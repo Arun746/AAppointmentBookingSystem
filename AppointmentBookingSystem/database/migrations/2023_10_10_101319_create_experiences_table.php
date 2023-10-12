@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('doctors_id'); 
             $table->string('organization');
             $table->string('position');
-            $table->text('job_description')(); 
+            $table->text('job_description'); 
             $table->date('start_date');
             $table->date('end_date')->nullable(); 
             $table->timestamps();
