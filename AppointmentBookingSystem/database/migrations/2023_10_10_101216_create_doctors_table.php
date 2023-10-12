@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->string('fname');
+            $table->string('mname');
             $table->string('lname');
             $table->string('lisence_no');
+            $table->string('email');
             $table->string('contact');
             $table->string('address');
             $table->string('gender');
