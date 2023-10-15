@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doctors extends Model
 {
     use HasFactory;
-    protected $fillable = ['users_id','fname', 'mname','lname','lisence_no','email','contact','address', 'gender','dob','specialization', 'photo',];
+    protected $fillable = ['name','license_no','email','contact','address', 'gender','dob','specialization', 'image'];
 
     public function experience() {
         return $this->hasMany(Experience::class);

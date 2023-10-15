@@ -13,21 +13,18 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('users_id');
-            $table->string('fname');
-            $table->string('mname');
-            $table->string('lname');
-            $table->string('lisence_no');
+            $table->string('name');
+            $table->string('license_no');
             $table->string('email');
             $table->string('contact');
             $table->string('address');
             $table->string('gender');
             $table->date('dob');
             $table->string('specialization');
-            $table->string('photo_path')->nullable(); // Store image file path
+            $table->string('image')->nullable(); // Store image file path
             $table->timestamps();
         
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+    
         });
     }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorsController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Doctors;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     //
-    Route::get('doctors', [DoctorsController::class, 'index'])->name('doctors.index');
+
+
+
+    Route::get('/doctors', [DoctorsController::class, 'index'])->name('doctors.index');
     Route::get('/doctors/create', [DoctorsController::class, 'create'])->name('doctors.create');
+    Route::post('/doctors', [DoctorsController::class, 'store'])->name('doctors.store');
+    Route::get('/{doctor}/edit', [DoctorsController::class, 'edit'])->name('doctors.edit');
+    Route::put('/{doctor}/updated', [DoctorsController::class, 'update'])->name('doctors.update');
+    Route::delete('/{doctor}/deleted', [DoctorsController::class, 'delete'])->name('doctors.delete');
 });
