@@ -8,9 +8,8 @@
       <div class="col-sm-8">
         <h2> Edit Doctors Detail 
         </h2>
-        <div class="card mt-3 p-3">
-       
-          <form method="post" action="{{route('doctors.update',['doctor'=>$doctor])}}" enctype="multipart/form-data" >
+        <div class="card mt-3 p-3">        
+            <form method="post" action="{{route('doctors.update',['doctor'=>$doctor])}}" enctype="multipart/form-data" >
             @csrf 
             @method('PUT') 
             <div class="form-row">
