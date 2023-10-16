@@ -37,6 +37,7 @@
                                     <tr>
                                         <th>SN</th>
                                         <th>Name</th>
+                                        
                                         <th>Email</th>
                                         <th>Specialization</th>
                                         <th>Contact</th>
@@ -52,14 +53,15 @@
                                         <td>{{$doctor->specialization}}</td>
                                         <td>{{$doctor->contact}}</td>
                                         <td>
-                                            <button class="btn btn-primary">View</button>
+                                            <button class="btn btn-info btn-sm">View</button>
                                         </td>
                                         <td>
-                                            <a href="{{route('doctors.edit',['doctor'=>$doctor])}}" class="btn btn-info btn-sm"
+                                           
+                                            <a href="{{route('doctors.edit',['doctor'=>$doctor->id])}}" class="btn btn-info btn-sm"
                                                 role="button">Edit</a>
                                         </td>
                                         <td>
-                                            <form method="post" action="{{route('doctors.delete',['doctor'=>$doctor])}}">
+                                            <form method="post" action="{{route('doctors.delete',['doctor'=>$doctor->id])}}">
                                                 @csrf
                                                 @method('delete')
                                                 <input type="submit" value="Delete" class="btn btn-danger btn-sm"

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use App\Models\Doctors;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
+
 class DoctorsController extends Controller
 {
     public function index()
@@ -16,7 +18,7 @@ class DoctorsController extends Controller
     {
         return view('doctors.create');
     }
-    
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -24,27 +26,40 @@ class DoctorsController extends Controller
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
             'license_no' => 'required|string|max:255',
-            'email' => 'required|email|unique:doctors,email', 
-            'password' => 'required|string|min:8', 
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
             'contact' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'gender' => 'required|string|max:255',
             'dob' => 'required|date|max:255',
             'specialization' => 'required|string|max:255',
-            'image' => 'file|nullable|mimes:jpeg,png,jpg,gif|max:2048',   
-        ]);  
+
+        ]);
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public'); 
-            $validatedData['image'] = $imagePath;
-        }
-        Doctors::create($validatedData);
+
+        $user = User::create([
+            'name' => $validatedData['name'] ,
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
+        ]);
+
+        $doctorvalidated['user_id'] =$user->id;
+
+        $doctor = Doctors::create([
+        'name' => $validatedData['name'],
+        'user_id' => $user->id,
+        'license_no' =>  $validatedData['license_no'],
+        'email' =>  $validatedData['email'],
+        'password' =>  $validatedData['password'],
+        'contact' =>  $validatedData['contact'],
+        'address' =>  $validatedData['address'],
+        'gender' => $validatedData['gender'],
+        'dob' =>$validatedData['dob'] ,
+        'specialization' =>$validatedData['specialization'] ,
+        ]);
         return redirect()->route('doctors.index')->with('success', 'Doctor registered successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
@@ -52,7 +67,8 @@ class DoctorsController extends Controller
 
     public function edit(Doctors $doctor)
     {
-        return view('doctors.edit',['doctor'=>$doctor]);
+        $user = User::find($doctor->user_id);
+        return view('doctors.edit', ['doctor' => $doctor, 'user' => $user]);
     }
 
     public function update(Request $request, Doctors $doctor)
@@ -62,35 +78,35 @@ class DoctorsController extends Controller
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
             'license_no' => 'required|string|max:255',
-            'email' => 'required|email|unique:doctors,email', 
+            'email' => 'required|email|email',
+            'password' => 'required|string|min:8',
             'contact' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'gender' => 'required|string|max:255',
             'dob' => 'required|date|max:255',
             'specialization' => 'required|string|max:255',
-            'image' => 'file|nullable|mimes:jpeg,png,jpg,gif|max:2048',   
-        ]);  
+        ]);
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
 
- 
-        if ($request->hasFile('image')) {
-            // Delete the previous image (if exists)
-            if ($doctor->image) {
-                Storage::disk('public')->delete($doctor->image);
-            }
-        
-            $imagePath = $request->file('image')->store('public/images');
-            $validatedData['image'] = $imagePath;
-
-        }
+        $user = User::find($doctor->user_id);
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
+        ]);
         $doctor->update($validatedData);
+
         return redirect()->route('doctors.index')->with('success', 'Doctor Updated successfully.');
 
 }
 
-    public function delete(Doctors $doctor)
-    {
-       $doctor->delete();
-       return redirect(route('doctors.index'))->with('success','Doctor deleted  successfully'); 
+public function delete(Doctors $doctor)
+{
+    $user = User::find($doctor->user_id);
+    if ($user) {
+        $user->delete();
     }
+    $doctor->delete();
+    return redirect()->route('doctors.index')->with('success', 'Doctor deleted successfully');
+}
 }

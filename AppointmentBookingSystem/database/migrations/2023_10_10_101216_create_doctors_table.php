@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('license_no');
+            $table->string('user_id');
             $table->string('email');
             $table->string('password');
             $table->string('contact');

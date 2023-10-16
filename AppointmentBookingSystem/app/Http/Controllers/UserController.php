@@ -49,7 +49,7 @@ class UserController extends Controller
             'fname' => 'required|string|max:255',
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'password' => 'required|string|min:8', 
             'role' => 'nullable',  
         ]);  

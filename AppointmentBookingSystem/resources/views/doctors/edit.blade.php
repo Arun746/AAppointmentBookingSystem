@@ -38,6 +38,13 @@
                 <input type="email" id="email" name="email" class="form-control" value="{{old('email',$doctor->email)}}" />
               </div>
             
+              <div class="form-group ">
+                <label for="password">Password:</label>
+                <input type="string" id="password"name="password" class="form-control" />
+                @error('password')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+              </div>
 
               <div class="form-group">
                 <label for="contact">Ph.Number</label>
@@ -64,10 +71,7 @@
                 <input type="text" id="specialization" name="specialization" class="form-control" value="{{old('specialization',$doctor->specialization)}}" />
               </div>
 
-              <div class="form-group">
-                <label for="Image">Image:</label>
-                <input type="file" name="image" class="form-control-file" />
-              </div>
+      
 
             <button type="submit" class="btn btn-dark">Update</button>
           </form>   

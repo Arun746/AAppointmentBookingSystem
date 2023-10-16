@@ -75,10 +75,6 @@
                 <input type="text" id="specialization" name="specialization" class="form-control" />
               </div>
 
-              <div class="form-group col">
-                <label for="Image">Image:</label>
-                <input type="file" name="image" class="form-control" />
-              </div>
 
             <button type="submit" class="btn btn-dark">Submit</button>
           </form>   
