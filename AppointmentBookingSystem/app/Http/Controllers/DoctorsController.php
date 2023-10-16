@@ -25,6 +25,7 @@ class DoctorsController extends Controller
             'lname' => 'required|string|max:255',
             'license_no' => 'required|string|max:255',
             'email' => 'required|email|unique:doctors,email', 
+            'password' => 'required|string|min:8', 
             'contact' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'gender' => 'required|string|max:255',

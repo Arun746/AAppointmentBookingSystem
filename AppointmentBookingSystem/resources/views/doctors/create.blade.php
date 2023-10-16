@@ -43,6 +43,14 @@
               </div>
 
               <div class="form-group col">
+                <label for="password">Password:</label>
+                <input type="string" id="password"name="password" class="form-control" />
+                @error('password')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+              </div>
+              
+              <div class="form-group col">
                 <label for="contact">Ph.Number</label>
                 <input type="integer" id="contact"name="contact" class="form-control" />
               </div>
