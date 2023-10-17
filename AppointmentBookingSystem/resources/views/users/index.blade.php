@@ -25,7 +25,7 @@
 
                     <div class="text-right">
                         
-                        <a href="/users/create" class="btn btn-dark mt-2 mb-2" role="button">New User</a>
+                        <a href="{{route('users.create')}}" class="btn btn-dark mt-2 mb-2" role="button">New User</a>
                     </div>
 
                     <div class="card">
@@ -36,10 +36,9 @@
                                         <th>SN</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Password</th>
                                         <th>Role</th>
                                         <th>Status</th>
-                                        <th colspan="2">Action</th>
+                                        <th colspan="2" class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,20 +47,20 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->password }}</td>
                                         <td>{{ $user->role}}</td>
                                         <td>{{ $user->status}}</td>
-                                        <td>
-                                            <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-info btn-sm" role="button">Edit</a>
+                                        <td class="text-right">
+                                            <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-info btn-sm fas fa-edit" role="button">Edit</a>
 
                                         </td>
                                         <td>
-                                            <form method="post" action="{{route('users.delete',['user'=>$user])}}">
+                                            <form method="post" onclick="returnconfirm('Are you sure?')" action="{{route('users.delete',['user'=>$user])}}">
                                                 @csrf
                                                 @method('delete')
-                                                <input type="submit" value="Delete" class="btn btn-danger btn-sm"
-                                                    role="button" />
-                                            </form>
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                  </button>
+                                            
                                     </tr>
                                 @endforeach
                                 </tbody>

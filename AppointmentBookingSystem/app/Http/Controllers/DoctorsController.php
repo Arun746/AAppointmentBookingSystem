@@ -67,8 +67,7 @@ class DoctorsController extends Controller
 
     public function edit(Doctors $doctor)
     {
-        $user = User::find($doctor->user_id);
-        return view('doctors.edit', ['doctor' => $doctor, 'user' => $user]);
+        return view('doctors.edit', ['doctor' => $doctor]);
     }
 
     public function update(Request $request, Doctors $doctor)
@@ -78,22 +77,23 @@ class DoctorsController extends Controller
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
             'license_no' => 'required|string|max:255',
-            'email' => 'required|email|email',
-            'password' => 'required|string|min:8',
+            'email' => 'required|email',
+            'password' => 'required||min:8|confirmed',
             'contact' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'gender' => 'required|string|max:255',
+            'gender' => 'required',
             'dob' => 'required|date|max:255',
             'specialization' => 'required|string|max:255',
         ]);
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
 
-        $user = User::find($doctor->user_id);
+        $user = User::findOrFail($doctor->user_id);
         $user->update([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => $validatedData['password'],
         ]);
+
         $doctor->update($validatedData);
 
         return redirect()->route('doctors.index')->with('success', 'Doctor Updated successfully.');
@@ -102,7 +102,7 @@ class DoctorsController extends Controller
 
 public function delete(Doctors $doctor)
 {
-    $user = User::find($doctor->user_id);
+    $user = User::findOrFail($doctor->user_id);
     if ($user) {
         $user->delete();
     }

@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="text-right">
-                    <a href="/doctors/create" class="btn btn-dark mt-2 mb-2" role="button">New Doctor</a>
+                    <a href="{{route('doctors.create')}}" class="btn btn-dark mt-2 mb-2" role="button">New Doctor</a>
                 </div>
 
                 @if(session('success'))
@@ -52,20 +52,21 @@
                                         <td>{{$doctor->email}}</td>
                                         <td>{{$doctor->specialization}}</td>
                                         <td>{{$doctor->contact}}</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">View</button>
+                                        <td class="text-right">
+                                            <button class="btn btn-info btn-sm fas fa-eye">View</button>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                            
-                                            <a href="{{route('doctors.edit',['doctor'=>$doctor->id])}}" class="btn btn-info btn-sm"
+                                            <a href="{{route('doctors.edit',['doctor'=>$doctor->id])}}" class="btn btn-info btn-sm fas fa-edit"
                                                 role="button">Edit</a>
                                         </td>
-                                        <td>
-                                            <form method="post" action="{{route('doctors.delete',['doctor'=>$doctor->id])}}">
+                                        <td class="text-left">
+                                            <form method="post" onclick="returnconfirm('Are you sure?')"  action="{{route('doctors.delete',['doctor'=>$doctor->id])}}">
                                                 @csrf
                                                 @method('delete')
-                                                <input type="submit" value="Delete" class="btn btn-danger btn-sm"
-                                                    role="button" />
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                  </button>
                                             </form>
                                         </td>
                                     </tr>

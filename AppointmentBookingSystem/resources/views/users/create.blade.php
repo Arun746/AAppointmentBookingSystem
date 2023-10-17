@@ -12,7 +12,7 @@
        
           <form method="post" action="{{route('users.store')}}" enctype="multipart/form-data" >
             @csrf 
-            @method('POST') 
+             
             <div class="form-row">
                 <div class="form-group col">
                     <label for="fname">First Name:</label>

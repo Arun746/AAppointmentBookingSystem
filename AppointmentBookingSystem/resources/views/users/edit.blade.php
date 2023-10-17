@@ -31,13 +31,7 @@
                         @enderror
                       </div>
                     
-                      <div class="form-group col">
-                        <label for="password">Password:</label>
-                        <input type="string" id="password"name="password" class="form-control"  value="{{ old('password', $user->password)}}"/>
-                        @error('password')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                      </div>
+               
         
                     <div class="form-group col">
                         <label for="role">Role:</label>

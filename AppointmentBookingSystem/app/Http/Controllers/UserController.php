@@ -27,7 +27,7 @@ class UserController extends Controller
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8', 
+            'password' => 'required|password|min:8', 
             'role' => 'nullable',  
         ]);  
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];

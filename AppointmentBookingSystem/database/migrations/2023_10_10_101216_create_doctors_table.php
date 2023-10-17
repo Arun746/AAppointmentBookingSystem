@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('contact');
             $table->string('address');
-            $table->string('gender');
+            $table->enum('gender', ['male', 'female', 'others']);
             $table->date('dob');
             $table->string('specialization');
             $table->string('image')->nullable(); // Store image file path
