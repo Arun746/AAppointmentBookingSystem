@@ -28,46 +28,61 @@
                     <input type="text" id="lname" name="lname" class="form-control" value="{{old('lname',$doctor->lname)}}" />
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group " col>
                 <label for="license_no">License Number:</label>
                 <input type="text" id="license_no" name="license_no" class="form-control" value="{{old('license_no',$doctor->license_no)}}" />
               </div>
 
-            <div class="form-group ">
+            <div class="form-group " col>
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" class="form-control" value="{{old('email',$doctor->email)}}" />
+                @error('email')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
               </div>
             
     
 
-              <div class="form-group">
+              <div class="form-group" col>
                 <label for="contact">Ph.Number</label>
                 <input type="integer" id="contact"name="contact" class="form-control"  value="{{old('contact',$doctor->contact)}}" />
               </div>
 
-            <div class="form-group">
+            <div class="form-group" col>
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address" class="form-control" value="{{old('address',$doctor->address)}}" />
               </div>
 
-              <div class="form-group">
+              <div class="form-group "col>
                 <label for="gender">Gender:</label>
-                <input type="text" id="gender"name="gender" class="form-control" value="{{old('gender',$doctor->gender)}}" />
+                <div class="row">
+                <div class="form-check">
+                    <input type="radio" id="male" name="gender" value="male"  >
+                    <label for="male" >Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="female" name="gender" value="female"  />
+                    <label for="female">Female</label>
+                </div>
+
+                <div class="form-check">
+                  <input type="radio" id="others" name="gender" value="others" />
+                  <label for="others" >Others</label>
+              </div>
+                </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group" col>
                 <label for="dob">DOB:</label>
                 <input type="date" id="dob" name="dob" class="form-control" value="{{old('dob',$doctor->dob)}}" />
               </div>
 
-              <div class="form-group">
+              <div class="form-group" col>
                 <label for="specialization">Specialization:</label>
                 <input type="text" id="specialization" name="specialization" class="form-control" value="{{old('specialization',$doctor->specialization)}}" />
               </div>
-
-      
-
-            <button type="submit" class="btn btn-dark">Update</button>
+            
+            <button type="submit" class="btn btn-dark" co>Update</button>
           </form>   
       </div>
     </div>

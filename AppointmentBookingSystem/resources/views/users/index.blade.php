@@ -30,7 +30,7 @@
 
                     <div class="card">
                         <div class="card-body p-0">
-                            <table class="table">
+                            <table class="table" >
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -44,8 +44,8 @@
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{ $user->name }}</td>
+                                        <td>{{$loop->iteration}}</td>                                       
+                                        <td>{{$user->fname . ' ' . $user->mname . ' ' . $user->lname}}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->role}}</td>
                                         <td>{{ $user->status}}</td>
@@ -53,8 +53,8 @@
                                             <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-info btn-sm fas fa-edit" role="button">Edit</a>
 
                                         </td>
-                                        <td>
-                                            <form method="post" onclick="returnconfirm('Are you sure?')" action="{{route('users.delete',['user'=>$user])}}">
+                                        <td class="text-center">
+                                            <form method="post" onclick="return confirm('Are you sure?')" action="{{route('users.delete',['user'=>$user])}}">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -66,7 +66,6 @@
                                 </tbody>
                             </table>
                         </div>
-
 
                     </div>
                 </div>

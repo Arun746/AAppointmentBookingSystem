@@ -29,13 +29,13 @@
                                 <div class="input-group mb-3">
                                     <input type="text" name="name"
                                            class="form-control @error('name') is-invalid @enderror"
-                                           placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}" required>
+                                           placeholder="{{ __('Name') }}" value="{{ old('fname', auth()->user()->fname) }}" required>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-user"></span>
                                         </div>
                                     </div>
-                                    @error('name')
+                                    @error('fname')
                                     <span class="error invalid-feedback">
                                         {{ $message }}
                                     </span>

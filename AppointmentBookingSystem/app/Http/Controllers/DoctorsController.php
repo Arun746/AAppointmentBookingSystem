@@ -5,7 +5,6 @@ use App\Models\User;
 use App\Models\Doctors;
 use Illuminate\Http\Request;
 
-
 class DoctorsController extends Controller
 {
     public function index()
@@ -26,19 +25,22 @@ class DoctorsController extends Controller
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
             'license_no' => 'required|string|max:255',
-            'email' => 'required|email',
-            'password' => 'required|string|min:8',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' =>'required|min:8',
             'contact' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'gender' => 'required|string|max:255',
-            'dob' => 'required|date|max:255',
+            'dob' => 'required|date',
             'specialization' => 'required|string|max:255',
 
         ]);
-        $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
+       
 
         $user = User::create([
-            'name' => $validatedData['name'] ,
+            'fname' => $validatedData['fname'] ,
+            'mname' => $validatedData['mname'],
+            'lname' => $validatedData['lname'],
             'email' => $validatedData['email'],
             'password' => $validatedData['password'],
         ]);
@@ -46,7 +48,9 @@ class DoctorsController extends Controller
         $doctorvalidated['user_id'] =$user->id;
 
         $doctor = Doctors::create([
-        'name' => $validatedData['name'],
+        'fname' => $validatedData['fname'],
+        'mname' => $validatedData['mname'],
+        'lname' => $validatedData['lname'],
         'user_id' => $user->id,
         'license_no' =>  $validatedData['license_no'],
         'email' =>  $validatedData['email'],
@@ -78,20 +82,18 @@ class DoctorsController extends Controller
             'lname' => 'required|string|max:255',
             'license_no' => 'required|string|max:255',
             'email' => 'required|email',
-            'password' => 'required||min:8|confirmed',
             'contact' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'gender' => 'required',
             'dob' => 'required|date|max:255',
             'specialization' => 'required|string|max:255',
         ]);
-        $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
-
         $user = User::findOrFail($doctor->user_id);
         $user->update([
-            'name' => $validatedData['name'],
+            'fname' => $validatedData['fname'],
+            'mname' => $validatedData['mname'],
+            'lname' => $validatedData['lname'],
             'email' => $validatedData['email'],
-            'password' => $validatedData['password'],
         ]);
 
         $doctor->update($validatedData);
@@ -102,7 +104,7 @@ class DoctorsController extends Controller
 
 public function delete(Doctors $doctor)
 {
-    $user = User::findOrFail($doctor->user_id);
+    $user = User::find($doctor->user_id);
     if ($user) {
         $user->delete();
     }

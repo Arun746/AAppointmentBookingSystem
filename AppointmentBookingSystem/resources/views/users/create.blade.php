@@ -17,16 +17,25 @@
                 <div class="form-group col">
                     <label for="fname">First Name:</label>
                     <input type="text" id="fname" name="fname" class="form-control" />
+                    @error('fname')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             
                 <div class="form-group col">
                     <label for="mname">Middle Name:</label>
                     <input type="text" id="mname" name="mname" class="form-control" />
+                    @error('mname')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             
                 <div class="form-group col">
                     <label for="lname">Last Name:</label>
                     <input type="text" id="lname" name="lname" class="form-control" />
+                    @error('lname')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 

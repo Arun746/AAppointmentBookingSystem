@@ -48,7 +48,8 @@
                                     @foreach($doctors as $doctor)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$doctor->name}}</td>
+                                        <td>{{$doctor->fname . ' ' . $doctor->mname . ' ' . $doctor->lname}}</td>
+
                                         <td>{{$doctor->email}}</td>
                                         <td>{{$doctor->specialization}}</td>
                                         <td>{{$doctor->contact}}</td>
@@ -61,7 +62,7 @@
                                                 role="button">Edit</a>
                                         </td>
                                         <td class="text-left">
-                                            <form method="post" onclick="returnconfirm('Are you sure?')"  action="{{route('doctors.delete',['doctor'=>$doctor->id])}}">
+                                            <form method="post" onclick="return confirm('Are you sure?')"  action="{{route('doctors.delete',['doctor'=>$doctor->id])}}">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm">
