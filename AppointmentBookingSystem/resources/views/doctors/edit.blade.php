@@ -75,6 +75,7 @@
                 <label for="dob">DOB:</label>
                 <input type="date" id="dob" name="dob" class="form-control" value="{{old('dob',$doctor->dob)}}" />
               </div>
+              <input type="hidden" id="engdob" name='engdob' />
 
               <div class="form-group" col>
                 <label for="specialization">Specialization:</label>

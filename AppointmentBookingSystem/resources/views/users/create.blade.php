@@ -49,7 +49,7 @@
             
               <div class="form-group col">
                 <label for="password">Password:</label>
-                <input type="string" id="password"name="password" class="form-control" />
+                <input type="password" id="password"name="password" class="form-control" />
                 @error('password')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -62,6 +62,14 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
               </div>
+
+              <div class="form-group col">
+                        <label for="status">status:</label>
+                        <input type="boolean" id="status" name="status" class="form-control" />
+                        @error('status')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                      </div>
 
             <button type="submit" class="btn btn-dark">Submit</button>
           </form>   

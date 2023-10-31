@@ -19,6 +19,7 @@ class Doctors extends Model
                            'address',
                            'gender',
                             'dob',
+                            'engdob',
                             'specialization',
                             'role',
                             'status',

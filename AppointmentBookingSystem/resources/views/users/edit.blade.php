@@ -6,6 +6,7 @@
         <div class="col-sm-8">
             <h2>Edit User Details</h2>
             <div class="card mt-3 p-3">
+                {{$errors}}
                 <form method="post" action="{{ route('users.update', ['user' => $user->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -46,6 +47,14 @@
                         <label for="role">Role:</label>
                         <input type="text" id="role" name="role" class="form-control" value="{{ old('role', $user->role)}}"/>
                         @error('role')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                      </div>
+
+                      <div class="form-group col">
+                        <label for="status">status:</label>
+                        <input type="boolean" id="status" name="status" class="form-control" value="{{ old('status', $user->status)}}"/>
+                        @error('status')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>

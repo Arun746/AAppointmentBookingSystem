@@ -57,7 +57,7 @@
                                         <td>
                                             @if ($user->status==0)
                                             Inactive
-                                            @else
+                                            @elseif($user->status==1)
                                             Active
                                             @endif
                                         </td>

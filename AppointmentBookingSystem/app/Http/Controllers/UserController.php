@@ -27,11 +27,11 @@ class UserController extends Controller
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|password|min:8', 
-            'role' => 'nullable',  
+            'password' => 'required|min:8',
+            'role' => 'required', 
+            'status'=>'required', 
         ]);  
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
-        $validatedData['status'] = 'default_status';
         User::create($validatedData);
         return redirect()->route('users.index')->with('success', 'User registered successfully.');
     }
@@ -49,12 +49,12 @@ class UserController extends Controller
             'fname' => 'required|string|max:255',
             'mname' => 'nullable|string|max:255',
             'lname' => 'required|string|max:255',
-            'email' => 'required|email',
-            'password' => 'required|string|min:8', 
-            'role' => 'nullable',  
+            'email' => 'required|email', 
+            'role' => 'nullable', 
+            'status'=>'required', 
         ]);  
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
-        $validatedData['status'] = 'default_status';
+       
         $user->update($validatedData);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }

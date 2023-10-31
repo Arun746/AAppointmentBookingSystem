@@ -9,7 +9,7 @@
         <h2> Add Doctors 
         </h2>
         <div class="card mt-3 p-3">
-       
+       {{$errors}}
           <form method="post" action="{{route('doctors.store')}}" enctype="multipart/form-data" >
             @csrf 
             @method('POST') 
@@ -113,6 +113,7 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
               </div>
+              <input type="hidden" id="engdob" name='engdob' />
 
               <div class="form-group col">
                 <label for="specialization">Specialization:</label>

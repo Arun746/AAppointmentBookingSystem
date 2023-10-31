@@ -23,7 +23,8 @@ class DoctorRequest extends FormRequest
                 'contact' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
                 'gender' => 'required|string|max:255',
-                'dob' => 'required|date',
+                'dob' => 'required',
+                'engdob'=>'required',
                 'specialization' => 'required|string|max:255',
                 'role' => 'nullable|integer',
             ];
@@ -42,7 +43,8 @@ class DoctorRequest extends FormRequest
                 'contact' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
                 'gender' => 'required|string|max:255',
-                'dob' => 'required|date',
+                'dob' => 'required',
+                'engdob'=>'required',
                 'specialization' => 'required|string|max:255',
                 'role' => 'nullable|integer',
             ];
