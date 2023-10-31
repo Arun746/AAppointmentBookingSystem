@@ -22,10 +22,10 @@
                     <div class="alert alert-info">
                         Users Details
                     </div>
-
-                    <div class="text-right">
-                        
-                        <a href="{{route('users.create')}}" class="btn btn-dark mt-2 mb-2" role="button">New User</a>
+                    <div class="text-right mt-2 mb-2">
+                        <a href="{{route('users.create')}}" class="btn btn-primary btn-sm" role="button">
+                            <button class="fas  fa-plus"></button> New User
+                        </a>
                     </div>
 
                     <div class="card">
@@ -47,26 +47,37 @@
                                         <td>{{$loop->iteration}}</td>                                       
                                         <td>{{$user->fname . ' ' . $user->mname . ' ' . $user->lname}}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->role}}</td>
-                                        <td>{{ $user->status}}</td>
-                                        <td class="text-right">
-                                            <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-info btn-sm fas fa-edit" role="button">Edit</a>
+                                        <td>
+                                            @if ($user->role==0)
+                                            Admin
+                                            @else
+                                            Doctor 
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($user->status==0)
+                                            Inactive
+                                            @else
+                                            Active
+                                            @endif
+                                        </td>
+                                        <td class="text-right pr-0">
+                                            <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-warning btn-sm fas fa-edit" role="button">Edit</a>
 
                                         </td>
-                                        <td class="text-center">
-                                            <form method="post" onclick="return confirm('Are you sure?')" action="{{route('users.delete',['user'=>$user])}}">
+                                        <td class="text-center pl-0">
+                                            <form method="post" onclick="return confirm('Are you sure?')" action="{{route('users.delete',['user'=>$user->id])}}">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm">
                                                     <i class="fas fa-trash-alt"></i> Delete
-                                                  </button>
-                                            
+                                                  </button> 
+                                            </form>    
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>

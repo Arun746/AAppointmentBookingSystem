@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         
       <div class="col-sm-8">
-        <h2> Fill Doctors Detail 
+        <h2> Add Doctors 
         </h2>
         <div class="card mt-3 p-3">
        
@@ -121,6 +121,14 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
               </div>
+
+              <div class="form-group col">
+                <label for="role">Role:</label>
+                <input type="number" id="role" name="role" class="form-control" value="{{old('role')}}"/>
+                @error('role')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+              </div>       
 
             <button type="submit" class="btn btn-dark">Submit</button>
           </form>   

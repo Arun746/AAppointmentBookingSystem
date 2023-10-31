@@ -17,14 +17,16 @@ return new class extends Migration
             $table->string('mname')->nullable();
             $table->string('lname');
             $table->string('license_no');
-            $table->foreignId('user_id')->constrained('users');
-            $table->email('email');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('email');
             $table->string('password');
             $table->string('contact');
             $table->string('address');
             $table->enum('gender', ['male', 'female', 'others']);
             $table->date('dob');
             $table->string('specialization');
+            $table->integer('role')->nullable();
+            $table->boolean('status')->default(0);
             $table->string('image')->nullable(); // Store image file path
             $table->timestamps();
         

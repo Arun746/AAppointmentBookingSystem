@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         
       <div class="col-sm-8">
-        <h2> Edit Doctors Detail 
+        <h2> Edit Doctor Detail 
         </h2>
         <div class="card mt-3 p-3">        
             <form method="post" action="{{route('doctors.update',['doctor'=>$doctor])}}" enctype="multipart/form-data" >
@@ -40,9 +40,7 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
               </div>
-            
-    
-
+              
               <div class="form-group" col>
                 <label for="contact">Ph.Number</label>
                 <input type="integer" id="contact"name="contact" class="form-control"  value="{{old('contact',$doctor->contact)}}" />
@@ -82,7 +80,7 @@
                 <input type="text" id="specialization" name="specialization" class="form-control" value="{{old('specialization',$doctor->specialization)}}" />
               </div>
             
-            <button type="submit" class="btn btn-dark" co>Update</button>
+            <button type="submit" class="btn btn-dark" >Update</button>
           </form>   
       </div>
     </div>

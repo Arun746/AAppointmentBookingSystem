@@ -33,6 +33,7 @@ class DoctorsController extends Controller
             'gender' => 'required|string|max:255',
             'dob' => 'required|date',
             'specialization' => 'required|string|max:255',
+            'role'=>'nullable|integer',
 
         ]);
        
@@ -43,6 +44,7 @@ class DoctorsController extends Controller
             'lname' => $validatedData['lname'],
             'email' => $validatedData['email'],
             'password' => $validatedData['password'],
+            'role'=>$validatedData['role'],
         ]);
 
         $doctorvalidated['user_id'] =$user->id;
@@ -60,6 +62,7 @@ class DoctorsController extends Controller
         'gender' => $validatedData['gender'],
         'dob' =>$validatedData['dob'] ,
         'specialization' =>$validatedData['specialization'] ,
+        'role'=>$validatedData['role'],
         ]);
         return redirect()->route('doctors.index')->with('success', 'Doctor registered successfully.');
     }
@@ -71,6 +74,7 @@ class DoctorsController extends Controller
 
     public function edit(Doctors $doctor)
     {
+        // dd($doctor);
         return view('doctors.edit', ['doctor' => $doctor]);
     }
 
@@ -87,6 +91,7 @@ class DoctorsController extends Controller
             'gender' => 'required',
             'dob' => 'required|date|max:255',
             'specialization' => 'required|string|max:255',
+            'role'=>'nullable'|'integer',
         ]);
         $user = User::findOrFail($doctor->user_id);
         $user->update([

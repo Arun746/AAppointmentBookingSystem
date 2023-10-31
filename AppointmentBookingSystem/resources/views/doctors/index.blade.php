@@ -22,9 +22,13 @@
                     Doctors Details
                 </div>
 
-                <div class="text-right">
-                    <a href="{{route('doctors.create')}}" class="btn btn-dark mt-2 mb-2" role="button">New Doctor</a>
+                <div class="text-right mt-2 mb-2">
+                    <a href="{{ route('doctors.create') }}" class="btn btn-primary btn-sm" role="button">
+                        <button class="fas  fa-plus"></button> New Doctor
+                    </a>
                 </div>
+                
+                
 
                 @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
@@ -36,8 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Name</th>
-                                        
+                                        <th>Name</th>                                       
                                         <th>Email</th>
                                         <th>Specialization</th>
                                         <th>Contact</th>
@@ -49,19 +52,18 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$doctor->fname . ' ' . $doctor->mname . ' ' . $doctor->lname}}</td>
-
                                         <td>{{$doctor->email}}</td>
                                         <td>{{$doctor->specialization}}</td>
                                         <td>{{$doctor->contact}}</td>
-                                        <td class="text-right">
+                                        <td class="text-right  pr-0">
                                             <button class="btn btn-info btn-sm fas fa-eye">View</button>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center pl-0 pr-0">
                                            
-                                            <a href="{{route('doctors.edit',['doctor'=>$doctor->id])}}" class="btn btn-info btn-sm fas fa-edit"
+                                            <a href="{{route('doctors.edit',['doctor'=>$doctor->id])}}" class="btn btn-warning btn-sm fas fa-edit"
                                                 role="button">Edit</a>
                                         </td>
-                                        <td class="text-left">
+                                        <td class="text-left  pl-0">
                                             <form method="post" onclick="return confirm('Are you sure?')"  action="{{route('doctors.delete',['doctor'=>$doctor->id])}}">
                                                 @csrf
                                                 @method('delete')
