@@ -129,7 +129,15 @@
                 @error('role')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
-              </div>       
+              </div>  
+              
+              <div class="form-group col">
+                        <label for="status">status:</label>
+                        <input type="boolean" id="status" name="status" class="form-control" />
+                        @error('status')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                      </div>
 
             <button type="submit" class="btn btn-dark">Submit</button>
           </form>   

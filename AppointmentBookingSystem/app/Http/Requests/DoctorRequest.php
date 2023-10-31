@@ -27,6 +27,7 @@ class DoctorRequest extends FormRequest
                 'engdob'=>'required',
                 'specialization' => 'required|string|max:255',
                 'role' => 'nullable|integer',
+                'status'=>'nullable',
             ];
         } else {
             return [
@@ -47,6 +48,7 @@ class DoctorRequest extends FormRequest
                 'engdob'=>'required',
                 'specialization' => 'required|string|max:255',
                 'role' => 'nullable|integer',
+                'status'=>'nullable',
             ];
         }
     }

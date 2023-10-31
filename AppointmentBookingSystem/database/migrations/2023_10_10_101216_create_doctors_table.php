@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('engdob');
             $table->string('specialization');
             $table->integer('role')->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('status');
             $table->string('image')->nullable(); // Store image file path
             $table->timestamps();
         

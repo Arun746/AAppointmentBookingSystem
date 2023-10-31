@@ -81,6 +81,14 @@
                 <label for="specialization">Specialization:</label>
                 <input type="text" id="specialization" name="specialization" class="form-control" value="{{old('specialization',$doctor->specialization)}}" />
               </div>
+
+              <div class="form-group col">
+                        <label for="status">status:</label>
+                        <input type="boolean" id="status" name="status" class="form-control" value="{{ old('status', $doctor->status)}}"/>
+                        @error('status')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                      </div>
             
             <button type="submit" class="btn btn-dark" >Update</button>
           </form>   
