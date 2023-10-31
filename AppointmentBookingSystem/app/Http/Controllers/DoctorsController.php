@@ -106,14 +106,12 @@ class DoctorsController extends Controller
         return redirect()->route('doctors.index')->with('success', 'Doctor Updated successfully.');
 
 }
-
 public function delete(Doctors $doctor)
 {
-    $user = User::find($doctor->user_id);
-    if ($user) {
-        $user->delete();
-    }
-    $doctor->delete();
-    return redirect()->route('doctors.index')->with('success', 'Doctor deleted successfully');
+    $doctor->user->delete(); 
+    $doctor->delete(); 
+
+    return redirect()->route('doctors.index')->with('success', 'Doctor and associated user deleted successfully');
 }
+
 }

@@ -5,7 +5,9 @@ window.onload = function() {
       elm.nepaliDatePicker({
           ndpYear: true,
           ndpMonth: true,
-          ndpYearCount: 10,
-          language: "english"
+          ndpYearCount: 10, 
+                 
       });
    };
+
+   

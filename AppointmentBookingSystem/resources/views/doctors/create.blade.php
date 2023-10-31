@@ -64,7 +64,7 @@
 
             <div class="form-group col">
               <label for="password_confirmation">Confirm Password:</label>
-              <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"   />
+              <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"   value="{{ old('password_confirmation') }}" />
               @error('confirmpassword')
               <span class="text-danger">{{ $message }}</span>
               @enderror
@@ -91,16 +91,16 @@
                 <label for="gender">Gender:</label>
                 <div class="row">
                 <div class="form-check">
-                    <input type="radio" id="male" name="gender" value="male"  >
+                    <input type="radio" id="male" name="gender" value="male" {{ old('gender') === 'male' ? 'checked' : '' }}>
                     <label for="male" >Male</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" id="female" name="gender" value="female"  />
+                    <input type="radio" id="female" name="gender" value="female" {{ old('gender') === 'female' ? 'checked' : '' }} />
                     <label for="female">Female</label>
                 </div>
 
                 <div class="form-check">
-                  <input type="radio" id="others" name="gender" value="others" />
+                  <input type="radio" id="others" name="gender" value="others" {{ old('gender') === 'others' ? 'checked' : '' }} />
                   <label for="others" >Others</label>
               </div>
             </div>
@@ -108,7 +108,7 @@
 
               <div class="form-group col">
                 <label for="dob">DOB:</label>
-                <input type="date" id="dob" name="dob" class="form-control" value="{{old('dob')}}"/>
+                <input type="varchar" id="dob" name="dob" class="form-control" value="{{old('dob')}}"/>
                 @error('dob')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror

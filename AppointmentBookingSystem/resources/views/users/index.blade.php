@@ -50,7 +50,7 @@
                                         <td>
                                             @if ($user->role==0)
                                             Admin
-                                            @else
+                                            @elseif($user->role==1)
                                             Doctor 
                                             @endif
                                         </td>
