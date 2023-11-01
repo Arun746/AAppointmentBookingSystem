@@ -17,19 +17,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="alert alert-info">
                     Doctors Details
                 </div>
-
                 <div class="text-right mt-2 mb-2">
                     <a href="{{ route('doctors.create') }}" class="btn btn-primary btn-sm" role="button">
                         <button class="fas  fa-plus"></button> New Doctor
                     </a>
                 </div>
-                
-                
-
                 @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -83,5 +78,4 @@
         </div>
     </div>
 </div>
-
 @endsection
