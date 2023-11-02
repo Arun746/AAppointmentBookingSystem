@@ -49,6 +49,18 @@ class DoctorRequest extends FormRequest
                 'specialization' => 'required|string|max:255',
                 'role' => 'nullable|integer',
                 'status'=>'nullable',
+
+                'level'=>'required',
+                'board'=>'required',
+                'institution'=>'required',
+                'completion_year'=>'required',
+                'gpa'=>'required',
+
+                'organization'=>'required',
+                'position'=>'required',
+                'job_description'=>'required',
+                'start_date'=>'required',
+                'end_date'=>'required',
             ];
         }
     }

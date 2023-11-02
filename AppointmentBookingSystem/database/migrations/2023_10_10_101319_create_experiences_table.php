@@ -6,14 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('doctors_id'); 
+            $table->foreignId('doctors_id')->constrained('doctors')->onDelete('cascade'); 
             $table->string('organization');
             $table->string('position');
             $table->text('job_description'); 
@@ -22,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             
-            $table->foreign('doctors_id')->references('id')->on('doctors')->onDelete('cascade');
+            // $table->foreign('doctors_id')->references('id')->on('doctors')->onDelete('cascade');
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('experience');
     }
 };

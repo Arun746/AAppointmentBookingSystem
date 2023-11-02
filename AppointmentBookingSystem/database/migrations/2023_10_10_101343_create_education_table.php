@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('educations', function (Blueprint $table) {
+        Schema::create('education', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('doctors_id'); 
+            $table->foreignId('doctors_id')->constrained('doctors')->onDelete('cascade'); 
             $table->string('level');
             $table->string('board');
             $table->string('institution');
             $table->year('completion_year'); 
-            $table->decimal('gpa', 3, 2); 
+            $table->decimal('gpa'); 
             $table->timestamps();
 
             
-            $table->foreign('doctors_id')->references('id')->on('doctors')->onDelete('cascade');
+            // $table->foreign('doctors_id')->references('id')->on('doctors')->onDelete('cascade');
         });
     }
 

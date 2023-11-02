@@ -95,5 +95,6 @@
 
 <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js" type="text/javascript"></script>
 <script src="{{ asset('js/nepalidatepick.js') }}"></script>
+<script src="{{ asset('js/wizardform.js') }}"></script>
 </body>
 </html>

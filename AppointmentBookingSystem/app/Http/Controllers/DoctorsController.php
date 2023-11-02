@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DoctorRequest;
 use App\Models\User;
 use App\Models\Doctors;
+use App\Models\Education;
+use App\Models\Experience;
 
 class DoctorsController extends Controller
 {
@@ -23,6 +25,10 @@ class DoctorsController extends Controller
         
         $validatedData['user_id'] = $user->id;
         $doctor = Doctors::create($validatedData);
+
+        $validatedData['doctors_id']=$doctor->id;
+        $education= Education :: create ($validatedData);
+        $experience=Experience :: create ($validatedData);
         return redirect()->route('doctors.index')->with('success', 'Doctor registered successfully.');
     }
     public function edit(Doctors $doctor)
