@@ -20,7 +20,7 @@
         rel="stylesheet" type="text/css" />
 
 
-
+    <link rel="stylesheet" href="{{ asset('css/repeat.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -100,8 +100,9 @@
         type="text/javascript"></script>
     <script src="{{ asset('js/nepalidatepick.js') }}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="{{ asset('js/wizardform.js') }}"></script>
+    <script src="{{ asset('js\formrepeater.js') }}"></script>
 </body>
 
 </html>

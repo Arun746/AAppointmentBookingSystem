@@ -22,7 +22,7 @@ class DoctorsController extends Controller
         $validatedData = $request->validated();
         $validatedData['password'] = bcrypt($validatedData['password']);
         $user = User::create($validatedData);
-        
+
         $validatedData['user_id'] = $user->id;
         $doctor = Doctors::create($validatedData);
 
@@ -33,12 +33,20 @@ class DoctorsController extends Controller
     }
     public function edit(Doctors $doctor)
     {
-        return view('doctors.edit', compact('doctor'));
+        $education = $doctor->education;
+        $experience = $doctor->experience;
+        return view('doctors.edit', compact('doctor', 'education','experience'));
     }
     public function update(DoctorRequest $request, Doctors $doctor)
     {
         $validatedData = $request->validated();
         $doctor->user->update($validatedData);
+    foreach ($doctor->education as $education) {
+        $education->update($validatedData);
+    }
+    foreach ($doctor->experience as $experience) {
+        $experience->update($validatedData);
+    }
         $doctor->update($validatedData);
         return redirect()->route('doctors.index')->with('success', 'Doctor updated successfully.');
     }
