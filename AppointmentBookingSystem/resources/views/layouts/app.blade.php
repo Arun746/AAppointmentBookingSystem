@@ -102,7 +102,7 @@
 
 
     <script src="{{ asset('js/wizardform.js') }}"></script>
-    <script src="{{ asset('js\formrepeater.js') }}"></script>
+    <script src="{{ asset('js/formrepeater.js') }}"></script>
 </body>
 
 </html>

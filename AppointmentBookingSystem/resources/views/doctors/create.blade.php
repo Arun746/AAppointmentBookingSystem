@@ -12,7 +12,6 @@
                     {{ $errors }}
                     <form method="post" action="{{ route('doctors.store') }}" enctype="multipart/form-data">
                         @csrf
-
                         <div class="doctor-form" id="basicinfo" style="display: block">
                             <div class="card-header">
                                 <h1 class="card-title ">Basic Info</h1>
@@ -139,52 +138,59 @@
                         <div class="education-form" id="education" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Education</h3>
+                                <a href="#" class="btn btn-info btn-sm float-right" id="addbutton"> Add More</a>
                             </div>
+
                             <div class="card-body">
 
+                                <div class="col education-repeat">
+                                    <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;">
+                                        <div class="form-col">
+                                            <label for="level">level:</label>
+                                            <input type="text" id="level" name="level[]" class="form-control" />
+                                            @error('level')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
 
-                                <div class="form-col">
-                                    <label for="level">level:</label>
-                                    <input type="text" id="level" name="level" class="form-control"
-                                        value="{{ old('level') }}" />
-                                    @error('level')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                        <div class="form-col">
+                                            <label for="board">Board:</label>
+                                            <input type="text" id="board" name="board[]" class="form-control" />
+                                            @error('board')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
 
-                                <div class="form-col">
-                                    <label for="board">Board:</label>
-                                    <input type="text" id="board" name="board" class="form-control"
-                                        value="{{ old('board') }}" />
-                                    @error('board')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                        <div class="form-col">
+                                            <label for="institution">Institution:</label>
+                                            <input type="text" id="institution" name="institution[]"
+                                                class="form-control" />
+                                            @error('institution')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
 
-                                <div class="form-col">
-                                    <label for="institution">Institution:</label>
-                                    <input type="text" id="institution" name="institution" class="form-control"
-                                        value="{{ old('institution') }}" />
-                                    @error('institution')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                        <div class="form-col">
+                                            <label for="completion_year">Completion-Year:</label>
+                                            <input type="year" id="completion_year" name="completion_year[]"
+                                                class="form-control" {{-- value="{{ old('completion_year') }}" --}} />
+                                            @error('completion_year')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-col">
+                                            <label for="gpa">GPA:</label>
+                                            <input type="number" id="gpa" name="gpa[]" class="form-control" />
+                                            @error('gpa')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-col">
 
-                                <div class="form-col">
-                                    <label for="completion_year">Completion-Year:</label>
-                                    <input type="year" id="completion_year" name="completion_year"
-                                        class="form-control" value="{{ old('completion_year') }}" />
-                                    @error('completion_year')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-col">
-                                    <label for="gpa">GPA:</label>
-                                    <input type="number" id="gpa" name="gpa" class="form-control"
-                                        value="{{ old('gpa') }}" />
-                                    @error('gpa')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                            <i class="btn btn-danger btn-sm float-right remove-education ">Delete</i>
+
+                                        </div>
+                                    </fieldset>
                                 </div>
 
                             </div>
@@ -201,47 +207,58 @@
                         <div class="experience-form" id="experience" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Experience</h3>
+                                <a href="#" class="btn btn-info btn-sm float-right" id="experience-add">Add
+                                    More</a>
                             </div>
                             <div class="card-body">
-                                <div class="form-col">
-                                    <label for="organization">Organization Name:</label>
-                                    <input type="text" id="organization" name="organization" class="form-control"
-                                        value="{{ old('organization') }}" />
-                                    @error('organization')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-col">
-                                    <label for="position">Position:</label>
-                                    <input type="text" id="position" name="position" class="form-control"
-                                        value="{{ old('position') }}" />
-                                    @error('position')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-col">
-                                    <label for="job_description">Job description:</label>
-                                    <input type="textarea" id="job_description" name="job_description"
-                                        class="form-control" value="{{ old('job_description') }}" />
-                                    @error('job_description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-col">
-                                    <label for="start_date">Start-Date:</label>
-                                    <input type="date" id="start_date" name="start_date" class="form-control"
-                                        value="{{ old('start_date') }}" />
-                                    @error('start_date')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-col">
-                                    <label for="end_date">End-date:</label>
-                                    <input type="date" id="end_date" name="end_date" class="form-control"
-                                        value="{{ old('end_date') }}" />
-                                    @error('end_date')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <div class="col experience-repeat">
+                                    <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;">
+                                        <div class="form-col">
+                                            <label for="organization">Organization Name:</label>
+                                            <input type="text" id="organization" name="organization[]"
+                                                class="form-control" />
+                                            @error('organization')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-col">
+                                            <label for="position">Position:</label>
+                                            <input type="text" id="position" name="position[]"
+                                                class="form-control" />
+                                            @error('position')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-col">
+                                            <label for="job_description">Job description:</label>
+                                            <input type="textarea" id="job_description" name="job_description[]"
+                                                class="form-control" />
+                                            @error('job_description')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-col">
+                                            <label for="start_date">Start-Date:</label>
+                                            <input type="date" id="start_date" name="start_date[]"
+                                                class="form-control" />
+                                            @error('start_date')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-col">
+                                            <label for="end_date">End-date:</label>
+                                            <input type="date" id="end_date" name="end_date[]"
+                                                class="form-control" />
+                                            @error('end_date')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-col">
+                                            <a href="#" class="btn btn-danger btn-sm float-right "
+                                                id="">Delete</a>
+
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </div>
                             <div class="card-footer">

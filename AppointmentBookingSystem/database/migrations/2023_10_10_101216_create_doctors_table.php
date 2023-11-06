@@ -30,8 +30,8 @@ return new class extends Migration
             $table->boolean('status');
             $table->string('image')->nullable(); // Store image file path
             $table->timestamps();
-        
-    
+
+
         });
     }
 

@@ -23,14 +23,14 @@
                         Users Details
                     </div>
                     <div class="text-right mt-2 mb-2">
-                        <a href="{{route('users.create')}}" class="btn btn-primary btn-sm" role="button">
+                        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm" role="button">
                             <button class="fas  fa-plus"></button> New User
                         </a>
                     </div>
 
                     <div class="card">
                         <div class="card-body p-0">
-                            <table class="table" >
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -42,39 +42,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>                                       
-                                        <td>{{$user->fname . ' ' . $user->mname . ' ' . $user->lname}}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>
-                                            @if ($user->role==0)
-                                            Admin
-                                            @elseif($user->role==1)
-                                            Doctor 
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($user->status==0)
-                                            Inactive
-                                            @elseif($user->status==1)
-                                            Active
-                                            @endif
-                                        </td>
-                                        <td class="text-right pr-0">
-                                            <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-warning btn-sm fas fa-edit" role="button">Edit</a>
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $user->fname . ' ' . $user->mname . ' ' . $user->lname }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>
+                                                @if ($user->role == 0)
+                                                    Admin
+                                                @elseif($user->role == 1)
+                                                    Doctor
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($user->status == 0)
+                                                    Inactive
+                                                @elseif($user->status == 1)
+                                                    Active
+                                                @endif
+                                            </td>
+                                            <td class="text-right pr-0">
+                                                <a href="{{ route('users.edit', ['user' => $user]) }}"
+                                                    class="btn btn-warning btn-sm fas fa-edit" role="button">Edit</a>
 
-                                        </td>
-                                        <td class="text-center pl-0">
-                                            <form method="post" onclick="return confirm('Are you sure?')" action="{{route('users.delete',['user'=>$user->id])}}">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash-alt"></i> Delete
-                                                  </button> 
-                                            </form>    
-                                    </tr>
-                                @endforeach
+                                            </td>
+                                            <td class="text-center pl-0">
+                                                <form method="post" onclick="return confirm('Are you sure?')"
+                                                    action="{{ route('users.destroy', ['user' => $user->id]) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                    </button>
+                                                </form>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

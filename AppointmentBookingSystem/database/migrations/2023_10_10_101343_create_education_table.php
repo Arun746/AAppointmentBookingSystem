@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('education', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('doctors_id')->constrained('doctors')->onDelete('cascade'); 
+            $table->foreignId('doctors_id')->constrained('doctors')->onDelete('cascade');
             $table->string('level');
             $table->string('board');
             $table->string('institution');
-            $table->year('completion_year'); 
-            $table->decimal('gpa'); 
+            $table->year('completion_year');
+            $table->decimal('gpa');
             $table->timestamps();
 
-            
+
             // $table->foreign('doctors_id')->references('id')->on('doctors')->onDelete('cascade');
         });
     }
