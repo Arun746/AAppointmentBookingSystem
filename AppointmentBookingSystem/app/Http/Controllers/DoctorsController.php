@@ -21,6 +21,7 @@ class DoctorsController extends Controller
     {
         $validatedData = $request->validated();
         $validatedData['password'] = bcrypt($validatedData['password']);
+        $validatedData['role']=1;
         $user = User::create($validatedData);
 
         $validatedData['user_id'] = $user->id;
@@ -66,26 +67,60 @@ class DoctorsController extends Controller
     {
         $validatedData = $request->validated();
         $doctor->user->update($validatedData);
-            $educationData = Education::where('doctors_id', $doctor->id)->get();
-           foreach ($validatedData['institution'] as $key => $item) {
-                $educationData[$key]->update([
-                    'institution' => $validatedData['institution'][$key],
-                    'level' => $validatedData['level'][$key],
-                    'board' => $validatedData['board'][$key],
-                    'completion_year' => $validatedData['completion_year'][$key],
-                    'gpa' => $validatedData['gpa'][$key],
-                ]);
-            }
-            $experienceData = Experience::where('doctors_id', $doctor->id)->get();
-            foreach ($validatedData['organization'] as $key => $item) {
-                $experienceData[$key]->update([
-                    'organization' => $validatedData['organization'][$key],
-                    'position' => $validatedData['position'][$key],
-                    'job_description' => $validatedData['job_description'][$key],
-                    'start_date' => $validatedData['start_date'][$key],
-                    'end_date' => $validatedData['end_date'][$key],
-                ]);
-            }
+
+
+        // $educationData = Education::where('doctors_id', $doctor->id)->get();
+        //    foreach ($validatedData['institution'] as $key => $item) {
+        //         $educationData[$key]->update([
+        //             'institution' => $validatedData['institution'][$key],
+        //             'level' => $validatedData['level'][$key],
+        //             'board' => $validatedData['board'][$key],
+        //             'completion_year' => $validatedData['completion_year'][$key],
+        //             'gpa' => $validatedData['gpa'][$key],
+        //         ]);
+        //     }
+
+        $del_education = Doctors::find($doctor->id);
+        if ($del_education) {
+             Education::where('doctors_id', $doctor->id)->delete();
+        }
+        foreach ($validatedData['institution'] as $key => $item) {
+            $education = new Education();
+            $education->doctors_id = $doctor->id;
+            $education->level = $validatedData['level'][$key];
+            $education->institution = $validatedData['institution'][$key];
+            $education->board = $validatedData['board'][$key];
+            $education->completion_year = $validatedData['completion_year'][$key];
+            $education->gpa = $validatedData['gpa'][$key];
+            $education->save();
+        }
+
+        if ($del_education) {
+            Experience::where('doctors_id', $doctor->id)->delete();
+        }
+        foreach ($validatedData['organization'] as $key => $item) {
+            $experience = new Experience();
+            $experience->doctors_id = $doctor->id;
+            $experience->organization = $validatedData['organization'][$key];
+            $experience->position = $validatedData['position'][$key];
+            $experience->start_date = $validatedData['start_date'][$key];
+            $experience->end_date = $validatedData['end_date'][$key];
+            $experience->job_description = $validatedData['job_description'][$key];
+            $experience->save();
+
+        }
+
+
+            // $experienceData = Experience::where('doctors_id', $doctor->id)->get();
+            // foreach ($validatedData['organization'] as $key => $item) {
+            //     $experienceData[$key]->update([
+            //         'organization' => $validatedData['organization'][$key],
+            //         'position' => $validatedData['position'][$key],
+            //         'job_description' => $validatedData['job_description'][$key],
+            //         'start_date' => $validatedData['start_date'][$key],
+            //         'end_date' => $validatedData['end_date'][$key],
+            //     ]);
+            // }
         $doctor->update($validatedData);
         return redirect()->route('doctors.index')->with('success', 'Doctor updated successfully.');
     }

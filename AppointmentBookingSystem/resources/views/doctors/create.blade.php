@@ -94,7 +94,7 @@
 
                                 <div class="form-col">
                                     <label for="dob">DOB:</label>
-                                    <input type="varchar" id="dob" name="dob" class="form-control"
+                                    <input type="text" id="dob" name="dob" class="form-control"
                                         value="{{ old('dob') }}" />
                                     @error('dob')
                                         <span class="text-danger">{{ $message }}</span>
@@ -111,21 +111,18 @@
                                     @enderror
                                 </div>
 
+
                                 <div class="form-col">
-                                    <label for="role">Role:</label>
-                                    <input type="number" id="role" name="role" class="form-control"
-                                        value="{{ old('role') }}" />
-                                    @error('role')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-col">
-                                    <label for="status">status:</label>
-                                    <input type="boolean" id="status" name="status" class="form-control" />
+                                    <label for="status">Status:</label>
+                                    <select id="status" name="status" class="form-control">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
                                     @error('status')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-info btn-sm float-right" onclick="toggleFormOne()"
@@ -254,8 +251,8 @@
                                             @enderror
                                         </div>
                                         <div class="form-col">
-                                            <a href="#" class="btn btn-danger btn-sm float-right "
-                                                id="">Delete</a>
+                                            <div class="btn btn-danger btn-sm float-right remove-experience">Delete
+                                            </div>
 
                                         </div>
                                     </fieldset>

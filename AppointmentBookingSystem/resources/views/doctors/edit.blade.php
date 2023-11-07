@@ -102,14 +102,17 @@
                                         value="{{ old('specialization', $doctor->specialization) }}" />
                                 </div>
 
-                                <div class="form-group col">
-                                    <label for="status">status:</label>
-                                    <input type="boolean" id="status" name="status" class="form-control"
-                                        value="{{ old('status', $doctor->status) }}" />
+                                <div class="form-col">
+                                    <label for="status">Status:</label>
+                                    <select id="status" name="status" class="form-control">
+                                        <option value="0" @if ($doctor->status === 0) selected @endif>0</option>
+                                        <option value="1" @if ($doctor->status === 1) selected @endif>1</option>
+                                    </select>
                                     @error('status')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-info btn-sm float-right" onclick="toggleFormOne()"
@@ -122,57 +125,67 @@
                         <div class="education-form" id="education" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Education</h3>
+                                <a href="#" class="btn btn-info btn-sm float-right" id="addbutton"> Add More</a>
                             </div>
                             <div class="card-body">
-                                @if ($education)
-                                    @foreach ($education as $edu)
-                                        <div class="form-col">
-                                            <label for="level">level:</label>
-                                            <input type="text" id="level" name="level[]" class="form-control"
-                                                value="{{ old('level', $edu->level) }}" />
-                                            @error('level')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                @foreach ($education as $edu)
+                                    <div class="col education-repeat">
+                                        <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;">
+                                            <div class="form-col">
+                                                <label for="level">level:</label>
+                                                <input type="text" id="level" name="level[]" class="form-control"
+                                                    value="{{ old('level', $edu->level) }}" />
+                                                @error('level')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
 
-                                        <div class="form-col">
-                                            <label for="board">Board:</label>
-                                            <input type="text" id="board" name="board[]" class="form-control"
-                                                value="{{ old('board', $edu->board) }}" />
-                                            @error('board')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                            <div class="form-col">
+                                                <label for="board">Board:</label>
+                                                <input type="text" id="board" name="board[]" class="form-control"
+                                                    value="{{ old('board', $edu->board) }}" />
+                                                @error('board')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
 
-                                        <div class="form-col">
-                                            <label for="institution">Institution:</label>
-                                            <input type="text" id="institution" name="institution[]"
-                                                class="form-control"
-                                                value="{{ old('institution', $edu->institution) }}" />
-                                            @error('institution')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                            <div class="form-col">
+                                                <label for="institution">Institution:</label>
+                                                <input type="text" id="institution" name="institution[]"
+                                                    class="form-control"
+                                                    value="{{ old('institution', $edu->institution) }}" />
+                                                @error('institution')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
 
-                                        <div class="form-col">
-                                            <label for="completion_year">Completion-Year:</label>
-                                            <input type="year" id="completion_year" name="completion_year[]"
-                                                class="form-control"
-                                                value="{{ old('completion_year', $edu->completion_year) }}" />
-                                            @error('completion_year')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-col">
-                                            <label for="gpa">GPA:</label>
-                                            <input type="number" id="gpa" name="gpa[]" class="form-control"
-                                                value="{{ old('gpa', $edu->gpa) }}" />
-                                            @error('gpa')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    @endforeach
-                                @endif
+                                            <div class="form-col">
+                                                <label for="completion_year">Completion-Year:</label>
+                                                <input type="year" id="completion_year" name="completion_year[]"
+                                                    class="form-control"
+                                                    value="{{ old('completion_year', $edu->completion_year) }}" />
+                                                @error('completion_year')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-col">
+                                                <label for="gpa">GPA:</label>
+                                                <input type="number" id="gpa" name="gpa[]" class="form-control"
+                                                    value="{{ old('gpa', $edu->gpa) }}" />
+                                                @error('gpa')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-col">
+
+                                                <i class="btn btn-danger btn-sm float-right remove-education ">Delete</i>
+
+                                            </div>
+
+                                        </fieldset>
+                                    </div>
+                                @endforeach
+
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-info btn-sm float-left" onclick="toggleFormOne()"
@@ -187,54 +200,65 @@
                         <div class="experience-form" id="experience" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Experience</h3>
+                                <a href="#" class="btn btn-info btn-sm float-right" id="experience-add">Add
+                                    More</a>
                             </div>
                             <div class="card-body">
-                                @if ($experience)
-                                    @foreach ($experience as $exp)
-                                        <div class="form-col">
-                                            <label for="organization">Organization Name:</label>
-                                            <input type="text" id="organization" name="organization[]"
-                                                class="form-control"
-                                                value="{{ old('organization', $exp->organization) }}" />
-                                            @error('organization')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-col">
-                                            <label for="position">Position:</label>
-                                            <input type="text" id="position" name="position[]" class="form-control"
-                                                value="{{ old('position', $exp->position) }}" />
-                                            @error('position')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-col">
-                                            <label for="job_description">Job description:</label>
-                                            <input type="textarea" id="job_description" name="job_description[]"
-                                                class="form-control"
-                                                value="{{ old('job_description', $exp->job_description) }}" />
-                                            @error('job_description')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-col">
-                                            <label for="start_date">Start-Date:</label>
-                                            <input type="date" id="start_date" name="start_date[]"
-                                                class="form-control" value="{{ old('start_date', $exp->start_date) }}" />
-                                            @error('start_date')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-col">
-                                            <label for="end_date">End-date:</label>
-                                            <input type="date" id="end_date" name="end_date[]" class="form-control"
-                                                value="{{ old('end_date', $exp->end_date) }}" />
-                                            @error('end_date')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    @endforeach
-                                @endif
+
+                                @foreach ($experience as $exp)
+                                    <div class="col experience-repeat">
+                                        <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;">
+                                            <div class="form-col">
+                                                <label for="organization">Organization Name:</label>
+                                                <input type="text" id="organization" name="organization[]"
+                                                    class="form-control"
+                                                    value="{{ old('organization', $exp->organization) }}" />
+                                                @error('organization')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-col">
+                                                <label for="position">Position:</label>
+                                                <input type="text" id="position" name="position[]"
+                                                    class="form-control" value="{{ old('position', $exp->position) }}" />
+                                                @error('position')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-col">
+                                                <label for="job_description">Job description:</label>
+                                                <input type="textarea" id="job_description" name="job_description[]"
+                                                    class="form-control"
+                                                    value="{{ old('job_description', $exp->job_description) }}" />
+                                                @error('job_description')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-col">
+                                                <label for="start_date">Start-Date:</label>
+                                                <input type="date" id="start_date" name="start_date[]"
+                                                    class="form-control"
+                                                    value="{{ old('start_date', $exp->start_date) }}" />
+                                                @error('start_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-col">
+                                                <label for="end_date">End-date:</label>
+                                                <input type="date" id="end_date" name="end_date[]"
+                                                    class="form-control" value="{{ old('end_date', $exp->end_date) }}" />
+                                                @error('end_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-col">
+                                                <i class="btn btn-danger btn-sm float-right remove-experience">Delete</i>
+
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                @endforeach
+
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-info btn-sm float-left" onclick="toggleFormTwo()"

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document
             .getElementById("experience-add")
             .addEventListener("click", function () {
-                console.log("added");
+                // console.log("added");
                 const newRow = document.querySelector(".experience-repeat").cloneNode(true);
                 document.querySelector(".experience-repeat").parentNode.appendChild(newRow);
                 const inputFields = newRow.querySelectorAll("input");
@@ -41,4 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('remove-experience') && e.target.closest('.experience-repeat')) {
+            e.target.closest('.experience-repeat').remove();
+            console.log("sjdfhsajkdh");
+        }
+    })
 });
