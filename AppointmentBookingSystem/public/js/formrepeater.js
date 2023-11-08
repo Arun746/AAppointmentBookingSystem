@@ -15,7 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.addEventListener('click', function(e) {
     if (e.target && e.target.classList.contains('remove-education') && e.target.closest('.education-repeat')) {
+
         e.target.closest('.education-repeat').remove();
+
         console.log("sjdfhsajkdh");
     }
 });

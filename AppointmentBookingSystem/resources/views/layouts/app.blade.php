@@ -14,12 +14,9 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     @yield('styles')
-
     {{-- nepalicalendar --}}
     <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
         rel="stylesheet" type="text/css" />
-
-
     <link rel="stylesheet" href="{{ asset('css/repeat.css') }}">
 </head>
 
@@ -65,44 +62,43 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="/" class="brand-link">
+            <i class="brand-link">
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">ABS</span>
-            </a>
-
+            </i>
             @include('layouts.navigation')
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color: #f0f3f3; color: rgb(10, 10, 10);">
             @yield('content')
         </div>
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
+        {{-- <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
                 <h5>Title</h5>
                 <p>Sidebar content</p>
             </div>
         </aside>
-    </div>
+    </div> --}}
 
-    @vite('resources/js/app.js')
-    <!-- AdminLTE App -->
-    <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
-    @yield('scripts')
-
-
-    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
-        type="text/javascript"></script>
-    <script src="{{ asset('js/nepalidatepick.js') }}"></script>
+        @vite('resources/js/app.js')
+        <!-- AdminLTE App -->
+        <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
+        @yield('scripts')
 
 
-    <script src="{{ asset('js/wizardform.js') }}"></script>
-    <script src="{{ asset('js/formrepeater.js') }}"></script>
+        <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+            type="text/javascript"></script>
+        <script src="{{ asset('js/nepalidatepick.js') }}"></script>
+
+
+        <script src="{{ asset('js/wizardform.js') }}"></script>
+        <script src="{{ asset('js/formrepeater.js') }}"></script>
 </body>
 
 </html>

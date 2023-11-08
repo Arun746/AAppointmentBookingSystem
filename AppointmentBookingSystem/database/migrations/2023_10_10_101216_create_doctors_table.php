@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('role');
             $table->boolean('status');
             $table->string('image')->nullable(); // Store image file path
+            $table->softDeletes();
             $table->timestamps();
 
 

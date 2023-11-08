@@ -1,11 +1,12 @@
 <?php
+use App\Models\Doctors;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TrashController;
 use App\Http\Controllers\DoctorsController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Doctors;
 
 
 Route::get('/', function () {
@@ -39,4 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/doctors/{doctor}/edit', [DoctorsController::class, 'edit'])->name('doctors.edit');
     Route::put('/doctors/{doctor}', [DoctorsController::class, 'update'])->name('doctors.update');
     Route::delete('doctors/{doctor}', [DoctorsController::class, 'delete'])->name('doctors.delete');
+
+
+
+    Route::get('/trash', [TrashController::class, 'index'])->name('doctors.trash');
+    Route::get( 'trash/restore/{id}', [TrashController::class, 'restore'])->name('doctors.restore');
+    Route::delete('trash/delete/{id}', [TrashController::class, 'destroy'])->name('doctors.forcedelete');
 });

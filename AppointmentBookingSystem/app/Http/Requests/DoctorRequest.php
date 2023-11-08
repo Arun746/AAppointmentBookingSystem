@@ -47,10 +47,7 @@ class DoctorRequest extends FormRequest
                 'mname' => 'nullable|string|max:255',
                 'lname' => 'required|string|max:255',
                 'license_no' => 'required|string|max:255',
-                'email' => [
-                    'required',
-                    Rule::unique('doctors', 'email'),
-                ],
+                'email' => 'required|unique:doctors,email',
                 'password' => 'required|min:8|confirmed',
                 'password_confirmation' => 'required|min:8',
                 'contact' => 'required|string|max:255',

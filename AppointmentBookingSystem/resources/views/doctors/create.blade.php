@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container ">
 
         <div class="row justify-content-center">
 
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <h2> Add Doctors
                 </h2>
                 <div class="card mt-3 p-3">
                     {{ $errors }}
                     <form method="post" action="{{ route('doctors.store') }}" enctype="multipart/form-data">
                         @csrf
-                        <div class="doctor-form" id="basicinfo" style="display: block">
+                        <div class="doctor-form" id="basicinfo" style="display:  block">
                             <div class="card-header">
                                 <h1 class="card-title ">Basic Info</h1>
                             </div>
@@ -43,36 +43,71 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-col">
-                                    <label for="license_no">License Number:</label>
-                                    <input type="text" id="license_no" name="license_no" class="form-control"
-                                        value="{{ old('license_no') }}" />
-                                    @error('license_no')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="license_no">License Number:</label>
+                                        <input type="text" id="license_no" name="license_no" class="form-control"
+                                            value="{{ old('license_no') }}" />
+                                        @error('license_no')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col">
+                                        <label for="contact">Phone Number</label>
+                                        <input type="integer" id="contact"name="contact" class="form-control"
+                                            value="{{ old('contact') }}" />
+                                        @error('contact')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col">
+                                        <label for="address">Address:</label>
+                                        <input type="text" id="address" name="address" class="form-control"
+                                            value="{{ old('address') }}" />
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="status">Status:</label>
+                                        <select id="status" name="status" class="form-control">
+                                            <option value="0">Inactive</option>
+                                            <option value="1">Active</option>
+                                        </select>
+                                        @error('status')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col">
+                                        <label for="dob">DOB:</label>
+                                        <input type="text" id="dob" name="dob" class="form-control"
+                                            value="{{ old('dob') }}" />
+                                        @error('dob')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <input type="hidden" id="engdob" name='engdob' />
+
+                                    <div class="form-group col">
+                                        <label for="specialization">Specialization:</label>
+                                        <input type="text" id="specialization" name="specialization" class="form-control"
+                                            value="{{ old('specialization') }}" />
+                                        @error('specialization')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
                                 </div>
 
-                                <div class="form-col">
-                                    <label for="contact">Phone Number</label>
-                                    <input type="integer" id="contact"name="contact" class="form-control"
-                                        value="{{ old('contact') }}" />
-                                    @error('contact')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                <div class="form-group col">
 
-                                <div class="form-col">
-                                    <label for="address">Address:</label>
-                                    <input type="text" id="address" name="address" class="form-control"
-                                        value="{{ old('address') }}" />
-                                    @error('address')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-col">
-                                    <label for="gender">Gender:</label>
-                                    <div class="row">
+                                    <div class="row mt-3">
+                                        <label for="gender">Gender:</label>
                                         <div class="form-check">
                                             <input type="radio" id="male" name="gender" value="male"
                                                 {{ old('gender') === 'male' ? 'checked' : '' }}>
@@ -91,38 +126,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="form-col">
-                                    <label for="dob">DOB:</label>
-                                    <input type="text" id="dob" name="dob" class="form-control"
-                                        value="{{ old('dob') }}" />
-                                    @error('dob')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <input type="hidden" id="engdob" name='engdob' />
-
-                                <div class="form-col">
-                                    <label for="specialization">Specialization:</label>
-                                    <input type="text" id="specialization" name="specialization" class="form-control"
-                                        value="{{ old('specialization') }}" />
-                                    @error('specialization')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-col">
-                                    <label for="status">Status:</label>
-                                    <select id="status" name="status" class="form-control">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                    </select>
-                                    @error('status')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-info btn-sm float-right" onclick="toggleFormOne()"
@@ -141,8 +144,9 @@
                             <div class="card-body">
 
                                 <div class="col education-repeat">
-                                    <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;">
-                                        <div class="form-col">
+
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
                                             <label for="level">level:</label>
                                             <input type="text" id="level" name="level[]" class="form-control" />
                                             @error('level')
@@ -150,7 +154,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-col">
+                                        <div class="form-group col-sm-2">
                                             <label for="board">Board:</label>
                                             <input type="text" id="board" name="board[]" class="form-control" />
                                             @error('board')
@@ -158,7 +162,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-col">
+                                        <div class="form-group col-sm-3">
                                             <label for="institution">Institution:</label>
                                             <input type="text" id="institution" name="institution[]"
                                                 class="form-control" />
@@ -167,7 +171,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-col">
+                                        <div class="form-group col-sm-2">
                                             <label for="completion_year">Completion-Year:</label>
                                             <input type="year" id="completion_year" name="completion_year[]"
                                                 class="form-control" {{-- value="{{ old('completion_year') }}" --}} />
@@ -175,19 +179,21 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-col">
+                                        <div class="form-group col-sm-2">
                                             <label for="gpa">GPA:</label>
                                             <input type="number" id="gpa" name="gpa[]" class="form-control" />
                                             @error('gpa')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-col">
-
-                                            <i class="btn btn-danger btn-sm float-right remove-education ">Delete</i>
+                                        <div class="form-group col-sm-1 mt-4 pt-2">
+                                            <label></label>
+                                            <i
+                                                class="btn btn-danger  btn-sm float-right remove-education fas fa-trash-alt"></i>
 
                                         </div>
-                                    </fieldset>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -209,8 +215,9 @@
                             </div>
                             <div class="card-body">
                                 <div class="col experience-repeat">
-                                    <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;">
-                                        <div class="form-col">
+
+                                    <div class="row">
+                                        <div class="form-group col-sm-3">
                                             <label for="organization">Organization Name:</label>
                                             <input type="text" id="organization" name="organization[]"
                                                 class="form-control" />
@@ -218,7 +225,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-col">
+                                        <div class="form-group col-sm-2">
                                             <label for="position">Position:</label>
                                             <input type="text" id="position" name="position[]"
                                                 class="form-control" />
@@ -226,7 +233,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-col">
+                                        <div class="form-group col-sm-2">
                                             <label for="job_description">Job description:</label>
                                             <input type="textarea" id="job_description" name="job_description[]"
                                                 class="form-control" />
@@ -234,7 +241,8 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-col">
+
+                                        <div class="form-group col-sm-2">
                                             <label for="start_date">Start-Date:</label>
                                             <input type="date" id="start_date" name="start_date[]"
                                                 class="form-control" />
@@ -242,7 +250,8 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-col">
+
+                                        <div class="form-group col-sm-2">
                                             <label for="end_date">End-date:</label>
                                             <input type="date" id="end_date" name="end_date[]"
                                                 class="form-control" />
@@ -250,12 +259,12 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-col">
-                                            <div class="btn btn-danger btn-sm float-right remove-experience">Delete
-                                            </div>
-
+                                        <div class="form-group col-sm-1 mt-3 pt-3">
+                                            <i class="btn btn-danger btn-sm  fas fa-trash-alt remove-experience">
+                                            </i>
                                         </div>
-                                    </fieldset>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -267,40 +276,43 @@
                         </div>
 
                         {{-- Login Form --}}
-                        <div class="login-form" id="login" style="display: none">
+                        <div class="login-form" id="login" style="display:none">
                             <div class="card-header">
                                 <h3 class="card-title">login</h3>
                             </div>
                             <div class="card-body">
-                                <div class="form-group col">
-                                    <label for="email">Email:</label>
-                                    <input type="email" id="email" name="email" class="form-control"
-                                        value="{{ old('email') }}" />
-                                    @error('email')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group col">
-                                    <label for="password">Password:</label>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        value="{{ old('password') }}" />
-                                    @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group col">
-                                    <label for="password_confirmation">Confirm Password:</label>
-                                    <input type="password" id="password_confirmation" name="password_confirmation"
-                                        class="form-control" value="{{ old('password_confirmation') }}" />
-                                    @error('confirmpassword')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="email">Email:</label>
+                                        <input type="email" id="email" name="email" class="form-control"
+                                            value="{{ old('email') }}" />
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password" name="password" class="form-control"
+                                            value="{{ old('password') }}" />
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="password_confirmation">Confirm Password:</label>
+                                        <input type="password" id="password_confirmation" name="password_confirmation"
+                                            class="form-control" value="{{ old('password_confirmation') }}" />
+                                        @error('confirmpassword')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-info btn-sm float-left" onclick="toggleFormThree()"
                                     id="toggleFormThree">Previous</a>
-                                <button type="submit" class="btn btn-dark float-right">Submit</button>
+                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                    class="btn btn-success  btn-sm float-right">Submit</button>
                             </div>
                         </div>
 
