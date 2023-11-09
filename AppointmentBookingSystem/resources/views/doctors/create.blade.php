@@ -104,28 +104,47 @@
 
                                 </div>
 
-                                <div class="form-group col">
+                                <div class="form-row">
 
-                                    <div class="row mt-3">
-                                        <label for="gender">Gender:</label>
-                                        <div class="form-check">
-                                            <input type="radio" id="male" name="gender" value="male"
-                                                {{ old('gender') === 'male' ? 'checked' : '' }}>
-                                            <label for="male">Male</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="female" name="gender" value="female"
-                                                {{ old('gender') === 'female' ? 'checked' : '' }} />
-                                            <label for="female">Female</label>
-                                        </div>
+                                    <div class=" form-group col-sm-4">
+                                        <label for="department_id">Select Department:</label>
+                                        <select name="department_id" id="department_id" class="form-control">
+                                            <option value="">Select Department</option>
+                                            @foreach ($departments as $department)
+                                                <option value="{{ $department->id }}">
+                                                    {{ $department->departmentName }}</option>
+                                            @endforeach
+                                        </select>
 
-                                        <div class="form-check">
-                                            <input type="radio" id="others" name="gender" value="others"
-                                                {{ old('gender') === 'others' ? 'checked' : '' }} />
-                                            <label for="others">Others</label>
+                                        @error('department_id')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+
+                                        <div class="row mt-3 ml-3">
+                                            <label for="gender">Gender:</label>
+                                            <div class="form-check">
+                                                <input type="radio" id="male" name="gender" value="male"
+                                                    {{ old('gender') === 'male' ? 'checked' : '' }}>
+                                                <label for="male">Male</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" id="female" name="gender" value="female"
+                                                    {{ old('gender') === 'female' ? 'checked' : '' }} />
+                                                <label for="female">Female</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input type="radio" id="others" name="gender" value="others"
+                                                    {{ old('gender') === 'others' ? 'checked' : '' }} />
+                                                <label for="others">Others</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-info btn-sm float-right" onclick="toggleFormOne()"

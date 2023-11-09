@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('doctors', function (Blueprint $table) {
@@ -18,6 +15,7 @@ return new class extends Migration
             $table->string('lname');
             $table->string('license_no');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('department_id')->constrained('departments');
             $table->string('email');
             $table->string('password');
             $table->string('contact');
@@ -31,14 +29,8 @@ return new class extends Migration
             $table->string('image')->nullable(); // Store image file path
             $table->softDeletes();
             $table->timestamps();
-
-
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('doctors');

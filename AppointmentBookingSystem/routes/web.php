@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\DoctorsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DepartmentController;
 
 
 Route::get('/', function () {
@@ -46,4 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/trash', [TrashController::class, 'index'])->name('doctors.trash');
     Route::get( 'trash/restore/{id}', [TrashController::class, 'restore'])->name('doctors.restore');
     Route::delete('trash/delete/{id}', [TrashController::class, 'destroy'])->name('doctors.forcedelete');
+
+    Route::resource('department', DepartmentController::class);
 });

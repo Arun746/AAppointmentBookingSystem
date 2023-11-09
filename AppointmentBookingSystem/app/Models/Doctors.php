@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Department;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,7 @@ class Doctors extends Model
                            'mname',
                            'lname',
                            'user_id',
+                           'department_id',
                            'license_no',
                            'email',
                            'password',
@@ -33,6 +35,11 @@ class Doctors extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function department()
+    {
+        return $this ->belongsTo(Department::class,'department_id');
     }
     public function education() {
         return $this->hasMany(Education::class);

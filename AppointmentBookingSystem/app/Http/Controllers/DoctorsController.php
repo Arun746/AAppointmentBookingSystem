@@ -1,25 +1,27 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Requests\DoctorRequest;
 use App\Models\User;
 use App\Models\Doctors;
 use App\Models\Education;
+use App\Models\Department;
 use App\Models\Experience;
+use App\Http\Requests\DoctorRequest;
 
 class DoctorsController extends Controller
 {
     public function index()
     {
-        $doctors = Doctors::all();
+        $doctors = Doctors::latest()->get();
         return view('doctors.index', compact('doctors'));
     }
     public function create()
     {
-        return view('doctors.create');
+        $departments = Department::all();
+        return view('doctors.create',['departments'=>$departments]);
     }
     public function store(DoctorRequest $request)
     {
-        $validatedData = $request->validated();
+        $validatedData = $request->all();
         $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['role']=1;
         $user = User::create($validatedData);
@@ -103,4 +105,8 @@ class DoctorsController extends Controller
     }
 }
 
-
+// public function show($id)
+// {
+//     $doctor = Doctor::findOrFail($id);
+//     return view('system.doctor.profile', compact('doctor'));
+// }

@@ -13,22 +13,17 @@ class TrashController extends Controller
         $users = User::onlyTrashed()->get();
         return view('doctors.trash',compact('doctors'));
     }
-
     public function restore($id) {
         $doctor = Doctors::onlyTrashed()->where('id', $id)->first();
-
         if ($doctor) {
             $doctor->restore();
-
             $user = User::onlyTrashed()->where('id', $doctor->user_id)->first();
-
             if ($user) {
                 $user->restore();
             }
         }
         return redirect()->route('doctors.trash');
     }
-
     public function destroy($id)
     {
         $doctor = Doctors::onlyTrashed()->find($id);

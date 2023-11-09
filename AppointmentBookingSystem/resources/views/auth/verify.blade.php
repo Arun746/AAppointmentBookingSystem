@@ -16,8 +16,7 @@
             @csrf
             <div class="row">
                 <div class="col-12">
-                    <button type="submit"
-                            class="btn btn-primary btn-block">{{ __('click here to request another') }}</button>
+                    <button type="submit" class="btn btn-primary btn-block">click here to request another</button>
                 </div>
             </div>
         </form>

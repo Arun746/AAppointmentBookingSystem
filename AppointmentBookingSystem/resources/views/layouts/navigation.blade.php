@@ -46,6 +46,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('department.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-heartbeat"></i>
+                        <p>
+                            Department
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('doctors.trash') }}" class="nav-link">
                         <i class="nav-icon fas fa-trash-alt"></i>
                         <p>
