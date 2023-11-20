@@ -36,20 +36,29 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-calendar"></i>
-                        <p>
-                            Appointment
-                        </p>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('department.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-heartbeat"></i>
                         <p>
                             Department
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('schedule.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar"></i>
+                        <p>
+                            Schedule
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar"></i>
+                        <p>
+                            Appointment
                         </p>
                     </a>
                 </li>
@@ -62,6 +71,8 @@
                         </p>
                     </a>
                 </li>
+
+
             </ul>
         @elseif(Auth::check() && Auth::user()->role === 1)
             {
@@ -76,11 +87,12 @@
                     </a>
                 </li>
 
+
                 <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link">
+                    <a href="{{ route('schedule.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
-                            Appointment
+                            Schedule
                         </p>
                     </a>
                 </li>

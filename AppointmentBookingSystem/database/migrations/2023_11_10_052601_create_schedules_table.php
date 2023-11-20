@@ -6,21 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     public function up(): void
     {
-        Schema::create('education', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('doctors_id')->constrained('doctors')->onDelete('cascade');
-            $table->string('level');
-            $table->string('board');
-            $table->string('institution');
-            $table->year('completion_year');
-            $table->decimal('gpa');
+            $table->string('start_time');
+            $table->string('end_time');
+            $table->string('date_bs');
+            $table->string('date_ad')->nullable();
             $table->timestamps();
         });
     }
+
     public function down(): void
     {
-        Schema::dropIfExists('education');
+        Schema::dropIfExists('schedules');
     }
 };

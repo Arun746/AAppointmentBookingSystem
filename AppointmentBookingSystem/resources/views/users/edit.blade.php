@@ -7,8 +7,7 @@
                 <h2>Edit User Details</h2>
                 <div class="card mt-3 p-3">
                     {{ $errors }}
-                    <form method="post" action="{{ route('users.update', ['user' => $user->id]) }}"
-                        enctype="multipart/form-data">
+                    <form method="post" action="{{ route('users.update', ['user' => $user->id]) }}">
                         @csrf
                         @method('PUT')
                         <div class="form-row">

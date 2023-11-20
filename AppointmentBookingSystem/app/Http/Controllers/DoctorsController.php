@@ -14,6 +14,12 @@ class DoctorsController extends Controller
         $doctors = Doctors::latest()->get();
         return view('doctors.index', compact('doctors'));
     }
+    public function show(Doctors $doctor)
+    {
+        $education = Education::where('doctors_id', $doctor->id)->get();
+        $experience = Experience::where('doctors_id', $doctor->id)->get();
+        return view('doctors.profile', compact('doctor', 'education', 'experience'));
+    }
     public function create()
     {
         $departments = Department::all();
@@ -63,11 +69,12 @@ class DoctorsController extends Controller
         $experience = $doctor->experience;
         return view('doctors.edit', compact('doctor', 'education','experience'));
     }
-    public function update(DoctorRequest $request, Doctors $doctor)
+   public function update(DoctorRequest $request, Doctors $doctor)
     {
         $validatedData = $request->validated();
         $doctor->user->update($validatedData);
         $del_education = Doctors::find($doctor->id);
+        $del_experience = Doctors::find($doctor->id);
         if ($del_education) {
              Education::where('doctors_id', $doctor->id)->delete();
         }
@@ -81,7 +88,7 @@ class DoctorsController extends Controller
             $education->gpa = $validatedData['gpa'][$key];
             $education->save();
         }
-        if ($del_education) {
+        if ($del_experience) {
             Experience::where('doctors_id', $doctor->id)->delete();
         }
         foreach ($validatedData['organization'] as $key => $item) {
@@ -105,8 +112,3 @@ class DoctorsController extends Controller
     }
 }
 
-// public function show($id)
-// {
-//     $doctor = Doctor::findOrFail($id);
-//     return view('system.doctor.profile', compact('doctor'));
-// }

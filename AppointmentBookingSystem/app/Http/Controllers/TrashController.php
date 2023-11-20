@@ -11,7 +11,7 @@ class TrashController extends Controller
     {
         $doctors = Doctors::onlyTrashed()->get();
         $users = User::onlyTrashed()->get();
-        return view('doctors.trash',compact('doctors'));
+        return view('doctors.trash',compact('doctors','users'));
     }
     public function restore($id) {
         $doctor = Doctors::onlyTrashed()->where('id', $id)->first();

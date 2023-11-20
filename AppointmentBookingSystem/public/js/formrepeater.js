@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document
             .getElementById("addbutton")
             .addEventListener("click", function () {
-                console.log("added");
+                // console.log("added");
                 const newRow = document.querySelector(".education-repeat").cloneNode(true);
                 document.querySelector(".education-repeat").parentNode.appendChild(newRow);
                 const inputFields = newRow.querySelectorAll("input");
@@ -12,20 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
     }
-
     document.addEventListener('click', function(e) {
     if (e.target && e.target.classList.contains('remove-education') && e.target.closest('.education-repeat')) {
-
         e.target.closest('.education-repeat').remove();
-
-        console.log("sjdfhsajkdh");
+        // console.log("sjdfhsajkdh");
     }
 });
-
 });
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("experience-add")) {
@@ -50,3 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 });
+
+
+

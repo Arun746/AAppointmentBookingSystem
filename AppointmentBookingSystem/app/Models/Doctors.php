@@ -48,5 +48,7 @@ class Doctors extends Model
         return $this->hasMany(Experience::class);
     }
 
-
+    public function schedule() {
+        return $this->hasMany(Schedule::class);
+    }
 }

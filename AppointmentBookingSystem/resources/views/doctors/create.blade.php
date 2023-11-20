@@ -172,7 +172,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-
                                         <div class="form-group col-sm-2">
                                             <label for="board">Board:</label>
                                             <input type="text" id="board" name="board[]" class="form-control" />
@@ -180,7 +179,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-
                                         <div class="form-group col-sm-3">
                                             <label for="institution">Institution:</label>
                                             <input type="text" id="institution" name="institution[]"

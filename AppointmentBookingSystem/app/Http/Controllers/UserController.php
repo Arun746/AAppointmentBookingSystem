@@ -10,7 +10,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->get();
-
         return view('users.index', compact('users'));
     }
     public function create()
@@ -32,10 +31,9 @@ class UserController extends Controller
         User::create($validatedData);
         return redirect()->route('users.index')->with('success', 'User registered successfully.');
     }
-    public function show(string $id)
-    {
-
-    }
+    // public function show(string $id)
+    // {
+    // }
     public function edit(User $user)
     {
         return view('users.edit', ['user' => $user]);
@@ -56,7 +54,7 @@ class UserController extends Controller
     }
     public function destroy(User $user)
     {
-        $user->doctor->delete();
+       $user->doctor->delete();
        $user->delete();
        return redirect(route('users.index'))->with('success','User deleted  successfully');
 

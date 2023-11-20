@@ -30,7 +30,7 @@
                                     <tr>
                                         <th>SN</th>
                                         <th> Department Name</th>
-                                        <th>Count</th>
+                                        <th>No Of Doctors</th>
                                         <th colspan="2" class="text-center ">Action</th>
                                     </tr>
                                 </thead>
