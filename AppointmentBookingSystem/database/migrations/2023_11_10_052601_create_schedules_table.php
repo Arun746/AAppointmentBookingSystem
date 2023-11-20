@@ -13,8 +13,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('doctors_id')->constrained('doctors')->onDelete('cascade');
-            $table->string('start_time');
-            $table->string('end_time');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->string('date_bs');
             $table->string('date_ad')->nullable();
             $table->timestamps();
