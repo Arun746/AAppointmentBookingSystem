@@ -110,5 +110,7 @@ class DoctorsController extends Controller
        $doctor->delete();
        return redirect()->route('doctors.index')->with('success', 'Doctor deleted successfully');
     }
+
+
 }
 

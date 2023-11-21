@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Department;
+use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,5 +51,9 @@ class Doctors extends Model
 
     public function schedule() {
         return $this->hasMany(Schedule::class);
+    }
+
+    public function appointment() {
+        return $this->hasMany(Appointment::class);
     }
 }

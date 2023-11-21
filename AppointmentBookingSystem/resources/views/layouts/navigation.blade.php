@@ -75,7 +75,6 @@
 
             </ul>
         @elseif(Auth::check() && Auth::user()->role === 1)
-            {
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
@@ -97,7 +96,6 @@
                     </a>
                 </li>
             </ul>
-            }
         @endif
     </nav>
     <!-- /.sidebar-menu -->

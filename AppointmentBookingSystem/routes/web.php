@@ -9,11 +9,23 @@ use App\Http\Controllers\DoctorsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\DepartmentController;
-
+use App\Http\Controllers\AppointmentController;
 
 Route::get('/', function () {
+    return view('frontend.welcome');
+});
+
+
+// Route::get('/appointment', function () {
+//     return view('appointment.form');
+// });
+
+Route::get('/login', function () {
     return view('auth.login');
 });
+
+
+Route::resource('appointment', AppointmentController::class);
 
 Auth::routes();
 

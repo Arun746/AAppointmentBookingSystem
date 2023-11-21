@@ -60,7 +60,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:  rgba(49, 59, 59, 0.8) ;">
             <!-- Brand Logo -->
             <i class="brand-link">
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo"
@@ -71,9 +71,12 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" style="background-color: #f0f3f3; color: rgb(10, 10, 10);">
-            @yield('content')
+        <div class="background-image" {{-- style="background-image: url('https://companyclinic.net/wp-content/uploads/doctor-stethoscope-png-hd-stethoscope-4320-1024x680.jpg');" --}}>
+            <div class="content-wrapper" style="background-color: rgba(238, 243, 243, 0.8); color: rgb(10, 10, 10);">
+                @yield('content')
+            </div>
         </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->

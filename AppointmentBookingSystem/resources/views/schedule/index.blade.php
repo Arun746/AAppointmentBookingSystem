@@ -25,46 +25,58 @@
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                    <div class="card m-10">
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>SN</th>
-                                            <th>Doctor Name</th>
-                                            <th>Created By</th>
-                                            <th style="text-align: center;">Available Time</th>
-                                            <th>action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($schedules as $schedule)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $schedule->doctor->fname . ' ' . $schedule->doctor->mname . ' ' . $schedule->doctor->lname }}
-                                                </td>
-                                                <td>{{ $schedule->user->fname }}</td>
-                                                <td style="text-align: center;">
-                                                    {{ $schedule->start_time . ' to ' . $schedule->end_time }}</td>
-                                                </td>
-                                                <td>
-                                                    <form method="post" onclick="return confirm('Are you sure?')"
-                                                        action="{{ route('schedule.destroy', ['schedule' => $schedule->id]) }}">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-danger btn-sm">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+
+                    @foreach ($schedules->groupBy('date_bs') as $date => $dateSchedules)
+                        <h2 style="color:#401211">{{ $date }}</h2>
+
+                        @foreach ($dateSchedules->groupBy(function ($schedule) {
+            return $schedule->doctor->fname . ' ' . $schedule->doctor->mname;
+        }) as $doctorName => $doctorSchedules)
+                            <h4 style="color:#055c57">{{ $doctorName }}</h4>
+
+                            <div class="card m-10">
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN</th>
+                                                    {{-- <th>Doctor Name</th> --}}
+                                                    <th>Created By</th>
+                                                    {{-- <th>Date</th> --}}
+                                                    <th style="text-align: center;">Available Time</th>
+                                                    <th>action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($doctorSchedules as $schedule)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        {{-- <td>{{ $schedule->doctor->fname . ' ' . $schedule->doctor->mname . ' ' . $schedule->doctor->lname }}
+                                                        </td> --}}
+                                                        <td>{{ $schedule->user->fname }}</td>
+                                                        {{-- <td>{{ $schedule->date_bs }}</td> --}}
+                                                        <td style="text-align: center;">
+                                                            {{ $schedule->start_time . ' to ' . $schedule->end_time }}</td>
+                                                        <td>
+                                                            <form method="post" onclick="return confirm('Are you sure?')"
+                                                                action="{{ route('schedule.destroy', ['schedule' => $schedule->id]) }}">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
