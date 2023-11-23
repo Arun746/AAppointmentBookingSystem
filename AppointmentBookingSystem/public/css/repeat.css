@@ -1,0 +1,23 @@
+.repeat-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.repeat-container legend {
+    background-color: #fff;
+    padding: 0 10px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.repeat-container .row {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.repeat-container .delete {
+    margin-left: 10px;
+}
