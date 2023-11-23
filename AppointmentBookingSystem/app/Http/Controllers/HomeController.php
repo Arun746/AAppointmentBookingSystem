@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Doctors;
+use App\Models\Schedule;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,7 +26,12 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {$users=User::get();
+        $userCount = User::count();
+        $doctorCount = Doctors::count();
+        $departmentCount = Department::count();
+        $scheduleCount = Schedule::count();
+
+        return view('home', compact('userCount', 'doctorCount', 'departmentCount', 'scheduleCount','users'));
     }
 }

@@ -75,7 +75,7 @@
         <div class="container-fluid">
             <div class="row">
                 @foreach ($departments as $department)
-                    <div class="col-sm-4">
+                    <div class="col-lg-4">
                         <a href="{{ route('appointment.show', $department->id) }}">
                             <div class="card">
                                 <div class="card-body">
