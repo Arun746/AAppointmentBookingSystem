@@ -30,7 +30,7 @@
                                     <tr>
                                         <th>SN</th>
                                         <th> Department Name</th>
-                                        <th>No Of Doctors</th>
+                                        <th>Members</th>
                                         <th colspan="2" class="text-center ">Action</th>
                                     </tr>
                                 </thead>
@@ -40,7 +40,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $department->departmentName }}</td>
                                             <td>{{ $department->doctor->count() }}</td>
-                                            <td class="text-right pr-0 mr-0">
+                                            <td class="text-right pl-30 pr-0 mr-0">
                                                 <a href="{{ route('department.edit', ['department' => $department]) }}"
                                                     class="btn btn-warning btn-sm fas fa-edit" role="button">Edit</a>
 

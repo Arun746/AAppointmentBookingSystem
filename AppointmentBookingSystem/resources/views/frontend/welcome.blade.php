@@ -20,6 +20,10 @@
             </a>
         </div>
     </nav>
+
+    @if (session('success'))
+        <div class="alert alert-success text-center">{{ session('success') }}</div>
+    @endif
     <div class="container-fluid ">
         <div class="content " style="text-align:center; padding-top:20%;">
             <h1>Book Your Appointment</h1>

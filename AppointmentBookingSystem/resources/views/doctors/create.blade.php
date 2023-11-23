@@ -17,7 +17,7 @@
                                 <h1 class="card-title ">Basic Info</h1>
                             </div>
                             <div class="card-body">
-                                <div class="form-row">
+                                <div class="form row">
                                     <div class="form-group col">
                                         <label for="fname">First Name:</label>
                                         <input type="text" id="fname" name="fname" class="form-control"
@@ -142,6 +142,16 @@
                                                 <label for="others">Others</label>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class=" form-group col-sm-4">
+                                        <label for="image">Select image:</label>
+                                        <input type="file" id="image" name="image" class="form-control "
+                                            value="{{ old('image') }}" />
+
+                                        @error('image')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
 

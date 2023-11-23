@@ -70,7 +70,6 @@
                                     </div>
 
 
-
                                     <div class="form-group col">
                                         <label for="dob">DOB:</label>
                                         <input type="date" id="dob" name="dob" class="form-control"
@@ -85,6 +84,17 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
+
+
+                                    <div class="form-group col">
+                                        <label for="image">Image:</label>
+                                        <input type="file" id="image" name="image" class="form-control"
+                                            value="{{ old('image', $doctor->image) }}" onchange="previewImage(this)" />
+                                        <img id="imagePreview" src="{{ asset('storage/' . $doctor->image) }}"
+                                            class="mt-2 " style="max-width: 100px; max-height: 100px;" />
+                                    </div>
+
+
                                     <div class="form-group col-sm-4">
                                         <label for="status">Status:</label>
                                         <select id="status" name="status" class="form-control">
@@ -120,6 +130,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -284,4 +295,23 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('imagePreview');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function() {
+                preview.src = reader.result;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "{{ asset($doctor->image) }}";
+            }
+        }
+    </script>
 @endsection

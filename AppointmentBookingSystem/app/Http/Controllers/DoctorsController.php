@@ -7,6 +7,8 @@ use App\Models\Department;
 use App\Models\Experience;
 use App\Http\Requests\DoctorRequest;
 
+use Illuminate\Support\Facades\Storage;
+
 class DoctorsController extends Controller
 {
     public function index()
@@ -27,14 +29,14 @@ class DoctorsController extends Controller
     }
     public function store(DoctorRequest $request)
     {
-        $validatedData = $request->all();
+
+        $validatedData = $request->validated();
         $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['role']=1;
-        $user = User::create($validatedData);
 
+        $user = User::create($validatedData);
         $validatedData['user_id'] = $user->id;
         $doctor = Doctors::create($validatedData);
-
         $validatedData['doctors_id']=$doctor->id;
 
         $educationData = Education::where('doctors_id',$doctor->id)->get();
@@ -72,6 +74,8 @@ class DoctorsController extends Controller
    public function update(DoctorRequest $request, Doctors $doctor)
     {
         $validatedData = $request->validated();
+
+
         $doctor->user->update($validatedData);
         $del_education = Doctors::find($doctor->id);
         $del_experience = Doctors::find($doctor->id);

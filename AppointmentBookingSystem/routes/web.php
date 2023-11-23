@@ -13,17 +13,13 @@ use App\Http\Controllers\AppointmentController;
 
 Route::get('/', function () {
     return view('frontend.welcome');
-});
+})->name('welcome');
 
 
-// Route::get('/appointment', function () {
-//     return view('appointment.form');
+
+// Route::get('/login', function () {
+//     return view('auth.login');
 // });
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
-
 
 Route::resource('appointment', AppointmentController::class);
 
