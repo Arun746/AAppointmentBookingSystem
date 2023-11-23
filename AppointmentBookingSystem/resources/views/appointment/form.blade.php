@@ -32,14 +32,15 @@
                             <div class="card" style="background-color: #c0daea">
                                 <div class="card-header ">
                                     <div class="card-title">
-                                        <h4>{{ $department->departmentName }}</h4>
+                                        <h4>{{ $department->departmentName }} </i></h4>
                                     </div>
                                     <div class="card-body">
                                         @php
                                             $doctorsInDepartment = $department->doctor->where('department_id', $department->id);
                                             $doctorCount = $doctorsInDepartment->count();
                                         @endphp
-                                        <h3 class="text-center">Available Doctors: {{ $doctorCount }}</h3>
+                                        <h3 class="text-center">{{ $doctorCount }}</h3>
+
                                     </div>
                                 </div>
                             </div>

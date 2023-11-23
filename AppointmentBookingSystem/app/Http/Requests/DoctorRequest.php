@@ -25,7 +25,7 @@ class DoctorRequest extends FormRequest
                 'gender' => 'required|string|max:255',
                 'dob' => 'required',
                 'engdob'=>'required',
-                'department_id'=>'required',
+
                 'specialization' => 'required|string|max:255',
                 'role' => 'nullable|integer',
                 'status'=>'nullable',

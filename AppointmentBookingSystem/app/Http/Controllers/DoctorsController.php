@@ -5,8 +5,9 @@ use App\Models\Doctors;
 use App\Models\Education;
 use App\Models\Department;
 use App\Models\Experience;
-use App\Http\Requests\DoctorRequest;
+use Illuminate\Support\Facades\DB;
 
+use App\Http\Requests\DoctorRequest;
 use Illuminate\Support\Facades\Storage;
 
 class DoctorsController extends Controller
@@ -29,7 +30,7 @@ class DoctorsController extends Controller
     }
     public function store(DoctorRequest $request)
     {
-
+        return DB::transaction(function () use ($request) {
         $validatedData = $request->validated();
         $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['role']=1;
@@ -64,6 +65,7 @@ class DoctorsController extends Controller
         Experience::create($experienceData[$key]);
         }
         return redirect()->route('doctors.index')->with('success', 'Doctor registered successfully.');
+       });
     }
     public function edit(Doctors $doctor)
     {
@@ -73,9 +75,8 @@ class DoctorsController extends Controller
     }
    public function update(DoctorRequest $request, Doctors $doctor)
     {
+        return DB::transaction(function () use ($request,$doctor) {
         $validatedData = $request->validated();
-
-
         $doctor->user->update($validatedData);
         $del_education = Doctors::find($doctor->id);
         $del_experience = Doctors::find($doctor->id);
@@ -107,6 +108,9 @@ class DoctorsController extends Controller
         }
         $doctor->update($validatedData);
         return redirect()->route('doctors.index')->with('success', 'Doctor updated successfully.');
+
+
+      });
     }
     public function delete(Doctors $doctor)
     {

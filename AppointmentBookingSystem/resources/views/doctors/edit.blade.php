@@ -6,9 +6,15 @@
         <div class="row justify-content-center">
 
             <div class="col-sm-12">
-                {{ $errors }}
+
                 <h2> Edit Doctor Detail
                 </h2>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <div class="card mt-3 p-3 ">
 
                     <form method="post" action="{{ route('doctors.update', ['doctor' => $doctor]) }}"
@@ -93,7 +99,9 @@
                                         <img id="imagePreview" src="{{ asset('storage/' . $doctor->image) }}"
                                             class="mt-2 " style="max-width: 100px; max-height: 100px;" />
                                     </div>
-
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
 
                                     <div class="form-group col-sm-4">
                                         <label for="status">Status:</label>
@@ -150,12 +158,11 @@
                             <div class="card-body">
                                 @foreach ($education as $edu)
                                     <div class="col education-repeat">
-                                        {{-- <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;"> --}}
                                         <div class="form-row">
                                             <div class="form-group col-sm-2">
-                                                <label for="level">level:</label>
+                                                <label for="level">Level:</label>
                                                 <input type="text" id="level" name="level[]" class="form-control"
-                                                    value="{{ old('level', $edu->level) }}" />
+                                                    value="{{ is_array($oldLevel = old('level')) ? $oldLevel[$loop->index] : old('level', $edu->level ?? '') }}" />
                                                 @error('level')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -164,7 +171,7 @@
                                             <div class="form-group col-sm-2">
                                                 <label for="board">Board:</label>
                                                 <input type="text" id="board" name="board[]" class="form-control"
-                                                    value="{{ old('board', $edu->board) }}" />
+                                                    value="{{ is_array($oldBoard = old('board')) ? $oldBoard[$loop->index] : old('board', $edu->board ?? '') }}" />
                                                 @error('board')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -174,7 +181,7 @@
                                                 <label for="institution">Institution:</label>
                                                 <input type="text" id="institution" name="institution[]"
                                                     class="form-control"
-                                                    value="{{ old('institution', $edu->institution) }}" />
+                                                    value="{{ is_array($oldInstitution = old('institution')) ? $oldInstitution[$loop->index] : old('institution', $edu->institution ?? '') }}" />
                                                 @error('institution')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -184,28 +191,28 @@
                                                 <label for="completion_year">Completion-Year:</label>
                                                 <input type="year" id="completion_year" name="completion_year[]"
                                                     class="form-control"
-                                                    value="{{ old('completion_year', $edu->completion_year) }}" />
+                                                    value="{{ is_array($oldCompletionYear = old('completion_year')) ? $oldCompletionYear[$loop->index] : old('completion_year', $edu->completion_year ?? '') }}" />
                                                 @error('completion_year')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
                                             <div class="form-group col-sm-2">
                                                 <label for="gpa">GPA:</label>
                                                 <input type="number" id="gpa" name="gpa[]" class="form-control"
-                                                    value="{{ old('gpa', $edu->gpa) }}" />
+                                                    value="{{ is_array($oldGPA = old('gpa')) ? $oldGPA[$loop->index] : old('gpa', $edu->gpa ?? '') }}" />
                                                 @error('gpa')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
                                             <div class="form-group col-sm-1 mt-3 pt-3">
-
-                                                <i class="btn btn-danger btn-sm fas fa-trash-alt remove-education "></i>
-
+                                                <i class="btn btn-danger btn-sm fas fa-trash-alt remove-education"></i>
                                             </div>
                                         </div>
-
                                     </div>
                                 @endforeach
+
 
                             </div>
                             <div class="card-footer">
@@ -228,13 +235,12 @@
 
                                 @foreach ($experience as $exp)
                                     <div class="col experience-repeat">
-                                        {{-- <fieldset style="border: 1px solid #000; padding: 10px; margin:10px;"> --}}
                                         <div class="form-row">
                                             <div class="form-group col-sm-3">
                                                 <label for="organization">Organization Name:</label>
                                                 <input type="text" id="organization" name="organization[]"
                                                     class="form-control"
-                                                    value="{{ old('organization', $exp->organization) }}" />
+                                                    value="{{ is_array($oldOrganization = old('organization')) ? $oldOrganization[$loop->index] : old('organization', $exp->organization ?? '') }}" />
                                                 @error('organization')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -242,7 +248,7 @@
                                             <div class="form-group col-sm-2">
                                                 <label for="position">Position:</label>
                                                 <input type="text" id="position" name="position[]"
-                                                    class="form-control" value="{{ old('position', $exp->position) }}" />
+                                                    value="{{ is_array($oldPosition = old('position')) ? $oldPosition[$loop->index] : old('position', $exp->position ?? '') }}" />
                                                 @error('position')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -251,7 +257,7 @@
                                                 <label for="job_description">Job description:</label>
                                                 <input type="textarea" id="job_description" name="job_description[]"
                                                     class="form-control"
-                                                    value="{{ old('job_description', $exp->job_description) }}" />
+                                                    value="{{ is_array($oldJobDescription = old('job_description')) ? $oldJobDescription[$loop->index] : old('job_description', $exp->job_description ?? '') }}" />
                                                 @error('job_description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -260,7 +266,7 @@
                                                 <label for="start_date">Start-Date:</label>
                                                 <input type="date" id="start_date" name="start_date[]"
                                                     class="form-control"
-                                                    value="{{ old('start_date', $exp->start_date) }}" />
+                                                    value="{{ is_array($oldStartDate = old('start_date')) ? $oldStartDate[$loop->index] : old('start_date', $exp->start_date ?? '') }}" />
                                                 @error('start_date')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -268,7 +274,8 @@
                                             <div class="form-group col-sm-2">
                                                 <label for="end_date">End-date:</label>
                                                 <input type="date" id="end_date" name="end_date[]"
-                                                    class="form-control" value="{{ old('end_date', $exp->end_date) }}" />
+                                                    class="form-control"
+                                                    value="{{ is_array($oldEndDate = old('end_date')) ? $oldEndDate[$loop->index] : old('end_date', $exp->end_date ?? '') }}" />
                                                 @error('end_date')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -278,7 +285,6 @@
                                                     class="btn btn-danger btn-sm float-right fas fa-trash-alt remove-experience"></i>
                                             </div>
                                         </div>
-                                        {{-- </fieldset> --}}
                                     </div>
                                 @endforeach
 

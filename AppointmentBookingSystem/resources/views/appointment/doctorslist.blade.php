@@ -24,7 +24,7 @@
             <h2> Choose appointmenet schedule of preferred doctor</h2>
 
 
-            @foreach ($doctors as $doctor)
+            @forelse ($doctors as $doctor)
                 @if ($doctor->schedule->isNotEmpty())
                     <div class="row">
                         <div class="col-md-3">
@@ -220,7 +220,13 @@
 
                     </div>
                 @endif
-            @endforeach
+            @empty
+                <div class="text-center">
+                    <p>Sorry ! No doctors found 😢</p>
+                </div>
+
+            @endforelse
+
         </div>
     </div>
 

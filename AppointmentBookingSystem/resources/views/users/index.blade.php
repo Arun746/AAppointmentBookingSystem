@@ -27,7 +27,9 @@
                             <button class="fas  fa-plus"></button> New User
                         </a>
                     </div>
-
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
                     <div class="card">
                         <div class="card-body p-0">
                             <div class="table-responsive">
