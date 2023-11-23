@@ -71,7 +71,8 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="background-image" {{-- style="background-image: url('https://companyclinic.net/wp-content/uploads/doctor-stethoscope-png-hd-stethoscope-4320-1024x680.jpg');" --}}>
+        <div class="background-image"
+            style="background-image: url('https://companyclinic.net/wp-content/uploads/doctor-stethoscope-png-hd-stethoscope-4320-1024x680.jpg');">
             <div class="content-wrapper" style="background-color: rgba(238, 243, 243, 0.8); color: rgb(10, 10, 10);">
                 @yield('content')
             </div>
@@ -98,7 +99,7 @@
         <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
             type="text/javascript"></script>
         <script src="{{ asset('js/nepalidatepick.js') }}"></script>
-
+        <script src="{{ asset('js/calendar.js') }}"></script>
 
         <script src="{{ asset('js/wizardform.js') }}"></script>
         <script src="{{ asset('js/formrepeater.js') }}"></script>
