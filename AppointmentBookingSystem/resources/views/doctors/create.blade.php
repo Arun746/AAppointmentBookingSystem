@@ -107,6 +107,18 @@
                                 <div class="form-row">
 
                                     <div class=" form-group col-sm-4">
+                                        <label for="image">Select image:</label>
+                                        <input type="file" id="image" name="image" class="form-control "
+                                            value="{{ old('image') }}" onchange="previewImage(this)" />
+                                        <img id="imagePreview" src="{{ asset('storage/images/images (2).jpeg') }}"
+                                            style="max-width: 100%; max-height: 200px;">
+
+                                        @error('image')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class=" form-group col-sm-4">
                                         <label for="department_id">Select Department:</label>
                                         <select name="department_id" id="department_id" class="form-control">
                                             <option value="">Select Department</option>
@@ -144,15 +156,7 @@
                                         </div>
                                     </div>
 
-                                    <div class=" form-group col-sm-4">
-                                        <label for="image">Select image:</label>
-                                        <input type="file" id="image" name="image" class="form-control "
-                                            value="{{ old('image') }}" />
 
-                                        @error('image')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
                                 </div>
 
                             </div>
@@ -177,7 +181,8 @@
                                     <div class="row">
                                         <div class="form-group col-sm-2">
                                             <label for="level">level:</label>
-                                            <input type="text" id="level" name="level[]" class="form-control" />
+                                            <input type="text" id="level" name="level[]" class="form-control"
+                                                value="{{ is_array(old('level')) ? old('level')[0] : old('level') }}" />
                                             @error('level')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -349,4 +354,21 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('imagePreview');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function() {
+                preview.src = reader.result;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 @endsection

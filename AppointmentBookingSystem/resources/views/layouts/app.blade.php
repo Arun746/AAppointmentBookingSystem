@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -15,14 +14,14 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     @yield('styles')
     {{-- nepalicalendar --}}
-    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+    <link href="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
         rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/repeat.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/content.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -80,16 +79,6 @@
 
         <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        {{-- <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside>
-    </div> --}}
-
         @vite('resources/js/app.js')
         <!-- AdminLTE App -->
         <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
@@ -100,11 +89,10 @@
             type="text/javascript"></script>
         <script src="{{ asset('js/nepalidatepick.js') }}"></script>
         <script src="{{ asset('js/calendar.js') }}"></script>
-
         <script src="{{ asset('js/wizardform.js') }}"></script>
         <script src="{{ asset('js/formrepeater.js') }}"></script>
-
         <script src="{{ asset('js/schedulerepeater.js') }}"></script>
+        <script src="{{ asset('js/currentdate.js') }}"></script>
 </body>
 
 </html>

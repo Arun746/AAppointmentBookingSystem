@@ -17,7 +17,6 @@ class AppointmentController extends Controller
     {
         // $doctors = Doctors::latest()->get();
         $departments = Department::latest()->get();
-
        return view('appointment.form',compact('departments'));
     }
     public function create()
@@ -32,6 +31,7 @@ class AppointmentController extends Controller
         $request['patient_id'] = $patientDetail->id;
         $scheduleData = Schedule::findOrFail($request->schedule_id);
         $request['doctors_id'] = $scheduleData->doctors_id;
+        $request['status'] = 0;
         Appointment::create($request->only([
             'schedule_id',
             'patient_id',

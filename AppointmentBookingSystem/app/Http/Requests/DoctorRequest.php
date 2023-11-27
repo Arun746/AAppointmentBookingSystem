@@ -65,7 +65,7 @@ class DoctorRequest extends FormRequest
                 'institution'=>'required',
                 'completion_year'=>'required',
                 'gpa'=>'required',
-'department_id'=>'required',
+                'department_id'=>'required',
                 'organization'=>'required',
                 'position'=>'required',
                 'job_description'=>'required',

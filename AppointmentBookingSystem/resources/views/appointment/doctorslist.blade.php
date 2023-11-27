@@ -7,34 +7,61 @@
     <title>{{ config('app.name') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .navbar-brand {
+            font-family: Helvetica;
+        }
+
+        body {
+            background-image: url('https://c1.wallpaperflare.com/preview/937/818/491/stethoscope-doctor-md-medical-health-hospital.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: repeat;
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+
+
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-sm" style="background-color:#d5e8f2; backdrop-filter: blur(1px);">
+    <nav class="navbar navbar-expand-sm" style="backdrop-filter: blur(1px); background-color: #c6d1e7;">
         <div class="container-fluid">
-            <a class="navbar-brand">
+            <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="Appointment Booking System" style="width:40px;"
                     class="rounded-pill">
+                HEALTHCARE
             </a>
+
+            <!-- Toggler button for small screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+                    <li class="nav-item"><a class="nav-link " href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link " href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link " href="#">Contact Us</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="content">
         <div class="container">
             <h2> Choose appointmenet schedule of preferred doctor</h2>
-
-
             @forelse ($doctors as $doctor)
                 @if ($doctor->schedule->isNotEmpty())
                     <div class="row">
                         <div class="col-md-3">
-
                             <div class="card mb-4 card-secondary card-outline">
                                 <div class="card-body box-profile ">
                                     <div class="text-center">
                                         <div class="card-body text-center">
-                                            <img class="profile-user-img img-fluid "
-                                                src="{{ asset('storage/' . $doctor->image) }}" alt="profile">
+                                            <img class="profile-user-img img-fluid img-circle"
+                                                src="{{ asset('storage/' . $doctor->image) }}" alt="Profile Image">
                                             <p class="text-bold">
                                                 {{ $doctor->fname . '' . $doctor->mname . '' . $doctor->lname }}
                                             </p>
@@ -45,10 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
-
                         <div class="col-md-9 h-100">
                             <div class="card">
                                 <table class="table">
@@ -75,7 +99,8 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header text-center"
                                                                         style="background-color: #17a2b8;color:white">
-                                                                        <h4 class="modal-title text-center">Book Your
+                                                                        <h4 class="modal-title text-center">Book
+                                                                            Your
                                                                             appointment</h4>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"></button>
@@ -139,8 +164,8 @@
                                                                                 <div class="form-group col">
                                                                                     <label
                                                                                         for="address">Address:</label>
-                                                                                    <input type="text" id="address"
-                                                                                        name="address"
+                                                                                    <input type="text"
+                                                                                        id="address" name="address"
                                                                                         class="form-control" />
                                                                                     @error('address')
                                                                                         <span
@@ -151,8 +176,8 @@
                                                                                 <div class="form-group col">
                                                                                     <label for="contact">Contact
                                                                                         No:</label>
-                                                                                    <input type="tel" id="contact"
-                                                                                        name="contact"
+                                                                                    <input type="tel"
+                                                                                        id="contact" name="contact"
                                                                                         class="form-control" />
                                                                                     @error('contact')
                                                                                         <span
@@ -163,10 +188,11 @@
 
                                                                             <div class="form row">
                                                                                 <div class="form-group col">
-                                                                                    <label for="dob_bs">Remarks
+                                                                                    <label for="dob_bs">Date Of
+                                                                                        Birth
                                                                                         No:</label>
-                                                                                    <input type="date" id="dob_bs"
-                                                                                        name="dob_bs"
+                                                                                    <input type="date"
+                                                                                        id="dob_bs" name="dob_bs"
                                                                                         class="form-control" />
                                                                                     @error('dob_bs')
                                                                                         <span
@@ -192,6 +218,7 @@
                                                                                     value="{{ $key->id }}">
                                                                                 <input type="hidden"
                                                                                     name="booking_date_bs"
+                                                                                    id="booking_date_bs"
                                                                                     value="{{ $key->date_bs }}">
                                                                                 <input type="hidden"
                                                                                     name="booking_date_ad"
@@ -215,21 +242,45 @@
                                 </table>
                             </div>
                         </div>
-
-
-
+                    </div>
+                @else
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card mb-4 card-secondary card-outline">
+                                <div class="card-body box-profile ">
+                                    <div class="text-center">
+                                        <div class="card-body text-center">
+                                            <img class="profile-user-img img-fluid img-circle"
+                                                src="{{ asset('storage/' . $doctor->image) }}" alt="Profile Image">
+                                            <p class="text-bold">
+                                                {{ $doctor->fname . '' . $doctor->mname . '' . $doctor->lname }}
+                                            </p>
+                                            <p>
+                                                {{ $doctor->specialization }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 h-100">
+                            <div class="card">
+                                <!-- This doctor has no schedule -->
+                                <div class="text-center">
+                                    <p>Sorry! No schedule found for {{ $doctor->fname . ' ' . $doctor->lname }}
+                                        😢</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endif
             @empty
                 <div class="text-center">
-                    <p>Sorry ! No doctors found 😢</p>
+                    <p>Sorry ! No doctors found for this Department😢</p>
                 </div>
-
             @endforelse
-
         </div>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
