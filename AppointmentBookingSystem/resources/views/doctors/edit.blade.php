@@ -98,10 +98,12 @@
                                             value="{{ old('image', $doctor->image) }}" onchange="previewImage(this)" />
                                         <img id="imagePreview" src="{{ asset('storage/' . $doctor->image) }}"
                                             class="mt-2 " style="max-width: 100px; max-height: 100px;" />
+
+                                        @error('image')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                    @error('image')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+
 
                                     <div class="form-group col-sm-4">
                                         <label for="status">Status:</label>
@@ -248,6 +250,7 @@
                                             <div class="form-group col-sm-2">
                                                 <label for="position">Position:</label>
                                                 <input type="text" id="position" name="position[]"
+                                                    class="form-control"
                                                     value="{{ is_array($oldPosition = old('position')) ? $oldPosition[$loop->index] : old('position', $exp->position ?? '') }}" />
                                                 @error('position')
                                                     <span class="text-danger">{{ $message }}</span>

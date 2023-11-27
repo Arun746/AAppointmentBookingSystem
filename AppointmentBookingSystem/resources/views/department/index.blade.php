@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
@@ -25,7 +18,7 @@
 
                     <div class="card ">
                         <div class="card-body  p-0">
-                            <table class="table ">
+                            <table class="table table-responsive">
                                 <thead>
                                     <tr>
                                         <th>SN</th>

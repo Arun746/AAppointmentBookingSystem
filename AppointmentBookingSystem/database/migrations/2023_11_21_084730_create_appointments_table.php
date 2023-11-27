@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('appointments', function (Blueprint $table) {
@@ -20,13 +18,11 @@ return new class extends Migration
             $table->date('booking_date_bs');
             $table->date('booking_date_ad')->nullable();
             $table->string('remarks')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->nullable(); // 0 for pending , 1 for approved ,2 for removed
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('appointments');

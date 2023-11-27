@@ -51,7 +51,7 @@
         }
 
         .btn-booknow {
-            margin-left: 35%;
+            margin-left: 38%;
             margin-top: 15%;
             background-color: #1d2f4f;
             color: #c6d1e7;

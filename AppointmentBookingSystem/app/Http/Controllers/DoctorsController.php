@@ -6,7 +6,6 @@ use App\Models\Education;
 use App\Models\Department;
 use App\Models\Experience;
 use Illuminate\Support\Facades\DB;
-
 use App\Http\Requests\DoctorRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,7 +25,7 @@ class DoctorsController extends Controller
     public function create()
     {
         $departments = Department::all();
-        return view('doctors.create',['departments'=>$departments]);
+        return view('doctors.create',compact('departments'));
     }
     public function store(DoctorRequest $request)
     {
@@ -35,12 +34,18 @@ class DoctorsController extends Controller
         $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['role']=1;
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public'); // store in storage/app/public/images
+            $validatedData['image'] = $imagePath;
+        }
+
+        // dd($validatedData);
         $user = User::create($validatedData);
         $validatedData['user_id'] = $user->id;
         $doctor = Doctors::create($validatedData);
         $validatedData['doctors_id']=$doctor->id;
 
-        $educationData = Education::where('doctors_id',$doctor->id)->get();
+        // $educationData = Education::where('doctors_id',$doctor->id)->get();
         foreach($validatedData['institution'] as $key => $item){
             $educationData[$key] = [
                 'doctors_id' => $doctor->id,
@@ -52,7 +57,7 @@ class DoctorsController extends Controller
          ];
         Education::create($educationData[$key]);
         }
-        $experienceData = Experience::where('doctors_id',$doctor->id)->get();
+        // $experienceData = Experience::where('doctors_id',$doctor->id)->get();
         foreach($validatedData['organization'] as $key => $item){
             $experienceData[$key] = [
                 'doctors_id' => $doctor->id,
@@ -78,11 +83,8 @@ class DoctorsController extends Controller
         return DB::transaction(function () use ($request,$doctor) {
         $validatedData = $request->validated();
         $doctor->user->update($validatedData);
-        $del_education = Doctors::find($doctor->id);
-        $del_experience = Doctors::find($doctor->id);
-        if ($del_education) {
-             Education::where('doctors_id', $doctor->id)->delete();
-        }
+
+        Education::where('doctors_id', $doctor->id)->delete();
         foreach ($validatedData['institution'] as $key => $item) {
             $education = new Education();
             $education->doctors_id = $doctor->id;
@@ -93,9 +95,7 @@ class DoctorsController extends Controller
             $education->gpa = $validatedData['gpa'][$key];
             $education->save();
         }
-        if ($del_experience) {
             Experience::where('doctors_id', $doctor->id)->delete();
-        }
         foreach ($validatedData['organization'] as $key => $item) {
             $experience = new Experience();
             $experience->doctors_id = $doctor->id;
@@ -105,6 +105,14 @@ class DoctorsController extends Controller
             $experience->end_date = $validatedData['end_date'][$key];
             $experience->job_description = $validatedData['job_description'][$key];
             $experience->save();
+        }
+
+        if ($request->hasFile('image')) {
+            if ($doctor->image) {
+                Storage::disk('public')->delete($doctor->image);
+            }
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validatedData['image'] = $imagePath;
         }
         $doctor->update($validatedData);
         return redirect()->route('doctors.index')->with('success', 'Doctor updated successfully.');

@@ -25,10 +25,10 @@ class ScheduleController extends Controller
       $validatedData=$request->all();
       $user = auth()->user();
       $validatedData['user_id'] = $user->id;
-      $doctor = Doctors::where('id', $request->input('doctors_id'))->first();
+      $doctor = Doctors::find($request->input('doctors_id'));
       $validatedData['doctors_id']=$doctor->id;
 
-   foreach ($validatedData['start_time'] as $key => $startTime) {
+      foreach ($validatedData['start_time'] as $key => $startTime) {
         $schedule = new Schedule();
         $schedule->date_bs = $validatedData['date_bs'];
         $schedule->start_time = $startTime;
@@ -36,9 +36,9 @@ class ScheduleController extends Controller
         $schedule->doctors_id = $validatedData['doctors_id'];
         $schedule->user_id = $validatedData['user_id'];
         $schedule->save();
-    }
+      }
 
-    return redirect()->route('schedule.index')->with('success', 'Schedules created successfully.');
+      return redirect()->route('schedule.index')->with('success', 'Schedules created successfully.');
 
     }
 

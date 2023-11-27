@@ -25,12 +25,12 @@ Route::resource('appointment', AppointmentController::class);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::resource('users', UserController::class);
 
