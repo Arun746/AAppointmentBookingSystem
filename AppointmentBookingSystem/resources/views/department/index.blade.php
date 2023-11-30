@@ -18,39 +18,42 @@
 
                     <div class="card ">
                         <div class="card-body  p-0">
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>SN</th>
-                                        <th> Department Name</th>
-                                        <th>Members</th>
-                                        <th colspan="2" class="text-center ">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($departments as $department)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $department->departmentName }}</td>
-                                            <td>{{ $department->doctor->count() }}</td>
-                                            <td class="text-right pl-30 pr-0 mr-0">
-                                                <a href="{{ route('department.edit', ['department' => $department]) }}"
-                                                    class="btn btn-warning btn-sm fas fa-edit" role="button">Edit</a>
+                            <div class="table-responsive">
 
-                                            </td>
-                                            <td class="text-left pl-4 ">
-                                                <form method="post" onclick="return confirm('Are you sure?')"
-                                                    action="{{ route('department.destroy', ['department' => $department->id]) }}">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-trash-alt"></i> Delete
-                                                    </button>
-                                                </form>
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th> Department Name</th>
+                                            <th>Members</th>
+                                            <th colspan="2" class="text-center  ">Action</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($departments as $department)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $department->departmentName }}</td>
+                                                <td>{{ $department->doctor->count() }}</td>
+                                                <td class="text-right pl-10 pr-0 mr-0">
+                                                    <a href="{{ route('department.edit', ['department' => $department]) }}"
+                                                        class="btn btn-warning btn-sm fas fa-edit" role="button">Edit</a>
+
+                                                </td>
+                                                <td class="text-left pl-4 ">
+                                                    <form method="post" onclick="return confirm('Are you sure?')"
+                                                        action="{{ route('department.destroy', ['department' => $department->id]) }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                            <i class="fas fa-trash-alt"></i> Delete
+                                                        </button>
+                                                    </form>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

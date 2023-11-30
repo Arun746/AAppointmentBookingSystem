@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('department_id')->constrained('departments');
             $table->string('email');
-            $table->string('password');
+
             $table->string('contact');
             $table->string('address');
             $table->enum('gender', ['male', 'female', 'others']);

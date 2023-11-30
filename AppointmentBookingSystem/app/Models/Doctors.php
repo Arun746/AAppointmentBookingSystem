@@ -19,7 +19,6 @@ class Doctors extends Model
                            'department_id',
                            'license_no',
                            'email',
-                           'password',
                            'contact',
                            'address',
                            'gender',

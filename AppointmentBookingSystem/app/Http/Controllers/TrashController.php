@@ -23,7 +23,7 @@ class TrashController extends Controller
                 $user->restore();
             }
         }
-        return redirect()->route('doctors.trash');
+        return redirect()->route('doctors.trash')->with('success','Account Restored Successfully');
     }
     public function destroy($id)
     {

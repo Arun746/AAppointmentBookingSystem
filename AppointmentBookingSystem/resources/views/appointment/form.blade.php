@@ -42,13 +42,23 @@
         .heading {
             padding-left: 25px;
         }
+
+        .btn {
+            background-color: #1d2f4f;
+            color: #c6d1e7;
+        }
+
+        .btn:hover {
+            background-color: #1994ba;
+            color: #c6d1e7;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-sm" style="backdrop-filter: blur(1px); background-color: #c6d1e7;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="Appointment Booking System" style="width:40px;"
                     class="rounded-pill">
                 HEALTHCARE
@@ -62,36 +72,56 @@
 
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                    <li class="nav-item"><a class="nav-link " href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link " href="#">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link " href="#">Contact Us</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class=" btn">login
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="dept">
-        <h2 class="heading">Choose Department</h2>
-        <div class="container-fluid">
-            <div class="row">
-                @foreach ($departments as $department)
-                    <div class="col-lg-4">
-                        <a href="{{ route('appointment.show', $department->id) }}">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <h4>{{ $department->departmentName }} </h4>
-                                    </div>
-                                    @php
-                                        $doctorsInDepartment = $department->doctor->where('department_id', $department->id);
-                                        $doctorCount = $doctorsInDepartment->count();
-                                    @endphp
-                                    <h3 class="card-text">{{ $doctorCount }}</h3>
-                                </div>
-                            </div>
-                        </a>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info text-center mt-2 ">
+                            <h4> Choose Department</h4>
+                        </div>
                     </div>
-                @endforeach
+                    @foreach ($departments as $department)
+                        <div class="col-lg-3">
+                            <a href="{{ route('appointment.show', $department->id) }} " class="text-decoration-none">
+                                <div class="card">
+                                    <div class="card-body ">
+                                        <div class="card-title ">
+                                            <h5>Department :
+                                                {{ $department->departmentName }} </h5>
+
+                                        </div>
+                                        @php
+                                            $doctorsInDepartment = $department->doctor->where('department_id', $department->id);
+                                            $doctorCount = $doctorsInDepartment->count();
+                                        @endphp
+
+                                        <h3 class="card-text">{{ $doctorCount }}</h3>
+                                        <p class="card-text">Doctors Available</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

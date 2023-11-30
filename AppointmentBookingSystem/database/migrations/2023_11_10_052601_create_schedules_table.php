@@ -17,6 +17,7 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('date_bs');
             $table->string('date_ad')->nullable();
+            $table->enum('status', ['unoccupied', 'occupied'])->default('unoccupied');
             $table->timestamps();
         });
     }

@@ -19,7 +19,6 @@ class AppointmentRequest extends FormRequest
           'remarks'=>'nullable',
           'status'=>'nullable',
 
-
         ];
     }
 }

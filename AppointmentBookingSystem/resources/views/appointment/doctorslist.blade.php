@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <link href="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
     <style>
         .navbar-brand {
             font-family: Helvetica;
@@ -20,6 +23,16 @@
             height: 100vh;
             width: 100vw;
         }
+
+        .btn {
+            background-color: #1d2f4f;
+            color: #c6d1e7;
+        }
+
+        .btn:hover {
+            background-color: #1994ba;
+            color: #c6d1e7;
+        }
     </style>
 
 
@@ -28,7 +41,7 @@
 <body>
     <nav class="navbar navbar-expand-sm" style="backdrop-filter: blur(1px); background-color: #c6d1e7;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="Appointment Booking System" style="width:40px;"
                     class="rounded-pill">
                 HEALTHCARE
@@ -42,13 +55,25 @@
 
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                    <li class="nav-item"><a class="nav-link " href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link " href="#">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link " href="#">Contact Us</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class=" btn">login
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+
     <div class="content">
         <div class="container">
             <h2> Choose appointmenet schedule of preferred doctor</h2>
@@ -56,11 +81,11 @@
                 @if ($doctor->schedule->isNotEmpty())
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="card mb-4 card-secondary card-outline">
+                            <div class="card mb-4  card-outline">
                                 <div class="card-body box-profile ">
                                     <div class="text-center">
                                         <div class="card-body text-center">
-                                            <img class="profile-user-img img-fluid img-circle"
+                                            <img class="profile-user-img img-fluid img-circle "
                                                 src="{{ asset('storage/' . $doctor->image) }}" alt="Profile Image">
                                             <p class="text-bold">
                                                 {{ $doctor->fname . '' . $doctor->mname . '' . $doctor->lname }}
@@ -87,19 +112,25 @@
                                             <tr>
                                                 <td>{{ $date }}</td>
                                                 <td>
+
                                                     @foreach ($schedulesByDate as $key)
                                                         <button type="button" class="btn btn-info "
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#myModal-{{ $key->id }}">
+                                                            data-bs-target="#myModal{{ $key->id }}">
                                                             {{ $key->start_time . ' - ' . $key->end_time }}
                                                         </button>
+                                                        {{ $key->id }}
+                                                    @endforeach
 
-                                                        <div class="modal fade" id="myModal-{{ $key->id }}">
+                                                    @foreach ($schedulesByDate as $key)
+                                                        <div class="modal fade" id="myModal{{ $key->id }}">
                                                             <div class="modal-dialog modal-lg">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header text-center"
                                                                         style="background-color: #17a2b8;color:white">
-                                                                        <h4 class="modal-title text-center">Book
+                                                                        <h4 class="modal-title text-center">
+                                                                            {{ $key->id }}
+                                                                            Book
                                                                             Your
                                                                             appointment</h4>
                                                                         <button type="button" class="btn-close"
@@ -108,6 +139,7 @@
 
 
                                                                     <div class="modal-body">
+
                                                                         <form method="post"
                                                                             action="{{ route('appointment.store') }}">
                                                                             @csrf
@@ -190,9 +222,11 @@
                                                                                 <div class="form-group col">
                                                                                     <label for="dob_bs">Date Of
                                                                                         Birth
-                                                                                        No:</label>
-                                                                                    <input type="date"
-                                                                                        id="dob_bs" name="dob_bs"
+                                                                                        :</label>
+
+                                                                                    <input type="text"
+                                                                                        id="dob_bs{{ $key->id }}"
+                                                                                        name="dob_bs"
                                                                                         class="form-control" />
                                                                                     @error('dob_bs')
                                                                                         <span
@@ -201,9 +235,9 @@
                                                                                 </div>
                                                                                 <div class="form-group col">
                                                                                     <label for="remakrs">Remarks
-                                                                                        No:</label>
+                                                                                        :</label>
                                                                                     <input type="text"
-                                                                                        id="remakrs" name="remakrs"
+                                                                                        id="remakrs" name="remarks"
                                                                                         class="form-control" />
                                                                                     @error('remakrs')
                                                                                         <span
@@ -216,25 +250,34 @@
                                                                                 <input type="hidden"
                                                                                     name="schedule_id"
                                                                                     value="{{ $key->id }}">
-                                                                                <input type="hidden"
-                                                                                    name="booking_date_bs"
-                                                                                    id="booking_date_bs"
-                                                                                    value="{{ $key->date_bs }}">
-                                                                                <input type="hidden"
-                                                                                    name="booking_date_ad"
-                                                                                    value="{{ $key->date_ad }}">
 
                                                                                 <div class="form-group col pt-4  ">
                                                                                     <button type="submit"
                                                                                         class="btn btn-dark float-right">Submit</button>
                                                                                 </div>
                                                                             </div>
+
                                                                         </form>
                                                                     </div>
+                                                                    <script>
+                                                                        $(document).ready(function() {
+                                                                            $('#dob_bs{{ $key->id }}').nepaliDatePicker({
+                                                                                container: '#myModal{{ $key->id }}',
+                                                                                ndpYear: true,
+                                                                                ndpMonth: true,
+                                                                                ndpYearCount: 10,
+                                                                                // disableDaysAfter: 0
+                                                                            });
+
+
+                                                                        });
+                                                                    </script>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     @endforeach
+
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -282,8 +325,12 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+
+
 </body>
 
 </html>

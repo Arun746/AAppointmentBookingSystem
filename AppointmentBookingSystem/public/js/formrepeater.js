@@ -12,10 +12,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
     }
-    document.addEventListener('click', function(e) {
+
+document.addEventListener('click', function (e) {
     if (e.target && e.target.classList.contains('remove-education') && e.target.closest('.education-repeat')) {
-        e.target.closest('.education-repeat').remove();
-        // console.log("sjdfhsajkdh");
+        const educationEntries = document.querySelectorAll('.education-repeat');
+
+        if (educationEntries.length > 1) {
+            e.target.closest('.education-repeat').remove();
+        } else {
+            alert('At least one education entry is required.');
+        }
     }
 });
 });
@@ -36,12 +42,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (e.target && e.target.classList.contains('remove-experience') && e.target.closest('.experience-repeat')) {
-            e.target.closest('.experience-repeat').remove();
-            console.log("sjdfhsajkdh");
+            const experienceEntries = document.querySelectorAll('.experience-repeat');
+
+            if (experienceEntries.length > 1) {
+                e.target.closest('.experience-repeat').remove();
+            } else {
+                alert('At least one experience entry is required.');
+            }
         }
-    })
+    });
+
 });
 
 

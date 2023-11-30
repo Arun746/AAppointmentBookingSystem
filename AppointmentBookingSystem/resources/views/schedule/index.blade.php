@@ -16,7 +16,6 @@
         <div class="container-fluid ">
             <div class="row">
                 <div class="col-sm-12">
-
                     <div class="text-right mt-2 mb-2">
                         <a href="{{ route('schedule.create') }}" class="btn btn-primary btn-sm" role="button">
                             <button class="fas  fa-plus"></button> New
@@ -25,8 +24,19 @@
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
+                    {{-- {{ $errors }} --}}
+                    {{-- <form method="get" action="{{ route('schedule.index') }}">
+                        <label for="doctor">Filter by Doctor:</label>
+                        <select name="doctor">
+                            <option value="">All Doctors</option>
+                            {{-- @foreach ($doctors as $doctor)
+                                <option value="{{ $doctor->id }}">{{ $doctor->full_name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit">Apply Filter</button>
+                    </form> --}}
 
-                    @foreach ($schedules->groupBy('date_bs') as $date => $dateSchedules)
+                    @forelse ($schedules->groupBy('date_bs') as $date => $dateSchedules)
                         <h2 style="color:#401211">{{ $date }}</h2>
 
                         @foreach ($dateSchedules->groupBy(function ($schedule) {
@@ -76,7 +86,12 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endforeach
+                    @empty
+                        <div class="text-center">
+                            <h4> No Schedules Found!!</h4>
+                            <p>click the +New button to add Schedules </p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
