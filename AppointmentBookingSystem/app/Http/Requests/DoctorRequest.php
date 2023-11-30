@@ -29,7 +29,7 @@ class DoctorRequest extends FormRequest
                 'specialization' => 'required|string|max:255',
                 'role' => 'nullable|integer',
                 'status'=>'nullable',
-                'image'=>'required',
+                'image'=>'nullable',
                 'level'=>'required',
                 'board'=>'required',
                 'institution'=>'required',

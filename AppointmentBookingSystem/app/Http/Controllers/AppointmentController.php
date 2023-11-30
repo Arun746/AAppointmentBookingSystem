@@ -8,6 +8,7 @@ use App\Models\Schedule;
 use App\Models\Department;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\AppointmentRequest;
 
 class AppointmentController extends Controller
@@ -29,30 +30,43 @@ class AppointmentController extends Controller
     {
         $patientDetail = Patient::create($request->all());
         $request['patient_id'] = $patientDetail->id;
+        // dd($request->schedule_id);
         $scheduleData = Schedule::findOrFail($request->schedule_id);
         $request['doctors_id'] = $scheduleData->doctors_id;
-        $request['status'] = 0;
-        Appointment::create($request->only([
-            'schedule_id',
-            'patient_id',
-            'doctor_id',
-            'booking_date_bs',
-            'booking_date_ad',
-            'status',
-            'remarks',
-            'updated_at',
-            'created_at',
-        ]));
+        // $request['status'] = 0;
+        $appointment = Appointment::create([
+            'schedule_id' => $request->schedule_id,
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'status' => 0,
+            'remarks' => $request->remarks,
+            'updated_at' => now(),
+            'created_at' => now(),
+        ]);
 
+        $scheduleData->update(['status' => 'occupied']);
+
+        // dd($appointment);
+
+        Mail::send('mail.email',$scheduleData->toArray(),
+        function($message){
+            $message->to('doctor@gmail.com','Doctor')->subject('New Appointments Registered.');
+        });
         return redirect()->route('welcome')->with('success', 'Appointment booked successfully! We will get to you soon');
-
     }
-    public function show($id){
 
+
+    public function show($id){
         $departments = Department::findOrFail($id);
         $doctors = $departments->doctor()->with('schedule')->get();
 
-        return view('appointment.doctorslist',compact('doctors'));
+        // $bookedSchedules = Schedule::whereIn('id', function ($query) {
+        //     $query->select('schedule_id')
+        //         ->from('appointments')
+        //         ->whereIn('status', [0, 1]);
+        // })->pluck('id')->toArray();
+
+        return view('appointment.doctorslist', compact('doctors'));
     }
 
     public function edit(string $id)

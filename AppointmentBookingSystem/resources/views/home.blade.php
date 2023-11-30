@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-3 col-8">
                     <div class="card bg-secondary col-lg-12">
                         <div class="card-header border-0">
                             <h3 class="card-title">

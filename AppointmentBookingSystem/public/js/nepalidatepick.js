@@ -6,6 +6,8 @@ window.onload = function() {
           ndpYear: true,
           ndpMonth: true,
           ndpYearCount: 10,
+          readOnlyInput: true
+
 
       });
    };

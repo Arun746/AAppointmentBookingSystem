@@ -21,21 +21,22 @@
                     @endif
                     <div class="card m-10">
                         <div class="card-body p-0">
-                            <div class="table-responsive ">
-                                <!-- Make the table responsive -->
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>SN</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Specialization</th>
-                                            <th>Contact</th>
-                                            <th colspan="2" style="text-align: center;">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($doctors as $doctor)
+                            @forelse ($doctors as $doctor)
+                                <div class="table-responsive ">
+                                    <!-- Make the table responsive -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>SN</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Specialization</th>
+                                                <th>contact </th>
+                                                <th colspan="2" style="text-align: center;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $doctor->fname . ' ' . $doctor->mname . ' ' . $doctor->lname }}</td>
@@ -62,14 +63,21 @@
                                                 </td>
 
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </tbody>
+                                    </table>
+                                @empty
+                                    <div class="text-center">
+                                        <h4> Trash Is Empty!!</h4>
+
+                                    </div>
+                            @endforelse
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

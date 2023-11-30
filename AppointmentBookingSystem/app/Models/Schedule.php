@@ -18,6 +18,7 @@ class Schedule extends Model
         'end_time',
         'date_bs',
         'date_ad',
+        'status',
     ];
 
     public function doctor()

@@ -161,7 +161,7 @@
 
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-info btn-sm float-right" onclick="toggleFormOne()"
+                                <a href="#" class="btn btn-info btn-sm float-right " onclick="toggleFormOne()"
                                     id="toggleFormOne">Next</a>
                             </div>
                         </div>

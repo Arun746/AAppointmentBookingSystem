@@ -10,12 +10,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AppointmentManagementController;
 
 Route::get('/', function () {
     return view('frontend.welcome');
 })->name('welcome');
-
-
 
 // Route::get('/login', function () {
 //     return view('auth.login');
@@ -50,4 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('department', DepartmentController::class);
 
     Route::resource('schedule', ScheduleController::class);
+
+    Route::resource('appointment_management', AppointmentManagementController::class);
+
 });
