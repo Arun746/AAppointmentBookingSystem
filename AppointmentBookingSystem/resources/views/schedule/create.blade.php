@@ -8,7 +8,7 @@
                         @csrf
                         <div class="card-header">
                             <h3>Create Schedule</h3>
-                            {{ $errors }}
+
 
                             <a href="#" class="btn btn-info btn-sm float-right" id="schedule-add">Add More Schedules</a>
                         </div>
@@ -62,15 +62,6 @@
                                     @enderror
                                 </div>
 
-
-                                {{-- <div class="form-group col" id="schedule-container">
-                                    <div class="row schedule-repeat">
-
-                                        <div class="form-group col-sm-1 mt-3 pt-3">
-                                            <i class="btn btn-danger btn-sm fas fa-trash-alt remove-schedule"></i>
-                                        </div>
-                                    </div>
-                                </div> --}}
 
                             </div>
                         </div>
