@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
     <link href="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
         rel="stylesheet" type="text/css" />
     <style>
@@ -24,8 +22,10 @@
             width: 100vw;
         }
 
+
+
         .btn {
-            background-color: #1d2f4f;
+            background-color: #1d4f47;
             color: #c6d1e7;
         }
 
@@ -34,8 +34,6 @@
             color: #c6d1e7;
         }
     </style>
-
-
 </head>
 
 <body>
@@ -78,7 +76,7 @@
         <div class="container">
             <h2> Choose appointmenet schedule of preferred doctor</h2>
             @forelse ($doctors as $doctor)
-                @if ($doctor->schedule->isNotEmpty())
+                @if ($doctor->filteredSchedules->isNotEmpty())
                     <div class="row">
                         <div class="col-md-3">
                             <div class="card mb-4  card-outline">
@@ -108,18 +106,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($doctor->schedule->groupBy('date_bs') as $date => $schedulesByDate)
+                                        @foreach ($doctor->filteredSchedules as $date => $schedulesByDate)
                                             <tr>
                                                 <td>{{ $date }}</td>
                                                 <td>
 
                                                     @foreach ($schedulesByDate as $key)
-                                                        <button type="button" class="btn btn-info "
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#myModal{{ $key->id }}">
-                                                            {{ $key->start_time . ' - ' . $key->end_time }}
-                                                        </button>
-                                                        {{ $key->id }}
+                                                        @if ($key->status == 'occupied')
+                                                            <button type="button" class="btn btn-danger" disabled>
+                                                                {{ $key->start_time . ' - ' . $key->end_time }}
+                                                            </button>
+                                                        @else
+                                                            <button type="button" class="btn btn-info"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myModal{{ $key->id }}">
+                                                                {{ $key->start_time . ' - ' . $key->end_time }}
+                                                            </button>
+                                                        @endif
                                                     @endforeach
 
                                                     @foreach ($schedulesByDate as $key)
@@ -129,7 +132,7 @@
                                                                     <div class="modal-header text-center"
                                                                         style="background-color: #17a2b8;color:white">
                                                                         <h4 class="modal-title text-center">
-                                                                            {{ $key->id }}
+
                                                                             Book
                                                                             Your
                                                                             appointment</h4>
@@ -184,8 +187,8 @@
                                                                             <div class="form row">
                                                                                 <div class="form-group col">
                                                                                     <label for="email">Email:</label>
-                                                                                    <input type="email" id="email"
-                                                                                        name="email"
+                                                                                    <input type="email"
+                                                                                        id="email" name="email"
                                                                                         class="form-control" />
                                                                                     @error('email')
                                                                                         <span
@@ -280,6 +283,9 @@
 
                                                 </td>
                                             </tr>
+                                            {{-- @else
+                                                <h4>no Schedule found</h4>
+                                            @endif --}}
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -308,9 +314,10 @@
                         </div>
                         <div class="col-md-9 h-100">
                             <div class="card">
-                                <!-- This doctor has no schedule -->
+
                                 <div class="text-center">
-                                    <p>Sorry! No schedule found for {{ $doctor->fname . ' ' . $doctor->lname }}
+                                    <p>Sorry! No schedules available for tomorrow and after tomorrow for
+                                        {{ $doctor->fname . ' ' . $doctor->lname }}
                                         😢</p>
                                 </div>
                             </div>

@@ -36,7 +36,7 @@ class ScheduleController extends Controller
 
     public function create()
     {
-        // $departments=Department :: get ();
+
         $doctors = Doctors::get();
         return view('schedule.create',['doctors'=>$doctors]);
     }
@@ -51,33 +51,22 @@ class ScheduleController extends Controller
         $startTime = Carbon::parse($validatedData['start_time']);
         $endTime = Carbon::parse($validatedData['end_time']);
         $interval = $startTime->copy();
-        // dd($validatedData);
-        while ($startTime->lt($endTime) && $endTime->diffInMinutes($startTime) >= 30) {
-            $schedule=Schedule::create([
+
+        while ($interval->lt($endTime) && $endTime->diffInMinutes($interval) >= 30) {
+            $schedule = Schedule::create([
                 'user_id' => $validatedData['user_id'],
                 'doctors_id' => $validatedData['doctors_id'],
                 'date_bs' => $validatedData['date_bs'],
                 'date_ad' => $validatedData['date_ad'],
-                'start_time' => $startTime->format('H:i'),
-                'end_time' => $startTime->addMinutes(30)->format('H:i'),
+                'start_time' => $interval->format('H:i'),
+                'end_time' => $interval->addMinutes(30)->format('H:i'),
             ]);
-            $startTime->addMinutes(5);
-            // dd($schedule);
+            $interval->addMinutes(5);
         }
+
 
         return redirect()->route('schedule.index')->with('success', 'Schedules created successfully.');
     }
-
-    //    foreach ($validatedData['start_time'] as $key => $startTime) {
-    //     $schedule = new Schedule();
-    //     $schedule->date_bs = $validatedData['date_bs'];
-    //     $schedule->date_ad = $validatedData['date_ad'];
-    //     $schedule->start_time = $startTime;
-    //     $schedule->end_time = $validatedData['end_time'][$key];
-    //     $schedule->doctors_id = $validatedData['doctors_id'];
-    //     $schedule->user_id = $validatedData['user_id'];
-    //     $schedule->save();
-    //   }
 
     public function destroy(Schedule $schedule)
     {

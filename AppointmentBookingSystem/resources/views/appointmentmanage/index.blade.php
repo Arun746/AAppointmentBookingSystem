@@ -23,7 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">S.N.</th>
-                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Booking Date and Time</th>
                                         <th class="text-center">Day</th>
                                         <th class="text-center">Booked Time</th>
                                         <th class="text-center">Status</th>
@@ -33,7 +33,7 @@
                                     @foreach ($appointments as $doctor)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-center">{{ $doctor->booking_date_bs }}</td>
+                                            <td class="text-center">{{ $doctor->created_at }}</td>
                                             <td class="text-center">
                                                 {{ dayFromDate($doctor->booking_date_bs) }}
                                                 {{-- using helperfunction --}}

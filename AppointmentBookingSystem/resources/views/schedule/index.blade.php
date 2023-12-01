@@ -10,7 +10,6 @@
             </div>
         </div>
     </div>
-
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid ">
@@ -24,18 +23,6 @@
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                    {{-- {{ $errors }} --}}
-                    {{-- <form method="get" action="{{ route('schedule.index') }}">
-                        <label for="doctor">Filter by Doctor:</label>
-                        <select name="doctor">
-                            <option value="">All Doctors</option>
-                            {{-- @foreach ($doctors as $doctor)
-                                <option value="{{ $doctor->id }}">{{ $doctor->full_name }}</option>
-                            @endforeach
-                        </select>
-                        <button type="submit">Apply Filter</button>
-                    </form> --}}
-
                     @forelse ($schedules->groupBy('date_bs') as $date => $dateSchedules)
                         <h2 style="color:#401211">{{ $date }}</h2>
 
