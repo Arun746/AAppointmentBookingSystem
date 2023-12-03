@@ -10,7 +10,7 @@
                             <h3>Create Schedule</h3>
 
 
-                            <a href="#" class="btn btn-info btn-sm float-right" id="schedule-add">Add More Schedules</a>
+
                         </div>
                         <div class="card-body">
                             <div class="form-row ">
@@ -37,7 +37,7 @@
                                 <div class="form-group col-lg-3">
                                     <label for="date_bs">Date:</label>
                                     <input type="string" name="date_bs" id="date_bs" class="form-control"
-                                        value="{{ old('date_bs') }}" />
+                                        placeholder="Chose Date" value="{{ old('date_bs') }}" />
                                     @error('date_bs')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -92,9 +92,6 @@
 
             englishdate.value = adDate
         }
-        // setInterval(() => {
-        //     BsToAd()
-        // }, 10);
     </script>
 
 

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="content">
-        <div class="container">
+        <div class="container-fluid">
             <h3 class=>Profile</h3>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 ">
                     <div class="card card-secondary card-outline" style="width: 100%; height: 240px; margin: 0 auto;">
                         <div class="card-body box-profile ">
                             <div class="text-center">
@@ -75,60 +75,90 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
-                <div class="table-responsive ">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Institution</th>
-                                <th>Level</th>
-                                <th>Board</th>
-                                <th>Completion Year</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($doctor->education as $list)
+                <div class="row mt-4">
+                    <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $list->institution }}</td>
-
-                                    <td>{{ $list->level }}</td>
-
-                                    <td>{{ $list->board }}</td>
-
-                                    <td>{{ $list->completion_year }}</td>
+                                    <div class="col-md-3">
+                                        <th>Institution</th>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <th>Level</th>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <th>Board</th>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <th>Completion Year</th>
+                                    </div>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($doctor->education as $list)
+                                    <tr>
+                                        <div class="col-md-3">
+                                            <td>{{ $list->institution }}</td>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <td>{{ $list->level }}</td>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <td>{{ $list->board }}</td>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <td>{{ $list->completion_year }}</td>
+                                        </div>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                <strong><i class="fa fa-lightbulb mr-1"></i> Experience</strong>
-                <div class="table-responsive ">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Organization</th>
-                                <th>Position</th>
-                                <th>Start Date</th>
-                                <th>End date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($doctor->experience as $list2)
+                <div class="row mt-4">
+                    <strong><i class="fa fa-lightbulb mr-1"></i> Experience</strong>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $list2->organization }}</td>
-                                    <td>{{ $list2->position }}</td>
-                                    <td>{{ $list2->start_date }}</td>
-                                    <td>{{ $list2->end_date }}</td>
+                                    <div class="col-md-3">
+                                        <th>Organization</th>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <th>Position</th>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <th>Start Date</th>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <th>End Date</th>
+                                    </div>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($doctor->experience as $list2)
+                                    <tr>
+                                        <div class="col-md-3">
+                                            <td>{{ $list2->organization }}</td>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <td>{{ $list2->position }}</td>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <td>{{ $list2->start_date }}</td>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <td>{{ $list2->end_date }}</td>
+                                        </div>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 @endsection

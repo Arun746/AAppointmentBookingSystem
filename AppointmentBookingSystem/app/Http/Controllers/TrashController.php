@@ -10,7 +10,7 @@ class TrashController extends Controller
     public function index()
     {
         $doctors = Doctors::onlyTrashed()->get();
-        $users = User::onlyTrashed()->get();
+        // $users = User::onlyTrashed()->get();
         return view('doctors.trash',compact('doctors','users'));
     }
     public function restore($id)

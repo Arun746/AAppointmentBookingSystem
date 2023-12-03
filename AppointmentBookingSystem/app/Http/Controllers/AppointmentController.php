@@ -17,6 +17,10 @@ class AppointmentController extends Controller
     public function index()
     {
         $departments = Department::latest()->get();
+        foreach ($departments as $department) {
+            $doctorCount = Doctors::where('department_id', $department->id)->count();
+            $department->doctorCount = $doctorCount;
+        }
        return view('appointment.form',compact('departments'));
     }
 

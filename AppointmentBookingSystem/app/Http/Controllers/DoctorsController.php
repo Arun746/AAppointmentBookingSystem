@@ -39,13 +39,11 @@ class DoctorsController extends Controller
             $validatedData['image'] = $imagePath;
         }
 
-        // dd($validatedData);
         $user = User::create($validatedData);
         $validatedData['user_id'] = $user->id;
         $doctor = Doctors::create($validatedData);
         $validatedData['doctors_id']=$doctor->id;
 
-        // $educationData = Education::where('doctors_id',$doctor->id)->get();
         foreach($validatedData['institution'] as $key => $item){
             $educationData[$key] = [
                 'doctors_id' => $doctor->id,
@@ -57,7 +55,7 @@ class DoctorsController extends Controller
          ];
         Education::create($educationData[$key]);
         }
-        // $experienceData = Experience::where('doctors_id',$doctor->id)->get();
+
         foreach($validatedData['organization'] as $key => $item){
             $experienceData[$key] = [
                 'doctors_id' => $doctor->id,
