@@ -16,22 +16,19 @@ Route::get('/', function () {
     return view('frontend.welcome');
 })->name('welcome');
 
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
-
 Route::resource('appointment', AppointmentController::class);
 
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::view('about', 'about')->name('about');
+
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::resource('users', UserController::class);
+    Route::put('/users/{user}/reset-password', [UserController::class, 'passwordReset'])->name('users.resetPassword');
 
     //doctor
     Route::get('/doctors', [DoctorsController::class, 'index'])->name('doctors.index');

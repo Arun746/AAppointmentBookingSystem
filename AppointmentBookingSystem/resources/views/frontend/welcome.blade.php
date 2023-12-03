@@ -96,7 +96,7 @@
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="Appointment Booking System" style="width:40px;"
                     class="rounded-pill">
-                HEALTHCARE
+                A.HEALTHCARE
             </a>
 
             <!-- Toggler button for small screens -->

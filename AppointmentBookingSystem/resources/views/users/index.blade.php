@@ -41,7 +41,7 @@
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Status</th>
-                                            <th colspan="2" class="text-center">Action</th>
+                                            <th colspan="3" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,15 +69,26 @@
                                                         class="btn btn-warning btn-sm fas fa-edit" role="button">Edit</a>
 
                                                 </td>
-                                                <td class="text-center pl-0">
+                                                <td class="text-center pl-0 pr-0">
                                                     <form method="post" onclick="return confirm('Are you sure?')"
                                                         action="{{ route('users.destroy', ['user' => $user->id]) }}">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                        <button type="submit" class="btn btn-danger btn-sm" role="button">
                                                             <i class="fas fa-trash-alt"></i> Delete
                                                         </button>
                                                     </form>
+                                                </td>
+                                                <td class="text-left pl-0">
+                                                    <form method="post"
+                                                        action="{{ route('users.resetPassword', ['user' => $user->id]) }}">
+                                                        @csrf
+                                                        @method('put')
+                                                        <button type="submit" class="btn btn-secondary btn-sm "
+                                                            role="button"> <i class="fas fa-tools p-1"></i>Reset</button>
+                                                    </form>
+                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>

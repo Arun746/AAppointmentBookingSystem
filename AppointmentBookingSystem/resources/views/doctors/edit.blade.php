@@ -164,7 +164,7 @@
                                             <div class="form-group col-sm-2">
                                                 <label for="level">Level:</label>
                                                 <input type="text" id="level" name="level[]" class="form-control"
-                                                    value="{{ is_array($oldLevel = old('level')) ? $oldLevel[$loop->index] : old('level', $edu->level ?? '') }}" />
+                                                    value="{{ old('level', $edu->level) ?? '' }}" />
                                                 @error('level')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -173,7 +173,7 @@
                                             <div class="form-group col-sm-2">
                                                 <label for="board">Board:</label>
                                                 <input type="text" id="board" name="board[]" class="form-control"
-                                                    value="{{ is_array($oldBoard = old('board')) ? $oldBoard[$loop->index] : old('board', $edu->board ?? '') }}" />
+                                                    value="{{ old('board', $edu->board ?? '') }}" />
                                                 @error('board')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -183,7 +183,7 @@
                                                 <label for="institution">Institution:</label>
                                                 <input type="text" id="institution" name="institution[]"
                                                     class="form-control"
-                                                    value="{{ is_array($oldInstitution = old('institution')) ? $oldInstitution[$loop->index] : old('institution', $edu->institution ?? '') }}" />
+                                                    value="{{ old('institution', $edu->institution ?? '') }}" />
                                                 @error('institution')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -193,7 +193,7 @@
                                                 <label for="completion_year">Completion-Year:</label>
                                                 <input type="year" id="completion_year" name="completion_year[]"
                                                     class="form-control"
-                                                    value="{{ is_array($oldCompletionYear = old('completion_year')) ? $oldCompletionYear[$loop->index] : old('completion_year', $edu->completion_year ?? '') }}" />
+                                                    value="{{ old('completion_year', $edu->completion_year ?? '') }}" />
                                                 @error('completion_year')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -202,7 +202,7 @@
                                             <div class="form-group col-sm-2">
                                                 <label for="gpa">GPA:</label>
                                                 <input type="number" id="gpa" name="gpa[]" class="form-control"
-                                                    value="{{ is_array($oldGPA = old('gpa')) ? $oldGPA[$loop->index] : old('gpa', $edu->gpa ?? '') }}" />
+                                                    value="{{ old('gpa', $edu->gpa ?? '') }}" />
                                                 @error('gpa')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -242,7 +242,7 @@
                                                 <label for="organization">Organization Name:</label>
                                                 <input type="text" id="organization" name="organization[]"
                                                     class="form-control"
-                                                    value="{{ is_array($oldOrganization = old('organization')) ? $oldOrganization[$loop->index] : old('organization', $exp->organization ?? '') }}" />
+                                                    value="{{ old('organization', $exp->organization ?? '') }}" />
                                                 @error('organization')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -251,7 +251,7 @@
                                                 <label for="position">Position:</label>
                                                 <input type="text" id="position" name="position[]"
                                                     class="form-control"
-                                                    value="{{ is_array($oldPosition = old('position')) ? $oldPosition[$loop->index] : old('position', $exp->position ?? '') }}" />
+                                                    value="{{ old('position', $exp->position ?? '') }}" />
                                                 @error('position')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -260,7 +260,7 @@
                                                 <label for="job_description">Job description:</label>
                                                 <input type="textarea" id="job_description" name="job_description[]"
                                                     class="form-control"
-                                                    value="{{ is_array($oldJobDescription = old('job_description')) ? $oldJobDescription[$loop->index] : old('job_description', $exp->job_description ?? '') }}" />
+                                                    value="{{ old('job_description', $exp->job_description ?? '') }}" />
                                                 @error('job_description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -269,7 +269,7 @@
                                                 <label for="start_date">Start-Date:</label>
                                                 <input type="date" id="start_date" name="start_date[]"
                                                     class="form-control"
-                                                    value="{{ is_array($oldStartDate = old('start_date')) ? $oldStartDate[$loop->index] : old('start_date', $exp->start_date ?? '') }}" />
+                                                    value="{{ old('start_date', $exp->start_date ?? '') }}" />
                                                 @error('start_date')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -278,7 +278,7 @@
                                                 <label for="end_date">End-date:</label>
                                                 <input type="date" id="end_date" name="end_date[]"
                                                     class="form-control"
-                                                    value="{{ is_array($oldEndDate = old('end_date')) ? $oldEndDate[$loop->index] : old('end_date', $exp->end_date ?? '') }}" />
+                                                    value="{{ old('end_date', $exp->end_date ?? '') }}" />
                                                 @error('end_date')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

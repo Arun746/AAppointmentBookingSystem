@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Doctors;
 use App\Models\User;
+use App\Models\Doctors;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -31,9 +34,7 @@ class UserController extends Controller
         User::create($validatedData);
         return redirect()->route('users.index')->with('success', 'User registered successfully.');
     }
-    // public function show(string $id)
-    // {
-    // }
+
     public function edit(User $user)
     {
         return view('users.edit', ['user' => $user]);
@@ -53,12 +54,26 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
     public function destroy(User $user)
-    { if ($user->doctor) {
+    {
+         if ($user->doctor) {
        $user->doctor->delete();
-    }
+     }
        $user->delete();
        return redirect(route('users.index'))->with('success','User deleted  successfully');
 
     }
+
+    public function passwordReset(User $user)
+    {
+        $newPassword = Str::random(8);
+        $user->password = Hash::make($newPassword);
+        $user->save();
+        $email = $user->email;
+        Mail::send('mail.password_reset', ['user' => $user, 'newPassword' => $newPassword], function ($message) use ($email) {
+            $message->to($email, 'User')->subject('Password Reset Done !!');
+        });
+        return redirect()->back()->with('success', 'Password reset successfully. Check the user\'s email for the new password.');
+    }
+
 }
 

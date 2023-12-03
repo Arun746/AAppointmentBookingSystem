@@ -38,9 +38,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>SN</th>
-                                                    {{-- <th>Doctor Name</th> --}}
+
                                                     <th>Created By</th>
-                                                    {{-- <th>Date</th> --}}
+
                                                     <th style="text-align: center;">Available Time</th>
                                                     <th>action</th>
                                                 </tr>
@@ -49,10 +49,9 @@
                                                 @foreach ($doctorSchedules as $schedule)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        {{-- <td>{{ $schedule->doctor->fname . ' ' . $schedule->doctor->mname . ' ' . $schedule->doctor->lname }}
-                                                        </td> --}}
+
                                                         <td>{{ $schedule->user->fname }}</td>
-                                                        {{-- <td>{{ $schedule->date_bs }}</td> --}}
+
                                                         <td style="text-align: center;">
                                                             {{ $schedule->start_time . ' to ' . $schedule->end_time }}</td>
                                                         <td>

@@ -18,7 +18,8 @@ class HomeController extends Controller
 
 
     public function index()
-    {$users=User::get();
+    {
+        $users=User::get();
         $userCount = User::count();
         $doctorCount = Doctors::count();
         $departmentCount = Department::count();

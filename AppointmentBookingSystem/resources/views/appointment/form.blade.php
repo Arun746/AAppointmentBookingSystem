@@ -109,12 +109,7 @@
                                                 {{ $department->departmentName }} </h5>
 
                                         </div>
-                                        @php
-                                            $doctorsInDepartment = $department->doctor->where('department_id', $department->id);
-                                            $doctorCount = $doctorsInDepartment->count();
-                                        @endphp
-
-                                        <h3 class="card-text">{{ $doctorCount }}</h3>
+                                        <h3 class="card-text">{{ $department->doctorCount }}</h3>
                                         <p class="card-text">Doctors Available</p>
                                     </div>
                                 </div>

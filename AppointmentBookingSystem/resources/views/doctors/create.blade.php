@@ -9,7 +9,7 @@
                 <h2> Add Doctors
                 </h2>
                 <div class="card mt-3 p-3">
-                    {{ $errors }}
+
                     <form method="post" action="{{ route('doctors.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="doctor-form" id="basicinfo" style="display:  block">
@@ -86,7 +86,7 @@
                                     <div class="form-group col">
                                         <label for="dob">DOB:</label>
                                         <input type="text" id="dob" name="dob" class="form-control"
-                                            value="{{ old('dob') }}" />
+                                            placeholder="Choose Date" value="{{ old('dob') }}" />
                                         @error('dob')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

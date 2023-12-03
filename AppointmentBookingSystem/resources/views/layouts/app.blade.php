@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-Gn538LgJlrs1m2DpXxXsGRuugT6DO0nPEqSkdgJ8Bdf2Oo45/jGzP+9eK1vXQsP48+fq2aXnOMN4rZcwB94LNiQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -22,9 +27,7 @@
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
@@ -32,7 +35,6 @@
                 </li>
             </ul>
 
-            <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -56,11 +58,9 @@
                 </li>
             </ul>
         </nav>
-        <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:  rgba(49, 59, 59, 0.8) ;">
-            <!-- Brand Logo -->
+
             <i class="brand-link">
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -69,7 +69,7 @@
             @include('layouts.navigation')
         </aside>
 
-        <!-- Content Wrapper. Contains page content -->
+
         <div class="background-image"
             style="background-image: url('https://companyclinic.net/wp-content/uploads/doctor-stethoscope-png-hd-stethoscope-4320-1024x680.jpg');">
             <div class="content-wrapper" style="background-color: rgba(238, 243, 243, 0.8); color: rgb(10, 10, 10);">
@@ -77,13 +77,12 @@
             </div>
         </div>
 
-        <!-- /.content-wrapper -->
+
 
         @vite('resources/js/app.js')
-        <!-- AdminLTE App -->
         <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
-        @yield('scripts')
 
+        @yield('scripts')
 
         <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
             type="text/javascript"></script>
