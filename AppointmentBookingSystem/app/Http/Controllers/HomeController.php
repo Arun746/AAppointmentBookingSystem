@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\User;
 use App\Models\Doctors;
 use App\Models\Schedule;
@@ -25,6 +26,13 @@ class HomeController extends Controller
         $departmentCount = Department::count();
         $scheduleCount = Schedule::count();
 
-        return view('home', compact('userCount', 'doctorCount', 'departmentCount', 'scheduleCount','users'));
+            // Fetch data for the pie chart (replace with your actual logic)
+            $departments = Department::select('departmentName', DB::raw('count(doctors.id) as doctor_count'))
+            ->leftJoin('doctors', 'departments.id', '=', 'doctors.department_id')
+            ->groupBy('departments.id', 'departmentName')
+            ->get();
+
+
+        return view('home', compact('userCount', 'doctorCount', 'departmentCount', 'scheduleCount', 'users', 'departments'));
     }
 }

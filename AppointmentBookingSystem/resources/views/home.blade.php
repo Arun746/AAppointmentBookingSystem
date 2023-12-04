@@ -138,7 +138,39 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
+
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Doctors in Departments</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="chart-responsive">
+                                <canvas id="pieChart" height="150"></canvas>
+                            </div>
+                            <!-- ./chart-responsive -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer p-0">
+                            <!-- Add legends or any other information you want here -->
+                        </div>
+                        <!-- /.footer -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        var doctorsData = @json($departments);
+    </script>
 @endsection
