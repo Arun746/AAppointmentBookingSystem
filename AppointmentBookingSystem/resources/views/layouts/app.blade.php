@@ -23,6 +23,10 @@
         rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/repeat.css') }}">
     <link rel="stylesheet" href="{{ asset('css/content.css') }}">
+
+    {{-- chartJs library --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -92,6 +96,7 @@
         <script src="{{ asset('js/formrepeater.js') }}"></script>
         <script src="{{ asset('js/schedulerepeater.js') }}"></script>
         <script src="{{ asset('js/currentdate.js') }}"></script>
+        <script src="{{ asset('js/doctorPiechart.js') }}"></script>
 </body>
 
 </html>
