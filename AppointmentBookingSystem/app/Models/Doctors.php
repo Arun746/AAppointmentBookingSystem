@@ -7,10 +7,11 @@ use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Doctors extends Model
+class Doctors extends Model implements Auditable
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes,\OwenIt\Auditing\Auditable;
 
     protected $fillable = ['fname',
                            'mname',
@@ -56,3 +57,6 @@ class Doctors extends Model
         return $this->hasMany(Appointment::class);
     }
 }
+
+
+

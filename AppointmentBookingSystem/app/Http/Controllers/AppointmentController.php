@@ -30,6 +30,8 @@ class AppointmentController extends Controller
         $request['patient_id'] = $patientDetail->id;
         $scheduleData = Schedule::findOrFail($request->schedule_id);
         $request['doctors_id'] = $scheduleData->doctors_id;
+        $doctor = Doctors::findOrFail($scheduleData->doctors_id);
+        $email = $doctor->email;
         $appointment = Appointment::create([
             'schedule_id' => $request->schedule_id,
             'patient_id' => $request->patient_id,
@@ -41,28 +43,25 @@ class AppointmentController extends Controller
         ]);
         $scheduleData->update(['status' => 'occupied']);
         Mail::send('mail.email',$scheduleData->toArray(),
-        function($message){
-            $message->to('doctor@gmail.com','Doctor')->subject('New Appointments Registered.');
+        function($message)use ($email){
+            $message->to($email,'Doctor')->subject('New Appointments Registered.');
         });
         return redirect()->route('welcome')->with('success', 'Appointment booked successfully! We will get to you soon');
     }
 
     public function show($id)
-   {
-    $departments = Department::findOrFail($id);
-    $doctors = $departments->doctor()->with('schedule')->get();
-    $tomorrow = Carbon::now()->addDay()->format('Y-m-d');
-    $dayAfterTomorrow = Carbon::now()->addDays(2)->format('Y-m-d');
-    foreach ($doctors as $doctor) {
-        $doctor->filteredSchedules = $doctor->schedule
-            ->groupBy('date_ad')
-            ->filter(function ($schedulesByDate, $date) use ($tomorrow, $dayAfterTomorrow) {
-                return $date == $tomorrow || $date == $dayAfterTomorrow;
-            });
+    {
+        $departments = Department::findOrFail($id);
+        $doctors = $departments->doctor()->with('schedule')->get();
+        $tomorrow = Carbon::now()->addDay()->format('Y-m-d');
+        $dayAfterTomorrow = Carbon::now()->addDays(2)->format('Y-m-d');
+        foreach ($doctors as $doctor) {
+            $doctor->filteredSchedules = $doctor->schedule
+                ->groupBy('date_ad')
+                ->filter(function ($schedulesByDate, $date) use ($tomorrow, $dayAfterTomorrow) {
+                    return $date == $tomorrow || $date == $dayAfterTomorrow;
+                });
+        }
+        return view('appointment.doctorslist', compact('doctors'));
     }
-    return view('appointment.doctorslist', compact('doctors'));
-   }
 }
-
-
-
