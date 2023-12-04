@@ -37,7 +37,7 @@
                                 <div class="form-group col-lg-3">
                                     <label for="date_bs">Date:</label>
                                     <input type="string" name="date_bs" id="date_bs" class="form-control"
-                                        placeholder="Chose Date" value="{{ old('date_bs') }}" />
+                                        placeholder="Select Date" value="{{ old('date_bs') }}" />
                                     @error('date_bs')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -80,7 +80,9 @@
                 ndpYear: true,
                 ndpMonth: true,
                 ndpYearCount: 10,
-                readOnlyInput: true
+                readOnlyInput: true,
+                disableDaysBefore: 0,
+                disableDaysAfter: 3
 
             });
         });

@@ -8,10 +8,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable,SoftDeletes,\OwenIt\Auditing\Auditable;
     protected $table = 'users';
     protected $date='deleted_at';
     /**
@@ -59,3 +60,6 @@ class User extends Authenticatable
         return $this->hasMany(Schedule::class);
     }
 }
+
+
+

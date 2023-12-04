@@ -6,10 +6,10 @@ namespace App\Models;
 use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Schedule extends Model
+use OwenIt\Auditing\Contracts\Auditable;
+class Schedule extends Model implements Auditable
 {
-    use HasFactory;
+    use HasFactory,\OwenIt\Auditing\Auditable;
 
     protected $fillable =[
         'user_id',
@@ -35,3 +35,5 @@ class Schedule extends Model
         return $this->hasMany(Appointment::class);
     }
 }
+
+
