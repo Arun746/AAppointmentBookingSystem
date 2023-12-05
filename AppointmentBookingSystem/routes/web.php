@@ -22,6 +22,11 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('markAsRead',function(){
+        auth()->user()->unreadNotifications->markAsRead();
+       return redirect()->back();
+    })->name('markRead');
+
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
