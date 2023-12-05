@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Notifications\MyNotification;
 
 class UserController extends Controller
 {
@@ -51,6 +52,9 @@ class UserController extends Controller
         ]);
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
         $user->update($validatedData);
+        $action = 'edit_user';
+        $logged_user = auth()->user();
+        $logged_user->notify(new MyNotification($user, $action));
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
     public function destroy(User $user)
@@ -69,6 +73,9 @@ class UserController extends Controller
         $user->password = Hash::make($newPassword);
         $user->save();
         $email = $user->email;
+        $action = 'password_reset';
+        $logged_user = auth()->user();
+        $logged_user->notify(new MyNotification($user, $action));
         Mail::send('mail.password_reset', ['user' => $user, 'newPassword' => $newPassword], function ($message) use ($email) {
             $message->to($email, 'User')->subject('Password Reset Done !!');
         });

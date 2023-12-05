@@ -26,6 +26,13 @@
 
     {{-- chartJs library --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .navbar-nav .dropdown-menu li:hover {
+            background-color: rgb(150, 150, 150) !important;
+            transition: background-color 0.3s !important;
+        }
+    </style>
+
 
 </head>
 
@@ -40,6 +47,43 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fas fa-bell fa-lg" style="color: rgb(62, 147, 183)"></i>
+
+                        @if (auth()->user()->unreadNotifications->count())
+                            <span
+                                class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+                        @endif
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-xl" style="background-color: rgb(59, 115, 117); ">
+                        <span class=" dropdown-header">
+                            <h4 style="color:rgb(251, 253, 255);">Notifications</h4>
+                        </span>
+
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                            <li class="text-center " style="background-color: rgb(107, 193, 168); color: aliceblue; ">
+                                <a href="{{ route('markRead') }}">{{ $notification->data['data'] }}</a>
+                                <div class="dropdown-divider mt-5"></div>
+                            </li>
+                        @endforeach
+
+                        @foreach (auth()->user()->readNotifications->take(7) as $notification)
+                            <li class="text-center notification-dropdown-item"
+                                style="background-color: rgb(152, 163, 163); color: aliceblue; transition: background-color 0.3s;">
+                                <a>{{ $notification->data['data'] }}</a>
+                                <div class="dropdown-divider mt-5"></div>
+                            </li>
+                        @endforeach
+
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('markRead') }}" class="dropdown-item dropdown-footer"
+                            style="background-color: rgb(59, 115, 117);color:aliceblue; ">Mark All as
+                            read</a>
+                    </ul>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                         {{ Auth::user()->fname }}
