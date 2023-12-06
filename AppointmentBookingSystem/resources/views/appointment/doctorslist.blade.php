@@ -127,7 +127,7 @@
 
                                                     @foreach ($schedulesByDate as $key)
                                                         <div class="modal fade" id="myModal{{ $key->id }}">
-                                                            <div class="modal-dialog modal-lg">
+                                                            <div class="modal-dialog modal-md">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header text-center"
                                                                         style="background-color: #17a2b8;color:white">
@@ -161,18 +161,6 @@
                                                                                 </div>
 
                                                                                 <div class="form-group col">
-                                                                                    <label for="mname">Middle
-                                                                                        Name:</label>
-                                                                                    <input type="text" id="mname"
-                                                                                        name="mname"
-                                                                                        class="form-control" />
-                                                                                    @error('mname')
-                                                                                        <span
-                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </div>
-
-                                                                                <div class="form-group col">
                                                                                     <label for="lname">Last
                                                                                         Name:</label>
                                                                                     <input type="text" id="lname"
@@ -187,8 +175,8 @@
                                                                             <div class="form row">
                                                                                 <div class="form-group col">
                                                                                     <label for="email">Email:</label>
-                                                                                    <input type="email"
-                                                                                        id="email" name="email"
+                                                                                    <input type="email" id="email"
+                                                                                        name="email"
                                                                                         class="form-control" />
                                                                                     @error('email')
                                                                                         <span
@@ -208,17 +196,7 @@
                                                                                     @enderror
                                                                                 </div>
 
-                                                                                <div class="form-group col">
-                                                                                    <label for="contact">Contact
-                                                                                        No:</label>
-                                                                                    <input type="tel"
-                                                                                        id="contact" name="contact"
-                                                                                        class="form-control" />
-                                                                                    @error('contact')
-                                                                                        <span
-                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </div>
+
                                                                             </div>
 
                                                                             <div class="form row">
@@ -237,16 +215,17 @@
                                                                                     @enderror
                                                                                 </div>
                                                                                 <div class="form-group col">
-                                                                                    <label for="remakrs">Remarks
-                                                                                        :</label>
-                                                                                    <input type="text"
-                                                                                        id="remakrs" name="remarks"
+                                                                                    <label for="contact">Contact
+                                                                                        No:</label>
+                                                                                    <input type="tel"
+                                                                                        id="contact" name="contact"
                                                                                         class="form-control" />
-                                                                                    @error('remakrs')
+                                                                                    @error('contact')
                                                                                         <span
                                                                                             class="text-danger">{{ $message }}</span>
                                                                                     @enderror
                                                                                 </div>
+
 
                                                                                 <input type="hidden" name="doctor_id"
                                                                                     value="{{ $key->doctor->id }}">
@@ -254,9 +233,20 @@
                                                                                     name="schedule_id"
                                                                                     value="{{ $key->id }}">
 
-                                                                                <div class="form-group col pt-4  ">
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-dark float-right">Submit</button>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="form-group col pt-2">
+                                                                                    @if (config('services.recaptcha.key'))
+                                                                                        <div class="g-recaptcha"
+                                                                                            name="g-recaptcha"
+                                                                                            data-sitekey="{{ config('services.recaptcha.key') }}">
+                                                                                            {{ config('services.recaptcha.key') }}
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="mt-2">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-dark float-right">Submit</button>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
 
@@ -275,6 +265,27 @@
 
                                                                         });
                                                                     </script>
+                                                                    <script>
+                                                                        document.addEventListener('DOMContentLoaded', function() {
+                                                                            document.querySelector('.btn-dark').addEventListener('click', function() {
+                                                                                grecaptcha.ready(function() {
+                                                                                    grecaptcha.execute('{{ config('services.recaptcha.key') }}', {
+                                                                                            action: 'submit'
+                                                                                        })
+                                                                                        .then(function(token) {
+                                                                                            // Check if the token is valid before submitting the form
+                                                                                            if (token) {
+                                                                                                document.querySelector('form').submit();
+                                                                                            } else {
+                                                                                                // Handle the case where reCAPTCHA verification fails
+                                                                                                alert('Please verify that you are not a robot.');
+                                                                                            }
+                                                                                        });
+                                                                                });
+                                                                            });
+                                                                        });
+                                                                    </script>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -337,7 +348,7 @@
     <script src="https://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
         type="text/javascript"></script>
 
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>

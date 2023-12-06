@@ -18,7 +18,7 @@ class AppointmentRequest extends FormRequest
           'contact'=>'required',
           'remarks'=>'nullable',
           'status'=>'nullable',
-
+          'g-recaptcha-response' => 'required|recaptcha',
         ];
     }
 }

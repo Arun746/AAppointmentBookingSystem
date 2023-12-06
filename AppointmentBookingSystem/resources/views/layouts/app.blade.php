@@ -141,6 +141,8 @@
         <script src="{{ asset('js/schedulerepeater.js') }}"></script>
         <script src="{{ asset('js/currentdate.js') }}"></script>
         <script src="{{ asset('js/doctorPiechart.js') }}"></script>
+
+
 </body>
 
 </html>
