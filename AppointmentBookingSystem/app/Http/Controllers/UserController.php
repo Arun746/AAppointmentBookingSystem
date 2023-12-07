@@ -11,11 +11,30 @@ use App\Notifications\MyNotification;
 
 class UserController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $users = User::latest()->get();
+    //     return view('users.index', compact('users'));
+    // }
+    public function index(Request $request)
     {
-        $users = User::latest()->get();
+        $query = User::query();
+
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('fname', 'like', "%$searchTerm%")
+                  ->orWhere('mname', 'like', "%$searchTerm%")
+                  ->orWhere('lname', 'like', "%$searchTerm%")
+                  ->orWhere('email', 'like', "%$searchTerm%");
+            });
+        }
+
+        $users = $query->latest()->get();
+
         return view('users.index', compact('users'));
     }
+
     public function create()
     {
         return view('users.create');

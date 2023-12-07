@@ -30,6 +30,14 @@
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
+
+                    <div class="m-2">
+                        <form action="{{ route('users.index') }}" method="get">
+                            {{-- <label for="search">Search by Name or Email:</label> --}}
+                            <input type="text" name="search" placeholder="Search by Name or Email">
+                            <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                        </form>
+                    </div>
                     <div class="card">
                         <div class="card-body p-0">
                             <div class="table-responsive">
