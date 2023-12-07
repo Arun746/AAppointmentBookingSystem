@@ -17,7 +17,7 @@ class Department extends Model implements Auditable
 
 
     public function doctor(){
-        return $this -> hasMany(Doctors::class);
+        return $this -> hasMany(Doctors::class,'department_id');
     }
 
 }

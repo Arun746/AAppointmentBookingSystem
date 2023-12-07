@@ -8,14 +8,38 @@ use App\Models\Experience;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DoctorRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class DoctorsController extends Controller
 {
-    public function index()
-    {
-        $doctors = Doctors::latest()->get();
-        return view('doctors.index', compact('doctors'));
-    }
+    // public function index()
+    // {
+    //     $doctors = Doctors::latest()->get();
+    //     return view('doctors.index', compact('doctors'));
+    // }
+
+    public function index(Request $request)
+{
+    $doctors = Doctors::with('department')
+        ->when($request->filled('department'), function ($query) use ($request) {
+            $query->where('department_id', $request->input('department'));
+        })
+        ->when($request->has('search'), function ($query) use ($request) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('fname', 'like', "%$searchTerm%")
+                    ->orWhere('lname', 'like', "%$searchTerm%")
+                    ->orWhere('email', 'like', "%$searchTerm%");
+            });
+        })
+        ->latest()
+        ->get();
+
+    $departments = Department::all();
+
+    return view('doctors.index', compact('doctors', 'departments'));
+}
+
     public function show(Doctors $doctor)
     {
         $education = Education::where('doctors_id', $doctor->id)->get();

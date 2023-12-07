@@ -12,6 +12,7 @@
         "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.0",
+        "laravelcollective/html": "^6.4",
         "owen-it/laravel-auditing": "^13.5"
     },
     "require-dev": {

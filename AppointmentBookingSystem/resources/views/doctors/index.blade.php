@@ -27,6 +27,23 @@
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
+                    <div class="m-2">
+                        <form action="{{ route('doctors.index') }}" method="get">
+                            <label for="department">Filter by Department:</label>
+                            <select name="department">
+                                <option value="">All Departments</option>
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}">{{ $department->departmentName }}</option>
+                                @endforeach
+                            </select>
+
+
+                            <input type="text" name="search" placeholder="Search by Name or Email">
+
+                            <button class="btn btn-sm btn-primary" type="submit">Apply Filters</button>
+                        </form>
+                    </div>
+
                     <div class="card m-10">
                         <div class="card-body p-0">
                             <div class="table-responsive"> <!-- Make the table responsive -->
