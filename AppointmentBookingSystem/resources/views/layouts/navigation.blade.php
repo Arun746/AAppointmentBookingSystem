@@ -69,6 +69,31 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tree"></i>
+                        <p>
+                            Dynamic
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('page.index') }}" class="nav-link">
+                                <i class="fas fa-book nav-icon"></i>
+                                <p>Pages</p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-circle nav-icon"></i>
+                                <p>Menubar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
             </ul>
         @elseif(Auth::check() && Auth::user()->role === 1)
@@ -100,6 +125,9 @@
                         </p>
                     </a>
                 </li>
+
+
+
             </ul>
         @endif
     </nav>

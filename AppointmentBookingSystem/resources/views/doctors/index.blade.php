@@ -16,33 +16,35 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="alert alert-info">
-                        Doctors Details
+
+                    <div class="row">
+                        <div class="col-8 text-left m-2">
+                            <form action="{{ route('doctors.index') }}" method="get">
+                                <label for="department">Filter by Department:</label>
+                                <select name="department">
+                                    <option value="">All Departments</option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->departmentName }}</option>
+                                    @endforeach
+                                </select>
+
+
+                                <input type="text" name="search" placeholder="Search by Name or Email">
+
+                                <button class="btn btn-sm btn-primary" type="submit">Apply Filters</button>
+                            </form>
+                        </div>
+                        <div class="col text-right mt-2 mb-2">
+                            <a href="{{ route('doctors.create') }}" class="btn btn-primary btn-sm" role="button">
+                                <button class="fas  fa-plus pl-2"></button>ADD
+                            </a>
+                        </div>
                     </div>
-                    <div class="text-right mt-2 mb-2">
-                        <a href="{{ route('doctors.create') }}" class="btn btn-primary btn-sm" role="button">
-                            <button class="fas  fa-plus"></button> New Doctor
-                        </a>
-                    </div>
+
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                    <div class="m-2">
-                        <form action="{{ route('doctors.index') }}" method="get">
-                            <label for="department">Filter by Department:</label>
-                            <select name="department">
-                                <option value="">All Departments</option>
-                                @foreach ($departments as $department)
-                                    <option value="{{ $department->id }}">{{ $department->departmentName }}</option>
-                                @endforeach
-                            </select>
 
-
-                            <input type="text" name="search" placeholder="Search by Name or Email">
-
-                            <button class="btn btn-sm btn-primary" type="submit">Apply Filters</button>
-                        </form>
-                    </div>
 
                     <div class="card m-10">
                         <div class="card-body p-0">
