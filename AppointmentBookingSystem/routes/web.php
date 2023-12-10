@@ -1,8 +1,9 @@
 <?php
-use App\Models\Doctors;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\DoctorsController;
@@ -22,9 +23,9 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('markAsRead',function(){
+    Route::get('markAsRead', function () {
         auth()->user()->unreadNotifications->markAsRead();
-       return redirect()->back();
+        return redirect()->back();
     })->name('markRead');
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
@@ -45,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('doctors/{doctor}', [DoctorsController::class, 'delete'])->name('doctors.delete');
 
     Route::get('/trash', [TrashController::class, 'index'])->name('doctors.trash');
-    Route::get( 'trash/restore/{id}', [TrashController::class, 'restore'])->name('doctors.restore');
+    Route::get('trash/restore/{id}', [TrashController::class, 'restore'])->name('doctors.restore');
     Route::delete('trash/delete/{id}', [TrashController::class, 'destroy'])->name('doctors.forcedelete');
 
     Route::resource('department', DepartmentController::class);
@@ -53,5 +54,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('schedule', ScheduleController::class);
 
     Route::resource('appointment_management', AppointmentManagementController::class);
-
+    Route::resource('/dynamic/page', PageController::class);
 });

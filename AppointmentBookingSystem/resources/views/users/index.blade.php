@@ -22,22 +22,25 @@
                     <div class="alert alert-info">
                         Users Details
                     </div>
-                    <div class="text-right mt-2 mb-2">
-                        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm" role="button">
-                            <button class="fas  fa-plus"></button> New User
-                        </a>
-                    </div>
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
+                    <div class="row">
+                        <div class="col text-left mt-2 mb-2">
+                            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm" role="button">
+                                <button class="fas  fa-plus"></button> New User
+                            </a>
+                        </div>
 
-                    <div class="m-2">
-                        <form action="{{ route('users.index') }}" method="get">
-                            {{-- <label for="search">Search by Name or Email:</label> --}}
-                            <input type="text" name="search" placeholder="Search by Name or Email">
-                            <button class="btn btn-sm btn-primary" type="submit">Search</button>
-                        </form>
+
+                        <div class="col text-right mt-2">
+                            <form action="{{ route('users.index') }}" method="get">
+                                <input type="text" name="search" placeholder="Search by Name or Email">
+                                <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                            </form>
+                        </div>
                     </div>
+
                     <div class="card">
                         <div class="card-body p-0">
                             <div class="table-responsive">
