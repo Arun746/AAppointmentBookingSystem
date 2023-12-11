@@ -90,7 +90,8 @@
 </head>
 
 <body>
-
+    @inject('menubar_helper', 'App\Helpers\MenubarHelper')
+    {{-- $menuItems = $menus->list(); --}}
     <nav class="navbar navbar-expand-sm" style="backdrop-filter: blur(1px); background-color: #c6d1e7;">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
@@ -110,12 +111,21 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">Contact Us</a>
-                    </li>
+                    @foreach ($menubar_helper->list() as $menu)
+                        @if ($menu->type == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ $menu->module->link }}">{{ $menu->name }}</a>
+                            </li>
+                        @elseif ($menu->type == 2)
+                            <li class="nav-item"><a class="nav-link" href="">{{ $menu->name }}</a> </li>
+                        @else
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ $menu->external_link }}">{{ $menu->name }}</a> </li>
+                        @endif
+                    @endforeach
+
+
+
                     <li class="nav-item">
                         <a href="/login" class=" btn">login
                         </a>

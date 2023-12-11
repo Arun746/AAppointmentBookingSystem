@@ -21,7 +21,7 @@ class AppointmentController extends Controller
             $doctorCount = Doctors::where('department_id', $department->id)->count();
             $department->doctorCount = $doctorCount;
         }
-       return view('appointment.form',compact('departments'));
+        return view('appointment.form', compact('departments'));
     }
 
     public function store(AppointmentRequest $request)
@@ -42,10 +42,13 @@ class AppointmentController extends Controller
             'created_at' => now(),
         ]);
         $scheduleData->update(['status' => 'occupied']);
-        Mail::send('mail.email',$scheduleData->toArray(),
-        function($message)use ($email){
-            $message->to($email,'Doctor')->subject('New Appointments Registered.');
-        });
+        Mail::send(
+            'mail.email',
+            $scheduleData->toArray(),
+            function ($message) use ($email) {
+                $message->to($email, 'Doctor')->subject('New Appointments Registered.');
+            }
+        );
         return redirect()->route('welcome')->with('success', 'Appointment booked successfully! We will get to you soon');
     }
 

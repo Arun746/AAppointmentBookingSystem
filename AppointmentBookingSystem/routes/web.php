@@ -12,11 +12,13 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AppointmentManagementController;
+use App\Http\Controllers\MenubarController;
+use App\Http\Controllers\WelcomeController;
 
 Route::get('/', function () {
     return view('frontend.welcome');
 })->name('welcome');
-
+// Route::resource('/', WelcomeController::class);
 Route::resource('appointment', AppointmentController::class);
 
 Auth::routes();
@@ -55,4 +57,5 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('appointment_management', AppointmentManagementController::class);
     Route::resource('/dynamic/page', PageController::class);
+    Route::resource('/dynamic/menu', MenubarController::class);
 });

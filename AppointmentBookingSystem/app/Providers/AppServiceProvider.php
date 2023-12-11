@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Menubar;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 

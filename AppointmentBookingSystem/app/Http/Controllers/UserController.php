@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Doctors;
 use Illuminate\Support\Str;
@@ -24,9 +25,9 @@ class UserController extends Controller
             $searchTerm = $request->input('search');
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('fname', 'like', "%$searchTerm%")
-                  ->orWhere('mname', 'like', "%$searchTerm%")
-                  ->orWhere('lname', 'like', "%$searchTerm%")
-                  ->orWhere('email', 'like', "%$searchTerm%");
+                    ->orWhere('mname', 'like', "%$searchTerm%")
+                    ->orWhere('lname', 'like', "%$searchTerm%")
+                    ->orWhere('email', 'like', "%$searchTerm%");
             });
         }
 
@@ -48,7 +49,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
             'role' => 'required',
-            'status'=>'required',
+            'status' => 'required',
         ]);
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
         User::create($validatedData);
@@ -67,7 +68,7 @@ class UserController extends Controller
             'lname' => 'required|string|max:255',
             'email' => 'required|email',
             'role' => 'nullable',
-            'status'=>'required',
+            'status' => 'required',
         ]);
         $validatedData['name'] = $validatedData['fname'] . ' ' . $validatedData['mname'] . ' ' . $validatedData['lname'];
         $user->update($validatedData);
@@ -78,12 +79,11 @@ class UserController extends Controller
     }
     public function destroy(User $user)
     {
-         if ($user->doctor) {
-       $user->doctor->delete();
-     }
-       $user->delete();
-       return redirect(route('users.index'))->with('success','User deleted  successfully');
-
+        if ($user->doctor) {
+            $user->doctor->delete();
+        }
+        $user->delete();
+        return redirect(route('users.index'))->with('success', 'User deleted  successfully');
     }
 
     public function passwordReset(User $user)
@@ -100,6 +100,4 @@ class UserController extends Controller
         });
         return redirect()->back()->with('success', 'Password reset successfully. Check the user\'s email for the new password.');
     }
-
 }
-
