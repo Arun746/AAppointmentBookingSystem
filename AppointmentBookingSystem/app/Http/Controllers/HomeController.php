@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Models\User;
 use App\Models\Doctors;
 use App\Models\Schedule;
 use App\Models\Department;
-use Illuminate\Http\Request;
+
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -20,14 +21,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        $users=User::get();
+        $users = User::get();
         $userCount = User::count();
         $doctorCount = Doctors::count();
         $departmentCount = Department::count();
         $scheduleCount = Schedule::count();
 
-            // Fetch data for the pie chart (replace with your actual logic)
-            $departments = Department::select('departmentName', DB::raw('count(doctors.id) as doctor_count'))
+        // Fetch data for the pie chart (replace with your actual logic)
+        $departments = Department::select('departmentName', DB::raw('count(doctors.id) as doctor_count'))
             ->leftJoin('doctors', 'departments.id', '=', 'doctors.department_id')
             ->groupBy('departments.id', 'departmentName')
             ->get();

@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('menubars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->integer('parent_id')->nullable();
-            $table->string('slug')->nullable();
-            $table->boolean('status');
+            $table->string('name');
             $table->integer('order');
+            $table->integer('type');
+            // $table->integer('parent_id')->nullable();
+            // $table->string('slug')->nullable();
+            $table->foreignId('module_id')->constrained('modules')->onDelete('cascade')->nullable();
+            $table->foreignId('page_id')->constrained('pages')->onDelete('cascade')->nullable();
+            $table->string('external_link')->nullable();
+            $table->boolean('status')->nullable();
             $table->timestamps();
         });
     }

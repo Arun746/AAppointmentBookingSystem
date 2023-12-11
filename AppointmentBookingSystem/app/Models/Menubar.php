@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Page;
+use App\Models\Module;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Menubar extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['title'];
-
-    public function children()
+    protected $fillable = ['name', 'order', 'type', 'module_id', 'page_id', 'external_link', 'status'];
+    // In Menubar model
+    public function module()
     {
-        return $this->hasMany(Menu::class, 'parent_id');
+        return $this->belongsTo(Module::class);
     }
-
-    public function parent()
+    public function page()
     {
-        return $this->hasOne(Menu::class, 'id', 'parent_id');
+        return $this->belongsTo(Page::class);
     }
 }

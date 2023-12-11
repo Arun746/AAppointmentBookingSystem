@@ -86,7 +86,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('menu.index') }}" class="nav-link">
                                 <i class="fas fa-circle nav-icon"></i>
                                 <p>Menubar</p>
                             </a>
