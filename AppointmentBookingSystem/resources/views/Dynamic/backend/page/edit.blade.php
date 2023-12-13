@@ -18,7 +18,7 @@
         </div>
         <div class="card-body">
             {!! Form::open(['method' => 'PUT', 'route' => ['page.update', $page]]) !!}
-            {!! csrf_field() !!}
+            @csrf
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
