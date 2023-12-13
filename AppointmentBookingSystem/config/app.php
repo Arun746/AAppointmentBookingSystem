@@ -126,6 +126,14 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+
+
+
+    // localization
+    'available_locales' => [
+        'English' => 'en',
+        'Nepali' => 'ne',
+    ],
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
@@ -171,6 +179,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -186,8 +195,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'Form' => Collective\Html\FormFacade::class,
-    'Html' => Collective\Html\HtmlFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+
     ])->toArray(),
 
 ];

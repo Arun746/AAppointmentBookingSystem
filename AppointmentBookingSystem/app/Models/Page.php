@@ -18,7 +18,7 @@ class Page extends Model
         'description' => 'json',
     ];
 
-    public function menubars()
+    public function menubar()
     {
         return $this->hasMany(Menubar::class, 'page_id');
     }

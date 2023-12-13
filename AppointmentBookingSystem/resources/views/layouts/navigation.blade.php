@@ -94,7 +94,14 @@
                     </ul>
                 </li>
 
-
+                <li class="nav-item">
+                    <a href="{{ route('faq.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-question"></i>
+                        <p>
+                            FAQ Management
+                        </p>
+                    </a>
+                </li>
             </ul>
         @elseif(Auth::check() && Auth::user()->role === 1)
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"

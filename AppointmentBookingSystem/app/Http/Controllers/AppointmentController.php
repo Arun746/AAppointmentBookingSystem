@@ -49,7 +49,7 @@ class AppointmentController extends Controller
                 $message->to($email, 'Doctor')->subject('New Appointments Registered.');
             }
         );
-        return redirect()->route('welcome')->with('success', 'Appointment booked successfully! We will get to you soon');
+        return redirect()->route('index')->with('success', 'Appointment booked successfully! We will get to you soon');
     }
 
     public function show($id)
