@@ -93,8 +93,11 @@
     @if (session('success'))
         <div class="alert alert-success text-center">{{ session('success') }}</div>
     @endif
+
+
+
     <section class="main">
-        <div class="container m-6">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card">
@@ -114,9 +117,9 @@
         </div>
     </section>
 
-    <section class="additional-section" style="height: 800px">
+    <section class="additional-section" style="height: 700px ;background-color:#ebecf0;">
         <div class="container">
-            <h2 class="text-center col-12 mt-4 mb-4" style="color: #162e65">Frequently Asked Questions
+            <h2 class="text-center col-12 mt-4 mb-4" style="color: #1945ac">Frequently Asked Questions
             </h2>
 
             @if ($faq_helper->list()->isEmpty())
@@ -137,6 +140,54 @@
             @endif
         </div>
         </div>
+    </section>
+
+
+
+    <section class="feedback-section" style="height: 700px; background-color:#bbc3d5;">
+        <div class="mt-6">
+            <h2 class="text-center col-12 " style="color: #162e65">Feel free to drop us your feedback !!
+            </h2>
+        </div>
+
+        <div class="container ">
+            {!! Form::open(['method' => 'POST', 'route' => 'store']) !!}
+            @csrf
+            <div class="row mt-3 mb-3">
+                <div class="col-4">
+                    <div class="form-group">
+                        {!! Form::label('name', 'Name') !!}
+                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Full Name']) !!}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        {!! Form::label('email', 'Email') !!}
+                        {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => ' eg:abcd@gmail.com']) !!}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        {!! Form::label('contact', 'Contact') !!}
+                        {!! Form::text('contact', null, ['class' => 'form-control', 'placeholder' => 'contact ']) !!}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+
+                {!! Form::label('message', 'Message') !!}
+                {!! Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => 'Type your message here...']) !!}
+
+            </div>
+            <div class="row mt-3 ">
+                <div class=" col">
+                    {!! Form::submit('Send Feedback', ['class' => 'btn btn-primary ']) !!}
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>
+
     </section>
     @include('frontend.footer')
 

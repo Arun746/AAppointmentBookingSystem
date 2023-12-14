@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('order');
             $table->integer('type');
             // $table->integer('parent_id')->nullable();
-            // $table->string('slug')->nullable();
+
             $table->foreignId('module_id')->constrained('modules')->onDelete('cascade')->nullable();
             $table->foreignId('page_id')->constrained('pages')->onDelete('cascade')->nullable();
             $table->string('external_link')->nullable();
