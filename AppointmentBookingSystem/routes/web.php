@@ -19,7 +19,7 @@ use App\Http\Controllers\WelcomeController;
 
 
 Route::resource('/', WelcomeController::class);
-Route::get('/view', [WelcomeController::class, 'dynamic'])->name('view.dynamic');
+Route::get('/view/{id}', [WelcomeController::class, 'dynamic'])->name('view.dynamic');
 Route::resource('appointment', AppointmentController::class);
 
 Auth::routes();

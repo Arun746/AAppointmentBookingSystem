@@ -23,10 +23,10 @@ class AppointmentManagementController extends Controller
     public function edit($appointment_management, Request $request)
     {
         $status = $request->input('status');
-        $appointments= Appointment::find($appointment_management);
+        $appointments = Appointment::find($appointment_management);
         $appointments->status = $status;
-        $patient=Patient::find($appointments->patient_id);
-        $email=$patient->email;
+        $patient = Patient::find($appointments->patient_id);
+        $email = $patient->email;
         $appointments->save();
         $schedule = Schedule::find($appointments->schedule_id);
         if ($schedule) {
@@ -35,17 +35,14 @@ class AppointmentManagementController extends Controller
         }
 
         if ($status == 1) {
-            Mail::send('mail.patientappointment', $schedule->toArray(), function($message) use ($email){
+            Mail::send('mail.patientappointment', $schedule->toArray(), function ($message) use ($email) {
                 $message->to($email, 'Patient')->subject('Appointment Approved');
             });
-
-        } elseif($status == 2) {
-            Mail::send('mail.patientappointment', $schedule->toArray(), function($message) use ($email){
+        } elseif ($status == 2) {
+            Mail::send('mail.patientappointment', $schedule->toArray(), function ($message) use ($email) {
                 $message->to($email, 'Patient')->subject('Appointment Declined');
             });
         }
         return redirect()->back();
     }
-
-
 }

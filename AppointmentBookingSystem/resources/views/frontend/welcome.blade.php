@@ -47,7 +47,7 @@
 
 <body>
     @inject('menubar_helper', 'App\Helpers\MenubarHelper')
-    @inject('page_helper', 'App\Helpers\PageHelper')
+    {{-- @inject('page_helper', 'App\Helpers\PageHelper') --}}
 
     @include('frontend.navbar')
     @if (session('success'))
@@ -60,16 +60,18 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col text-right">
-
-                            <button id="toggleLanguage" onclick="toggleLanguage()">Toggle Language</button>
+                            <div>
+                                <button onclick="showContent('en')">EN</button>
+                                <button onclick="showContent('ne')">NE</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="row" id="languageContent">
-                        @foreach ($page_helper->list() as $page)
-                            <h2>{{ is_array($page->title) ? implode(', ', $page->title) : $page->title }}</h2>
-                            <p>{{ is_array($page->description) ? implode(', ', $page->description) : $page->description }}
-                            </p>
-                        @endforeach
+                    <div id="contentToShow">
+                        <div class="english" style="display:show">
+                            <h2>{{ $id->title['en'] }}</h2>
+                            <hr>
+                            <p>{!! $id->description['en'] !!}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,34 +79,22 @@
     </section>
 
 
+
+
+
     @include('frontend.footer')
 </body>
-{{-- <script>
-    function toggleLanguage() {
-        var languageContent = document.getElementById('languageContent');
-        var currentLanguage = languageContent.getAttribute('data-language');
-
-        // Toggle between English and Nepali
-        if (currentLanguage === 'en') {
-            // Switch to Nepali
-            renderContent({!! json_encode($page_helper->list('ne')) !!});
-            languageContent.setAttribute('data-language', 'ne');
-        } else {
-            // Switch to English
-            renderContent({!! json_encode($page_helper->list('en')) !!});
-            languageContent.setAttribute('data-language', 'en');
+<script>
+    function showContent(language) {
+        var contentContainer = document.getElementById('contentToShow');
+        if (language === 'en') {
+            contentContainer.innerHTML = '<h2>{{ $id->title['en'] }}</h2>' +
+                '<p>{{ $id->description['en'] }}</p>';
+        } else if (language === 'ne') {
+            contentContainer.innerHTML = '<h2>{{ $id->title['ne'] }}</h2>' +
+                '<p>{{ $id->description['ne'] }}</p>';
         }
     }
-
-    function renderContent(data) {
-        var html = '';
-        data.forEach(function(page) {
-            html += '<h2>' + (page.title[currentLanguage] || '') + '</h2>';
-            html += '<p>' + (page.description[currentLanguage] || '') + '</p>';
-        });
-        document.getElementById('languageContent').innerHTML = html;
-    }
-</script> --}}
-
+</script>
 
 </html>

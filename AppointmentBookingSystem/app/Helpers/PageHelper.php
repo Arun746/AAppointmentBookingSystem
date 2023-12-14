@@ -7,9 +7,9 @@ use App\Models\Page;
 
 class PageHelper
 {
-    public function list()
+    public function list($id)
     {
-        $pages = Page::get();
+        $pages = Page::where('id', $id)->get();
         return ($pages);
     }
 }

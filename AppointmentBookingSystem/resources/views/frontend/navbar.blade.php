@@ -23,8 +23,8 @@
                             <a class="nav-link" href="{{ $menu->module->link }}">{{ $menu->name }}</a>
                         </li>
                     @elseif ($menu->type == 2)
-                        <li class="nav-item"><a class="nav-link" href="{{ route('view.dynamic') }}">{{ $menu->name }}
-                                {{-- , ['page' => $menu->page->id] --}}
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ route('view.dynamic', ['id' => $menu->page->id]) }}">{{ $menu->name }}
                             </a>
                         </li>
                     @else
